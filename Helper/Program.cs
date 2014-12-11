@@ -14,15 +14,22 @@ namespace Helper
 	{
 		static void Main(string[] args)
 		{
-			IdentityResult roleResult;
-			ApplicationDbContext context = new ApplicationDbContext("IdentityLocal");
+//            PopulateBranches("MeasureLocal");
+            PopulateUsers("IdentityLocal");
 
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "store@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Store");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "employee@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Employee");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "tech@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Tech");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "admin@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Admin");
-			CustomerLoad();
-			PopulateLowesStores();
+//            PopulateBranches("MeasureLive");
+            PopulateUsers("IdentityLive");
+
+ //           PopulateBranches("MeasureAzure");
+            PopulateUsers("IdentityAzure");
+
+//            PopulateLowesStores("MeasureLocal");
+//            PopulateLowesStores("MeasureAzure");
+            PopulateLowesStores("MeasureLive");
+
+            CustomerLoad("MeasureLocal");
+            CustomerLoad("MeasureLive");
+            CustomerLoad("MeasureAzure");
 		}
 
 
@@ -84,62 +91,191 @@ namespace Helper
 			public string Sunday_Close;
 		}
 
-		static void CustomerLoad()
+		static void CustomerLoad(string connection)
 		{
-			RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities("MeasureLive");
+            System.Console.WriteLine("CustomerLoad {0}", connection);
+            RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities(connection);
 			AspNetUser user = conn.AspNetUsers.FirstOrDefault(u => u.UserName.StartsWith("employee"));
 			if (user != null)
-			for (int i = 0; i < 1000000;i++)
-			{
-				Customer c = new Customer();
-				c.LastModifiedById = user.Id;
-				c.LastModifiedDateTime = DateTime.Now;
-				c.LastName = string.Format("Customer{0}", i);
-				c.FirstName = string.Format("Test{0}", i);
-				c.Address = string.Format("{0} Nowhere Lane", i);
-				c.City = "Im Lost";
-				c.State = "GA";
-				c.ZipCode = "12345";
-				c.EmailAddress = "foo@bar.com";
-				conn.Customers.Add(c);
+            {
+                int count = conn.Customers.Count();
+                DateTime start = DateTime.Now;
+                for (int i = count; i < 1000000; i++)
+                {
+                    Customer c = new Customer();
+                    c.LastModifiedById = user.Id;
+                    c.LastModifiedDateTime = DateTime.Now;
+                    c.LastName = string.Format("Last{0}", i);
+                    c.FirstName = string.Format("First{0}", i);
+                    c.Address = string.Format("{0} Nowhere Lane", i);
+                    c.City = "Im Lost";
+                    c.State = "GA";
+                    c.ZipCode = "12345";
+                    c.EmailAddress = "foo@bar.com";
+                    conn.Customers.Add(c);
+                    if (((i + 1) % 1000) == 0)
+                    {
+                        DateTime end = DateTime.Now;
 
-				if (((i + 1) % 1000) == 0)
-				{
-					try
-					{
-						conn.SaveChanges();
-					}
-					catch (System.Data.Entity.Validation.DbEntityValidationException e)
-					{
-					}
-				}
+                        System.Console.WriteLine(string.Format("{0} - {1}", (end - start).ToString(), i));
+                        start = end;
+                        try
+                        {
+                            int a = conn.SaveChanges();
 
+                            conn.Dispose();
+                            conn = new RandREng.MeasureDBEntity.MeasureEntities(connection);
+                        }
+                        catch (System.Data.Entity.Validation.DbEntityValidationException e)
+                        {
+                        }
+                    }
+                }
 			}
 			conn.SaveChanges();
+            conn.Dispose();
 		}
-		static void PopulateLowesStores()
+
+        static void PopulateUsers(string connection)
+        {
+            System.Console.WriteLine("PopulateUsers {0}", connection);
+            PopulateAdmins(connection);
+            PopulateStoreUser(connection);
+            PopulateTechUser(connection);
+            PopulateEmployeesUser(connection);
+
+        }
+        static void PopulateAdmins(string connection)
+        {
+            IdentityResult roleResult;
+            ApplicationDbContext context = new ApplicationDbContext(connection);
+            roleResult = context.CreateUser(new ApplicationUser() { UserName = "admin@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Admin");
+            roleResult = context.CreateUser(new ApplicationUser() { UserName = "admin", IsConfirmed = true, Active = true }, "cfi12345", "Admin");
+        }
+
+        static void PopulateStoreUser(string connection)
+        {
+            IdentityResult roleResult;
+            ApplicationDbContext context = new ApplicationDbContext(connection);
+
+            roleResult = context.CreateUser(new ApplicationUser() { UserName = "store@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Store");
+        }
+
+        static void PopulateTechUser(string connection)
+        {
+            IdentityResult roleResult;
+            ApplicationDbContext context = new ApplicationDbContext(connection);
+
+            roleResult = context.CreateUser(new ApplicationUser() { UserName = "tech@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Tech");
+        }
+
+        static void PopulateEmployeesUser(string connection)
+        {
+            IdentityResult roleResult;
+            ApplicationDbContext context = new ApplicationDbContext(connection);
+
+            roleResult = context.CreateUser(new ApplicationUser() { UserName = "employee@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Employee");
+        }
+
+        static void PopulateBranches(string connection)
+        {
+            System.Console.WriteLine("PoulateBranches {0}", connection);
+            RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities(connection);
+
+            Branch branch = conn.Branches.FirstOrDefault(b => b.Name == "Atlanta");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Atlanta";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "GA";
+                branch.City = "Norcross";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Greenville");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Greenville";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "SC";
+                branch.City = "Greenville";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Coastal");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Coastal";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "SC";
+                branch.City = "Myrtle Beach";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Fayetteville");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Fayetteville";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "NC";
+                branch.City = "Fayetteville";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Columbia");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Columbia";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "SC";
+                branch.City = "Columbia";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Tampa");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Tampa";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "fl";
+                branch.City = "Tampa";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+            branch = conn.Branches.FirstOrDefault(b => b.Name == "Orlando");
+            if (branch == null)
+            {
+                branch = new Branch();
+                branch.Active = true;
+                branch.Name = "Orlando";
+                branch.Address = "4291 Communications Dr."; ;
+                branch.State = "FL";
+                branch.City = "Orlando";
+                branch.ZipCode = "30093";
+                conn.Branches.Add(branch);
+            }
+
+
+            conn.SaveChanges();
+        }        
+        
+        static void PopulateLowesStores(string connection)
 		{
-			RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities("MeasureLocal");
-
-			//ClientType ct = new ClientType();
-			//ct.Name = "Lowes";
-			//ct.QBClass = "Lowes";
-
-			//conn.Context.ClientTypes.Add(ct);
-			//conn.Save();
-			Branch branch = conn.Branches.FirstOrDefault(b => b.Name == "Atlanta");
-			if (branch == null)
-			{
-				branch = new Branch();
-				branch.Active = true;
-				branch.Name = "Atlanta";
-				branch.Address = "4291 Communications Dr.";;
-				branch.State = "GA";
-				branch.City = "Norcross";
-				branch.ZipCode = "30093";
-				conn.Branches.Add(branch);
-				conn.SaveChanges();
-			}
+            System.Console.WriteLine("PopulateLowesStores {0}", connection);
+            RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities(connection);
 
 			StoreType type = conn.StoreTypes.FirstOrDefault(st => st.Name == "LOWES");
 			if (type == null)
@@ -149,6 +285,7 @@ namespace Helper
 				conn.StoreTypes.Add(type);
 				conn.SaveChanges();
 			}
+            Branch branch = conn.Branches.FirstOrDefault(st => st.Name == "Atlanta");
 
 			Dictionary<string, Store> Stores = new Dictionary<string, Store>();
 			for (decimal lat = 27.0m; lat < 38.5m; lat += .5m)
@@ -181,6 +318,7 @@ namespace Helper
 
 							if (client == null)
 							{
+
 								Stores.Add(store.KEY, store);
 								System.Console.WriteLine("Adding store " + store.KEY);
 								client = new RandREng.MeasureDBEntity.Store();

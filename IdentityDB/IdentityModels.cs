@@ -70,7 +70,7 @@ namespace RandREng.IdentityDBEntity
 
 			if (user2 == null)
 			{
-				UserManager.Create(user, password);
+				result = UserManager.Create(user, password);
 				user2 = user;
 			}
 			else

@@ -8,12 +8,30 @@ namespace MeasuresMVC.Models.Repositories
     public class ItemRepository<T> : IRepository<T> where T : class
     {
 
-        private List<T> items;
+        private List<T> items 
+        {
+            get 
+            { 
+                if (this._items == null)
+                {
+                    this._items.ToList();
+                }
+                return this._items;
+            }
+        }
+        private List<T> _items;
+        private IQueryable<T> query;
         private string _sessionKey;
+
+        public ItemRepository(IQueryable<T> items, string sessionKey)
+        {
+            this.query = items;
+            this._sessionKey = sessionKey;
+        }
 
         public ItemRepository(IEnumerable<T> items, string sessionKey)
         {
-            this.items = items.ToList();
+            this._items = items.ToList();
             this._sessionKey = sessionKey;
         }
 
