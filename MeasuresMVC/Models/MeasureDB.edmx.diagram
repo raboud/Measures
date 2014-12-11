@@ -41,6 +41,10 @@
         <AssociationConnector Association="MeasureModel.FK_Measure_Customer" />
         <AssociationConnector Association="MeasureModel.FK_MeasureEmail_Measure" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_Measure" />
+        <EntityTypeShape EntityType="MeasureModel.SlotType" Width="1.5" PointX="0.875" PointY="12.75" />
+        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="3.125" PointY="12.5" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

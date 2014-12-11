@@ -11,21 +11,20 @@ namespace MeasuresMVC.Models
 {
     using System;
     using System.Collections.Generic;
-
-	public partial class AspNetUser
-	{
-		public AspNetUser()
-		{
-			this.Discriminator = "AspNetUser";
-			this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
-			this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
-			this.AspNetRoles = new HashSet<AspNetRole>();
-		}
-
-		override public string Id { get; set; }
-		override public string UserName { get; set; }
-		override public string PasswordHash { get; set; }
-		override public string SecurityStamp { get; set; }
+    
+    public partial class AspNetUser
+    {
+        public AspNetUser()
+        {
+            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.AspNetRoles = new HashSet<AspNetRole>();
+        }
+    
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string PasswordHash { get; set; }
+        public string SecurityStamp { get; set; }
         public string Discriminator { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }

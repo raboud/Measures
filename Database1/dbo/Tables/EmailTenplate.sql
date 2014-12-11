@@ -3,6 +3,7 @@
 	[EmailTypeId]	int NOT NULL,
     [Name]    NVARCHAR (50) NOT NULL,
     [Content] TEXT          NOT NULL,
+    [Active] BIT NOT NULL DEFAULT 1, 
     CONSTRAINT [PK_EmailTemplate] PRIMARY KEY CLUSTERED ([Id] ASC),
 
     CONSTRAINT [FK_EmailTemplate_EmailType] FOREIGN KEY ([EmailTypeId]) REFERENCES [dbo].[EmailType] ([Id]),

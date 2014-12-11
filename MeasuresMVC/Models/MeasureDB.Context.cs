@@ -44,5 +44,7 @@ namespace MeasuresMVC.Models
         public virtual DbSet<StoreType> StoreTypes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Measure> Measures { get; set; }
+        public virtual DbSet<SlotType> SlotTypes { get; set; }
+        public virtual DbSet<TechCapacity> TechCapacities { get; set; }
     }
 }

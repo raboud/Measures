@@ -106,6 +106,7 @@
           <Property Name="EmailTypeId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Content" Type="text" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="EmailType">
           <Key>
@@ -185,6 +186,15 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SlotType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Store">
           <Key>
@@ -240,6 +250,15 @@
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="LastModifiedDateTime" Type="datetime" />
           <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechCapacity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TechId" Type="int" Nullable="false" />
+          <Property Name="SlotTypeId" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Width">
           <Key>
@@ -460,6 +479,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TechCapacity_SlotType">
+          <End Role="SlotType" Type="Self.SlotType" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="SlotTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_Tech">
+          <End Role="Tech" Type="Self.Tech" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MeasureModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -477,9 +520,11 @@
           <EntitySet Name="MeasureMaterial" EntityType="Self.MeasureMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MeasureRoom" EntityType="Self.MeasureRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotType" EntityType="Self.SlotType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreType" EntityType="Self.StoreType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tech" EntityType="Self.Tech" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechCapacity" EntityType="Self.TechCapacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Width" EntityType="Self.Width" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Branch_Manager" Association="Self.FK_Branch_Manager">
             <End Role="Employees" EntitySet="Employees" />
@@ -549,6 +594,14 @@
             <End Role="StoreType" EntitySet="StoreType" />
             <End Role="Store" EntitySet="Store" />
           </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_SlotType" Association="Self.FK_TechCapacity_SlotType">
+            <End Role="SlotType" EntitySet="SlotType" />
+            <End Role="TechCapacity" EntitySet="TechCapacity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_Tech" Association="Self.FK_TechCapacity_Tech">
+            <End Role="Tech" EntitySet="Tech" />
+            <End Role="TechCapacity" EntitySet="TechCapacity" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -574,6 +627,7 @@
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" />
           <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="TechCapacities" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
         </EntityType>
         <EntityContainer Name="MeasureEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Teches" EntityType="Self.Tech" />
@@ -659,6 +713,16 @@
             <End Role="Measure" EntitySet="Measures" />
             <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
           </AssociationSet>
+          <EntitySet Name="SlotTypes" EntityType="MeasureModel.SlotType" />
+          <EntitySet Name="TechCapacities" EntityType="MeasureModel.TechCapacity" />
+          <AssociationSet Name="FK_TechCapacity_SlotType" Association="MeasureModel.FK_TechCapacity_SlotType">
+            <End Role="SlotType" EntitySet="SlotTypes" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_Tech" Association="MeasureModel.FK_TechCapacity_Tech">
+            <End Role="Tech" EntitySet="Teches" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="MaterialType">
           <Key>
@@ -699,6 +763,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Width">
           <Key>
@@ -876,6 +941,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EmailType" Relationship="MeasureModel.FK_EmailTemplate_EmailType" FromRole="EmailTemplate" ToRole="EmailType" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="EmailType">
           <Key>
@@ -1090,6 +1156,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SlotType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TechCapacities" Relationship="MeasureModel.FK_TechCapacity_SlotType" FromRole="SlotType" ToRole="TechCapacity" />
+        </EntityType>
+        <EntityType Name="TechCapacity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TechId" Type="Int32" Nullable="false" />
+          <Property Name="SlotTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="SlotType" Relationship="MeasureModel.FK_TechCapacity_SlotType" FromRole="TechCapacity" ToRole="SlotType" />
+          <NavigationProperty Name="Tech" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="TechCapacity" ToRole="Tech" />
+        </EntityType>
+        <Association Name="FK_TechCapacity_SlotType">
+          <End Type="MeasureModel.SlotType" Role="SlotType" Multiplicity="1" />
+          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="SlotTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_Tech">
+          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="1" />
+          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1150,6 +1260,7 @@
           <EntitySetMapping Name="Rooms">
             <EntityTypeMapping TypeName="MeasureModel.Room">
               <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -1237,6 +1348,7 @@
           <EntitySetMapping Name="EmailTemplates">
             <EntityTypeMapping TypeName="MeasureModel.EmailTemplate">
               <MappingFragment StoreEntitySet="EmailTemplate">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
@@ -1352,6 +1464,25 @@
               <MappingFragment StoreEntitySet="Measure">
                 <ScalarProperty Name="Enterred" ColumnName="Enterred" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotTypes">
+            <EntityTypeMapping TypeName="MeasureModel.SlotType">
+              <MappingFragment StoreEntitySet="SlotType">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechCapacities">
+            <EntityTypeMapping TypeName="MeasureModel.TechCapacity">
+              <MappingFragment StoreEntitySet="TechCapacity">
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="SlotTypeId" ColumnName="SlotTypeId" />
+                <ScalarProperty Name="TechId" ColumnName="TechId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

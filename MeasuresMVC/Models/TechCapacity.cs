@@ -12,14 +12,14 @@ namespace MeasuresMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class EmailTemplate
+    public partial class TechCapacity
     {
         public int Id { get; set; }
-        public int EmailTypeId { get; set; }
-        public string Name { get; set; }
-        public string Content { get; set; }
-        public bool Active { get; set; }
+        public int TechId { get; set; }
+        public int SlotTypeId { get; set; }
+        public byte Capacity { get; set; }
     
-        public virtual EmailType EmailType { get; set; }
+        public virtual SlotType SlotType { get; set; }
+        public virtual Tech Tech { get; set; }
     }
 }

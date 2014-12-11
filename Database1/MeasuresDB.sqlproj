@@ -86,6 +86,10 @@
     <Build Include="dbo\Tables\EmailTenplate.sql" />
     <Build Include="dbo\Tables\EmailType.sql" />
     <Build Include="dbo\Tables\MeasureEmail.sql" />
+    <Build Include="dbo\Tables\TechCapcity.sql" />
+    <Build Include="dbo\Tables\SlotType.sql" />
+    <Build Include="dbo\InsertRoom.sql" />
+    <Build Include="dbo\InsertSlotType.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Measure.sql" />
@@ -97,5 +101,8 @@
   <ItemGroup>
     <None Include="localdb.publish.xml" />
     <None Include="atl-sql-02.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
