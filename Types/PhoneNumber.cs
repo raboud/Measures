@@ -27,25 +27,32 @@ namespace RandREng.Types
 
 		public static string Reformat(string input)
 		{
-			string a = "ERROR";
-			try
-			{
-				Regex reg = new Regex(RegEx);
-				Match m = reg.Match(input);
-				if (m.Groups.Count == 5 && !string.IsNullOrEmpty(m.Groups[4].Value))
-				{
-					a = string.Format("({0}) {1}-{2} ext {3}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value, m.Groups[4].Value);
-				}
-				else if (m.Groups.Count == 4 || (m.Groups.Count == 5 && string.IsNullOrEmpty(m.Groups[4].Value)))
-				{
-					a = string.Format("({0}) {1}-{2}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
-				}
-			}
-			catch ( Exception)
+			string a = string.Empty;
+			if (input != null)
 			{
 
-			}
+				if (!string.IsNullOrEmpty(input))
+				{
+					try
+					{
+						a = "ERROR";
+						Regex reg = new Regex(RegEx);
+						Match m = reg.Match(input);
+						if (m.Groups.Count == 5 && !string.IsNullOrEmpty(m.Groups[4].Value))
+						{
+							a = string.Format("({0}) {1}-{2} ext {3}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value, m.Groups[4].Value);
+						}
+						else if (m.Groups.Count == 4 || (m.Groups.Count == 5 && string.IsNullOrEmpty(m.Groups[4].Value)))
+						{
+							a = string.Format("({0}) {1}-{2}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+						}
+					}
+					catch (Exception)
+					{
 
+					}
+				}
+			}
 			return a;
 		}
 
@@ -74,21 +81,29 @@ namespace RandREng.Types
 
 		public static string Reformat(string input)
 		{
-			string a = "ERROR";
-			try
+			string a = string.Empty;
+			if (input != null)
 			{
-				Regex reg = new Regex(RegEx);
-				Match m = reg.Match(input);
-				if (m.Groups.Count == 4)
+				input = input.Trim();
+
+				if (!string.IsNullOrEmpty(input))
 				{
-					a = string.Format("({0}) {1}-{2}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+					try
+					{
+						a = "ERROR";
+						Regex reg = new Regex(RegEx);
+						Match m = reg.Match(input);
+						if (m.Groups.Count == 4)
+						{
+							a = string.Format("({0}) {1}-{2}", m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+						}
+					}
+					catch (Exception)
+					{
+
+					}
 				}
 			}
-			catch (Exception)
-			{
-
-			}
-
 			return a;
 		}
 	}

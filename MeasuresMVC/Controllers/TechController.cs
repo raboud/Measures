@@ -13,6 +13,7 @@ using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
 using RandREng.IdentityDBEntity;
 using RandREng.MeasureDBEntity;
+using RandREng.Types;
 
 namespace MeasuresMVC.Controllers
 {
@@ -77,6 +78,8 @@ namespace MeasuresMVC.Controllers
 				model.LastModifiedDateTime = DateTime.Now;
 				try
 				{
+					model.PhoneNumber1 = PhoneNumber10.Reformat(model.PhoneNumber1);
+					model.PhoneNumber2 = PhoneNumber10.Reformat(model.PhoneNumber2);
 					db.Teches.Add(model);
 					db.SaveChanges();
 				}
@@ -119,13 +122,13 @@ namespace MeasuresMVC.Controllers
 				tech2.Address = model.Address;
 				tech2.Address2 = model.Address2;
 				tech2.City = model.City;
-				tech2.PhoneNumber1 = model.PhoneNumber1;
+				tech2.PhoneNumber1 = PhoneNumber10.Reformat(model.PhoneNumber1);
+				tech2.PhoneNumber2 = PhoneNumber10.Reformat(model.PhoneNumber2);
 				tech2.LastModifiedById = User.Identity.GetUserId();
 				tech2.LastModifiedDateTime = DateTime.Now;
 				tech2.LastName = model.LastName;
 				tech2.Latitude = model.Latitude;
 				tech2.Longitude = model.Longitude;
-				tech2.PhoneNumber2 = model.PhoneNumber2;
 				tech2.State = model.State;
 				tech2.ZipCode = model.ZipCode.Trim();
 //				db.Entry(model).State = EntityState.Modified;

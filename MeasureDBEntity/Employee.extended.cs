@@ -40,12 +40,12 @@ namespace RandREng.MeasureDBEntity
 			[DataType(DataType.EmailAddress)]
 			[Display(Name = "Email Address", Prompt = "Enter Customer Email Address", Description = "Email")]
 			[Required]
-			public string EmailAddress;
+			public string Email;
 
 			[Display(Name = "Address", Prompt = "Enter Customer Address", Description = "Address Line 1")]
 			[StringLength(50)]
 			[Required]
-			public string Address;
+			public string Address1;
 
 			[Display(Name = "Address Additional", Prompt = "Enter Customer Address", Description = "Address Line 2")]
 			[StringLength(50)]
@@ -64,7 +64,7 @@ namespace RandREng.MeasureDBEntity
 			[Display(Name = "Zip Code", Prompt = "Enter Zip Code", Description = "Zip Code")]
 			[PostalPlus4]
 			[Required]
-			public string ZipCode;
+			public string Zip;
 
 			[Display(Name = "Home Number", Prompt = "Enter Home Phone Number", Description = "Customer Home Phone")]
 			[PhoneNumber10]

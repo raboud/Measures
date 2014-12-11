@@ -31,12 +31,12 @@ namespace RandREng.MeasureDBEntity
         public string Notes { get; set; }
         public int BranchId { get; set; }
         public bool Active { get; set; }
-        public string StoreNickName { get; set; }
         public Nullable<double> Latitude { get; set; }
         public Nullable<double> Longitude { get; set; }
         public Nullable<short> DistrictNumber { get; set; }
         public bool IncludeInStatusReportAll { get; set; }
         public string Address { get; set; }
+        public string NickName { get; set; }
     
         public virtual Branch Branch { get; set; }
         public virtual StoreType StoreType { get; set; }

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[MeasureEmail]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY,
     [MeasureId] INT NOT NULL, 
 	[EmailTemplateId] int not null,
     [Sent] DATETIME NOT NULL

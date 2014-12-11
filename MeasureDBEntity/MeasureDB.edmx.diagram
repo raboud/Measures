@@ -8,10 +8,10 @@
         <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Branch" Width="1.5" PointX="1.5" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.5" PointX="0.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.EmailTemplate" Width="1.5" PointX="6.625" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.EmailTemplate" Width="1.5" PointX="6.5" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.EmailType" Width="1.5" PointX="8.625" PointY="8.125" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.Employee" Width="1.5" PointX="1.5" PointY="30" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="7.625" PointY="2.75" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="7.625" PointY="2.25" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.Measure" Width="1.5" PointX="2.375" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MeasureEmail" Width="1.5" PointX="4.375" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="2.125" PointX="4.5" PointY="3.75" IsExpanded="true" />
@@ -40,11 +40,22 @@
         <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.StoreTech" />
         <AssociationConnector Association="MeasureModel.FK_Employees_User" />
-        <AssociationConnector Association="MeasureModel.FK_Tech_User" />
+        <AssociationConnector Association="MeasureModel.FK_Tech_User" ManuallyRouted="true" >
+          <ConnectorPoint PointX="12.02344" PointY="4.0186979166666665" />
+          <ConnectorPoint PointX="12.02344" PointY="16.054688749999997" />
+          <ConnectorPoint PointX="11.817708333333334" PointY="16.054688749999997" />
+          <ConnectorPoint PointX="11.651041666666666" PointY="16.054688749999997" />
+          <ConnectorPoint PointX="11.606770833333334" PointY="16.054688749999997" />
+          <ConnectorPoint PointX="11.440104166666666" PointY="16.054688749999997" />
+          <ConnectorPoint PointX="5.375" PointY="16.054688749999997" />
+        </AssociationConnector>
         <AssociationConnector Association="MeasureModel.FK_OrderEmail_EmailTemplate" />
         <AssociationConnector Association="MeasureModel.FK_Customer_LastModified" />
         <AssociationConnector Association="MeasureModel.FK_Measure_EnterredBy" />
         <AssociationConnector Association="MeasureModel.FK_Tech_LastModified" />
+        <EntityTypeShape EntityType="MeasureModel.StoreWithBranch" Width="1.5" PointX="1.125" PointY="0.875" />
+        <AssociationConnector Association="MeasureModel.StoreUser" />
+        <AssociationConnector Association="MeasureModel.FK_Width_MaterialType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,7 @@ using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
 using RandREng.MeasureDBEntity;
+using RandREng.Types;
 
 namespace MeasuresMVC.Controllers
 {
@@ -28,7 +30,33 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Customer> list = from c in new MeasureEntities().Customers.Include(m => m.Measures).Where(m => m.Measures.Any(s => s.StoreId == 3)) orderby c.Id select c;
+			IQueryable<Customer> list = null;
+			try
+			{
+				if (User.IsInRole("Store"))
+				{
+					string userId = User.Identity.GetUserId();
+					List<int> stores = db.AspNetUsers.Find(userId).Stores.Select(s => s.Id).ToList();
+					list = from c in db.Customers
+							   .Include(m => m.Measures.Select(me => me.Emails))
+							   .Include(m => m.Measures.Select(mm => mm.Materials.Select(mr => mr.Rooms)))
+							   .Include(m => m.Measures.Select(s => s.Store))
+							   .Where(c => c.Measures.Any(m => stores.Contains(m.StoreId))) orderby c.Id select c;
+				}
+				else
+				{
+					list = from c in db.Customers
+							   .Include(m => m.Measures.Select(me => me.Emails))
+							   .Include(m => m.Measures.Select(mm => mm.Materials.Select(mr => mr.Rooms)))
+							   .Include(m => m.Measures.Select(s => s.Store))
+						   orderby c.Id
+						   select c;
+				}
+			}
+			catch (Exception e)
+			{
+
+			}
 			return View(list);
 		}
 
@@ -50,7 +78,7 @@ namespace MeasuresMVC.Controllers
             {
                 return HttpNotFound();
             }
-			ViewBag.ReturnUrl = Url.Action("Details" + "/" + id.Value); 
+			ViewBag.ReturnUrl = Url.Action("Details" + "/" + id.Value, "Customer"); 
 			return View(customer);
         }
 
@@ -73,12 +101,20 @@ namespace MeasuresMVC.Controllers
                 {
                     return View(customer);
                 }
+				customer.PhoneNumber1 = PhoneNumber10Ext.Reformat(customer.PhoneNumber1);
+				customer.PhoneNumber2 = PhoneNumber10Ext.Reformat(customer.PhoneNumber2);
+				customer.PhoneNumber2 = PhoneNumber10Ext.Reformat(customer.PhoneNumber2);
 				customer.LastModifiedById = User.Identity.GetUserId();
 				customer.LastModifiedDateTime = DateTime.Now;
-
+				customer.Measures.Add(new Measure()
+				{
+					EnterredById = User.Identity.GetUserId(),
+					Enterred = DateTime.Now,
+					StoreId = db.AspNetUsers.Find(User.Identity.GetUserId()).Stores.First().Id
+				});
                 db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Create", "Measure");
+                int count = db.SaveChanges();
+				return RedirectToAction("Details", "Measure", new { id = customer.Measures.First().Id });
             }
 
             return View(customer);
@@ -97,37 +133,16 @@ namespace MeasuresMVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			item.customer.Measures.Add(new Measure()
+			Measure m = new Measure()
 			{
 				EnterredById = User.Identity.GetUserId(),
 				Enterred = DateTime.Now,
-				StoreId = 3,
+				StoreId = db.AspNetUsers.Find(User.Identity.GetUserId()).Stores.First().Id,
 				CustomerId = item.customer.Id
-			});
+			};
+			item.customer.Measures.Add(m);
 			int i = db.SaveChanges();
-			return Redirect(returnUrl);
-		}
-
-		// POST: /Customer/Edit/5
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public ActionResult CreateMeasure(CreateMeasureModel item)
-		{
-			if (ModelState.IsValid)
-			{
-				item.customer.Measures.Add(new Measure() 
-				{ 
-					EnterredById = User.Identity.GetUserId(), 
-					Enterred = DateTime.Now,
- 					StoreId = 3,
-					CustomerId = item.customer.Id
-				});
-				int i = db.SaveChanges();
-
-			}
-			return View(item);
+			return RedirectToAction("Details", "Measure", new { id = m.Id });
 		}
 
 		// GET: /Customer/Edit/5
@@ -195,8 +210,20 @@ namespace MeasuresMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
+				try
+				{
+					customer.PhoneNumber1 = PhoneNumber10Ext.Reformat(customer.PhoneNumber1);
+					customer.PhoneNumber2 = PhoneNumber10Ext.Reformat(customer.PhoneNumber2);
+					customer.PhoneNumber2 = PhoneNumber10Ext.Reformat(customer.PhoneNumber3);
+					customer.LastModifiedById = User.Identity.GetUserId();
+					customer.LastModifiedDateTime = DateTime.Now;
+					db.Entry(customer).State = EntityState.Modified;
+					db.SaveChanges();
+				}
+				catch (DbEntityValidationException e)
+				{
+
+				}
                 return RedirectToAction("Index");
             }
             return View(customer);
@@ -232,7 +259,7 @@ namespace MeasuresMVC.Controllers
 		private void PopulateAssignedCourseData(MeasureMaterial instructor)
 		{
 			var allRooms = db.Rooms;
-			var materialRooms = new HashSet<int>(instructor.MeasureRooms.Select(c => c.RoomId));
+			var materialRooms = new HashSet<int>(instructor.Rooms.Select(c => c.RoomId));
 			var viewModel = new List<AssignedRoomData>();
 			foreach (var room in allRooms)
 			{
@@ -250,27 +277,27 @@ namespace MeasuresMVC.Controllers
 		{
 			if (selectedRooms == null)
 			{
-				instructorToUpdate.MeasureRooms = new List<MeasureRoom>();
+				instructorToUpdate.Rooms = new List<MeasureRoom>();
 				return;
 			}
 
 			var selectedCoursesHS = new HashSet<string>(selectedRooms);
 			var instructorCourses = new HashSet<int>
-				(instructorToUpdate.MeasureRooms.Select(c => c.RoomId));
+				(instructorToUpdate.Rooms.Select(c => c.RoomId));
 			foreach (var room in db.Rooms)
 			{
 				if (selectedCoursesHS.Contains(room.Name))
 				{
 					if (!instructorCourses.Contains(room.Id))
 					{
-						instructorToUpdate.MeasureRooms.Add(new MeasureRoom() { RoomId = room.Id });
+						instructorToUpdate.Rooms.Add(new MeasureRoom() { RoomId = room.Id });
 					}
 				}
 				else
 				{
 					if (instructorCourses.Contains(room.Id))
 					{
-						instructorToUpdate.MeasureRooms.Remove(instructorToUpdate.MeasureRooms.FirstOrDefault(m => m.RoomId == room.Id));
+						instructorToUpdate.Rooms.Remove(instructorToUpdate.Rooms.FirstOrDefault(m => m.RoomId == room.Id));
 					}
 				}
 			}

@@ -66,7 +66,7 @@ namespace RandREng.MeasureDBEntity
 
 			public bool Active;
 			[Display(Name = "Nickname", Prompt = "Nickname")]
-			public string StoreNickName;
+			public string NickName;
 			public Nullable<double> Latitude;
 			public Nullable<double> Longitude;
 			public Nullable<short> DistrictNumber;

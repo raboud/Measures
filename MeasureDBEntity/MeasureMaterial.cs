@@ -16,18 +16,19 @@ namespace RandREng.MeasureDBEntity
     {
         public MeasureMaterial()
         {
-            this.MeasureRooms = new HashSet<MeasureRoom>();
+            this.Rooms = new HashSet<MeasureRoom>();
         }
     
         public int Id { get; set; }
         public int MaterialTypeId { get; set; }
         public int MeasureId { get; set; }
-        public int WidthId { get; set; }
-        public int AltWidthId { get; set; }
+        public Nullable<int> WidthId { get; set; }
+        public Nullable<int> AltWidthId { get; set; }
+        public string Description { get; set; }
     
         public virtual MaterialType MaterialType { get; set; }
         public virtual Width AltWidth { get; set; }
         public virtual Width Width { get; set; }
-        public virtual ICollection<MeasureRoom> MeasureRooms { get; set; }
+        public virtual ICollection<MeasureRoom> Rooms { get; set; }
     }
 }

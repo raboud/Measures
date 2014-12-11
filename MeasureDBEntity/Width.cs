@@ -16,5 +16,6 @@ namespace RandREng.MeasureDBEntity
     {
         public int Id { get; set; }
         public double Value { get; set; }
+        public int MaterialTypeId { get; set; }
     }
 }

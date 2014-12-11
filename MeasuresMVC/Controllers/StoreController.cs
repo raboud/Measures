@@ -72,7 +72,7 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Store> stores = (IQueryable<Store>) (from c in new MeasureEntities().Stores.Include(c => c.Techs).Include(c => c.Branch) orderby c.Id select c);
+			IQueryable<StoreWithBranch> stores = (IQueryable<StoreWithBranch>) (from c in new MeasureEntities().StoreWithBranches.AsNoTracking() orderby c.Id select c);
 			return View(stores);
 		}
 
@@ -102,7 +102,7 @@ namespace MeasuresMVC.Controllers
 		public ActionResult Create()
 		{
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name");
-			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName");
+			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "TypeName");
 			return View();
 		}
 
@@ -111,7 +111,7 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
+		public ActionResult Create([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,NickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
 		{
 			if (ModelState.IsValid)
 			{
@@ -121,7 +121,7 @@ namespace MeasuresMVC.Controllers
 			}
 
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name", store.BranchId);
-			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName", store.TypeID);
+			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "TypeName", store.TypeID);
 			return View(store);
 		}
 
@@ -138,7 +138,7 @@ namespace MeasuresMVC.Controllers
 				return HttpNotFound();
 			}
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name", store.BranchId);
-			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName", store.TypeID);
+			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "TypeName", store.TypeID);
 			return View(store);
 		}
 
@@ -147,7 +147,7 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
+		public ActionResult Edit([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,NickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
 		{
 			if (ModelState.IsValid)
 			{
@@ -156,7 +156,7 @@ namespace MeasuresMVC.Controllers
 				return RedirectToAction("Index");
 			}
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name", store.BranchId);
-			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName", store.TypeID);
+			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "TypeName", store.TypeID);
 			return View(store);
 		}
 

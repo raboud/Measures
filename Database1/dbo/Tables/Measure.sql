@@ -6,6 +6,15 @@
 
     [StoreId] INT NOT NULL, 
     [EnterredById] [dbo].[AspNetUserId] NOT NULL, 
+    [Notes] NTEXT NULL, 
     CONSTRAINT [FK_Measure_Customer] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer] ([Id]),
     CONSTRAINT [FK_Measure_Store] FOREIGN KEY ([StoreId]) REFERENCES [dbo].[Store] ([Id]),
 )
+
+GO
+
+CREATE INDEX [IX_Measure_StoreId] ON [dbo].[Measure] ([StoreId])
+
+GO
+
+CREATE INDEX [IX_Measure_CustomerId] ON [dbo].[Measure] ([CustomerId])

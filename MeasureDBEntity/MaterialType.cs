@@ -14,7 +14,16 @@ namespace RandREng.MeasureDBEntity
     
     public partial class MaterialType
     {
+        public MaterialType()
+        {
+            this.Widths = new HashSet<Width>();
+        }
+    
         public int Id { get; set; }
         public string Description { get; set; }
+        public bool AllowPatternMatch { get; set; }
+        public bool AllowWidth { get; set; }
+    
+        public virtual ICollection<Width> Widths { get; set; }
     }
 }

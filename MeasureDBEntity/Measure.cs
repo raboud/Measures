@@ -16,8 +16,8 @@ namespace RandREng.MeasureDBEntity
     {
         public Measure()
         {
-            this.MeasureEmails = new HashSet<MeasureEmail>();
-            this.MeasureMaterials = new HashSet<MeasureMaterial>();
+            this.Emails = new HashSet<MeasureEmail>();
+            this.Materials = new HashSet<MeasureMaterial>();
         }
     
         public int Id { get; set; }
@@ -25,10 +25,11 @@ namespace RandREng.MeasureDBEntity
         public System.DateTime Enterred { get; set; }
         public int StoreId { get; set; }
         public string EnterredById { get; set; }
+        public string Notes { get; set; }
     
         public virtual Store Store { get; set; }
-        public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
-        public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
+        public virtual ICollection<MeasureEmail> Emails { get; set; }
+        public virtual ICollection<MeasureMaterial> Materials { get; set; }
         public virtual AspNetUser EnterredBy { get; set; }
     }
 }

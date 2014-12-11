@@ -17,8 +17,4 @@ namespace MeasuresMVC.Models
 		public int Id { get; set; }
 	}
 
-	public class StoreView : Store
-	{
-		public string BranchName { get { return this.Branch.Name; } }
-	}
 }

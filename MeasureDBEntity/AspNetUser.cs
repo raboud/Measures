@@ -14,6 +14,11 @@ namespace RandREng.MeasureDBEntity
     
     public partial class AspNetUser
     {
+        public AspNetUser()
+        {
+            this.Stores = new HashSet<Store>();
+        }
+    
         public string Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
@@ -26,5 +31,7 @@ namespace RandREng.MeasureDBEntity
         public string LastName { get; set; }
         public Nullable<bool> Active { get; set; }
         public string Discriminator { get; set; }
+    
+        public virtual ICollection<Store> Stores { get; set; }
     }
 }

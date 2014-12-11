@@ -27,7 +27,7 @@
 	.AutoGenerateLayouts(false)
 	.Columns(column =>
 	{
-		column.For(x => x.StoreTypeName).HeaderText("Store Type").Width("30%");
+		column.For(x => x.Name).HeaderText("Store Type").Width("30%");
 		column.For(x => x.ImageName).HeaderText("Image").Width("30%");
 		column.For(x => x.QBClass).HeaderText("QBClass").Width("20%");
 	})

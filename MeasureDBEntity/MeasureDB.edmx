@@ -81,7 +81,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Employees">
@@ -110,6 +110,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AllowPatternMatch" Type="bit" Nullable="false" />
+          <Property Name="AllowWidth" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -120,12 +122,13 @@
           <Property Name="Enterred" Type="datetime" Nullable="false" />
           <Property Name="StoreId" Type="int" Nullable="false" />
           <Property Name="EnterredById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Notes" Type="ntext" />
         </EntityType>
         <EntityType Name="MeasureEmail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MeasureId" Type="int" Nullable="false" />
           <Property Name="EmailTemplateId" Type="int" Nullable="false" />
           <Property Name="Sent" Type="datetime" Nullable="false" />
@@ -137,8 +140,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaterialTypeId" Type="int" Nullable="false" />
           <Property Name="MeasureId" Type="int" Nullable="false" />
-          <Property Name="WidthId" Type="int" Nullable="false" />
-          <Property Name="AltWidthId" Type="int" Nullable="false" />
+          <Property Name="WidthId" Type="int" />
+          <Property Name="AltWidthId" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MeasureRoom">
           <Key>
@@ -182,7 +186,7 @@
           <Property Name="Notes" Type="ntext" />
           <Property Name="BranchId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="StoreNickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
           <Property Name="DistrictNumber" Type="smallint" />
@@ -201,10 +205,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StoreTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="ImageName" Type="nvarchar" MaxLength="50" />
           <Property Name="Logo" Type="image" />
           <Property Name="QBClass" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StoreUser">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="Tech">
           <Key>
@@ -240,8 +252,29 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
+          <Property Name="MaterialTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Measure.dbo.StoreWithBranch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StoreWithBranch">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="BranchName" />
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="StoreType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="DistrictNumber" Type="smallint" />
         </EntityType>
         <Association Name="FK_Branch_Manager">
           <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
@@ -340,7 +373,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MeasureMaterial_AltWidth">
-          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
           <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -376,7 +409,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MeasureMaterial_Width">
-          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
           <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -471,6 +504,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StoreUser_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreUser" Type="Self.StoreUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreUser">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreUser_User">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="StoreUser" Type="Self.StoreUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tech_LastModified">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Tech" Type="Self.Tech" Multiplicity="*" />
@@ -519,6 +576,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Width_MaterialType">
+          <End Role="MaterialType" Type="Self.MaterialType" Multiplicity="1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Width">
+              <PropertyRef Name="MaterialTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MeasureModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
@@ -536,9 +605,25 @@
           <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreTech" EntityType="Self.StoreTech" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreType" EntityType="Self.StoreType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreUser" EntityType="Self.StoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tech" EntityType="Self.Tech" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TechCapacity" EntityType="Self.TechCapacity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Width" EntityType="Self.Width" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreWithBranch" EntityType="Self.StoreWithBranch" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StoreWithBranch].[Id] AS [Id], 
+    [StoreWithBranch].[Address] AS [Address], 
+    [StoreWithBranch].[City] AS [City], 
+    [StoreWithBranch].[State] AS [State], 
+    [StoreWithBranch].[ZipCode] AS [ZipCode], 
+    [StoreWithBranch].[NickName] AS [NickName], 
+    [StoreWithBranch].[BranchName] AS [BranchName], 
+    [StoreWithBranch].[StoreType] AS [StoreType], 
+    [StoreWithBranch].[Active] AS [Active], 
+    [StoreWithBranch].[Number] AS [Number], 
+    [StoreWithBranch].[DistrictNumber] AS [DistrictNumber]
+    FROM [dbo].[StoreWithBranch] AS [StoreWithBranch]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Branch_Manager" Association="Self.FK_Branch_Manager">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Branch" EntitySet="Branch" />
@@ -615,6 +700,14 @@
             <End Role="Tech" EntitySet="Tech" />
             <End Role="StoreTech" EntitySet="StoreTech" />
           </AssociationSet>
+          <AssociationSet Name="FK_StoreUser_Store" Association="Self.FK_StoreUser_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreUser" EntitySet="StoreUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreUser_User" Association="Self.FK_StoreUser_User">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="StoreUser" EntitySet="StoreUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tech_LastModified" Association="Self.FK_Tech_LastModified">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Tech" EntitySet="Tech" />
@@ -630,6 +723,10 @@
           <AssociationSet Name="FK_TechCapacity_Tech" Association="Self.FK_TechCapacity_Tech">
             <End Role="Tech" EntitySet="Tech" />
             <End Role="TechCapacity" EntitySet="TechCapacity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Width_MaterialType" Association="Self.FK_Width_MaterialType">
+            <End Role="MaterialType" EntitySet="MaterialType" />
+            <End Role="Width" EntitySet="Width" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -652,6 +749,7 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Stores" Relationship="MeasureModel.StoreUser" FromRole="AspNetUser" ToRole="Store" />
         </EntityType>
         <EntityType Name="Branch">
           <Key>
@@ -756,6 +854,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AllowPatternMatch" Type="Boolean" Nullable="false" />
+          <Property Name="AllowWidth" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Widths" Relationship="MeasureModel.FK_Width_MaterialType" FromRole="MaterialType" ToRole="Width" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -767,9 +868,10 @@
           <Property Name="StoreId" Type="Int32" Nullable="false" />
           <Property Name="EnterredById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Store" Relationship="Self.FK_Measure_Store" FromRole="Measure" ToRole="Store" />
-          <NavigationProperty Name="MeasureEmails" Relationship="Self.FK_MeasureEmail_Measure" FromRole="Measure" ToRole="MeasureEmail" />
-          <NavigationProperty Name="MeasureMaterials" Relationship="Self.FK_MeasureMaterial_Measure" FromRole="Measure" ToRole="MeasureMaterial" />
+          <NavigationProperty Name="Emails" Relationship="Self.FK_MeasureEmail_Measure" FromRole="Measure" ToRole="MeasureEmail" />
+          <NavigationProperty Name="Materials" Relationship="Self.FK_MeasureMaterial_Measure" FromRole="Measure" ToRole="MeasureMaterial" />
           <NavigationProperty Name="EnterredBy" Relationship="MeasureModel.FK_Measure_EnterredBy" FromRole="Measure" ToRole="AspNetUser" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MeasureEmail">
           <Key>
@@ -789,12 +891,13 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaterialTypeId" Type="Int32" Nullable="false" />
           <Property Name="MeasureId" Type="Int32" Nullable="false" />
-          <Property Name="WidthId" Type="Int32" Nullable="false" />
-          <Property Name="AltWidthId" Type="Int32" Nullable="false" />
+          <Property Name="WidthId" Type="Int32" />
+          <Property Name="AltWidthId" Type="Int32" />
           <NavigationProperty Name="MaterialType" Relationship="Self.FK_MeasureMaterial_MaterialType" FromRole="MeasureMaterial" ToRole="MaterialType" />
-          <NavigationProperty Name="AltWidth" Relationship="Self.FK_MeasureMaterial_AltWidth" FromRole="MeasureMaterial" ToRole="Width" />
-          <NavigationProperty Name="Width" Relationship="Self.FK_MeasureMaterial_Width" FromRole="MeasureMaterial" ToRole="Width" />
-          <NavigationProperty Name="MeasureRooms" Relationship="Self.FK_MeasureRoom_MeasureMaterial" FromRole="MeasureMaterial" ToRole="MeasureRoom" />
+          <NavigationProperty Name="AltWidth" Relationship="MeasureModel.FK_MeasureMaterial_AltWidth" FromRole="MeasureMaterial" ToRole="Width" />
+          <NavigationProperty Name="Width" Relationship="MeasureModel.FK_MeasureMaterial_Width" FromRole="MeasureMaterial" ToRole="Width" />
+          <NavigationProperty Name="Rooms" Relationship="Self.FK_MeasureRoom_MeasureMaterial" FromRole="MeasureMaterial" ToRole="MeasureRoom" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MeasureRoom">
           <Key>
@@ -838,7 +941,6 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BranchId" Type="Int32" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="StoreNickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
           <Property Name="DistrictNumber" Type="Int16" />
@@ -847,16 +949,17 @@
           <NavigationProperty Name="StoreType" Relationship="Self.FK_Store_StoreType" FromRole="Store" ToRole="StoreType" />
           <NavigationProperty Name="Techs" Relationship="MeasureModel.StoreTech" FromRole="Store" ToRole="Tech" />
           <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StoreType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StoreTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="QBClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tech">
           <Key>
@@ -898,6 +1001,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="MaterialTypeId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Branch_Manager">
           <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
@@ -996,7 +1100,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MeasureMaterial_AltWidth">
-          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
           <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -1008,7 +1112,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MeasureMaterial_Width">
-          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="Width" Type="Self.Width" Multiplicity="0..1" />
           <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Width">
@@ -1186,6 +1290,15 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Tech" EntitySet="Teches" />
           </AssociationSet>
+          <EntitySet Name="StoreWithBranches" EntityType="MeasureModel.StoreWithBranch" />
+          <AssociationSet Name="StoreUser" Association="MeasureModel.StoreUser">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Width_MaterialType" Association="MeasureModel.FK_Width_MaterialType">
+            <End Role="MaterialType" EntitySet="MaterialTypes" />
+            <End Role="Width" EntitySet="Widths" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="StoreTech">
           <End Type="MeasureModel.Store" Role="Store" Multiplicity="*" />
@@ -1264,6 +1377,39 @@
             </Principal>
             <Dependent Role="Tech">
               <PropertyRef Name="LastModifiedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StoreWithBranch">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="BranchName" />
+          </Key>
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StoreType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictNumber" Type="Int16" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BranchName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="StoreUser">
+          <End Type="MeasureModel.Store" Role="Store" Multiplicity="*" />
+          <End Type="MeasureModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Width_MaterialType">
+          <End Type="MeasureModel.MaterialType" Role="MaterialType" Multiplicity="1" />
+          <End Type="MeasureModel.Width" Role="Width" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Width">
+              <PropertyRef Name="MaterialTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1381,6 +1527,8 @@
           <EntitySetMapping Name="MaterialTypes">
             <EntityTypeMapping TypeName="MeasureModel.MaterialType">
               <MappingFragment StoreEntitySet="MaterialType">
+                <ScalarProperty Name="AllowWidth" ColumnName="AllowWidth" />
+                <ScalarProperty Name="AllowPatternMatch" ColumnName="AllowPatternMatch" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1389,6 +1537,7 @@
           <EntitySetMapping Name="Measures">
             <EntityTypeMapping TypeName="MeasureModel.Measure">
               <MappingFragment StoreEntitySet="Measure">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Enterred" ColumnName="Enterred" />
@@ -1410,6 +1559,7 @@
           <EntitySetMapping Name="MeasureMaterials">
             <EntityTypeMapping TypeName="MeasureModel.MeasureMaterial">
               <MappingFragment StoreEntitySet="MeasureMaterial">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MaterialTypeId" ColumnName="MaterialTypeId" />
                 <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
@@ -1449,6 +1599,7 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="MeasureModel.Store">
               <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
@@ -1462,7 +1613,6 @@
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="StoreNickName" ColumnName="StoreNickName" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="DistrictNumber" ColumnName="DistrictNumber" />
@@ -1473,8 +1623,8 @@
           <EntitySetMapping Name="StoreTypes">
             <EntityTypeMapping TypeName="MeasureModel.StoreType">
               <MappingFragment StoreEntitySet="StoreType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StoreTypeName" ColumnName="StoreTypeName" />
                 <ScalarProperty Name="ImageName" ColumnName="ImageName" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />
                 <ScalarProperty Name="QBClass" ColumnName="QBClass" />
@@ -1516,6 +1666,7 @@
           <EntitySetMapping Name="Widths">
             <EntityTypeMapping TypeName="MeasureModel.Width">
               <MappingFragment StoreEntitySet="Width">
+                <ScalarProperty Name="MaterialTypeId" ColumnName="MaterialTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
               </MappingFragment>
@@ -1524,6 +1675,31 @@
           <AssociationSetMapping Name="StoreTech" TypeName="MeasureModel.StoreTech" StoreEntitySet="StoreTech">
             <EndProperty Name="Tech">
               <ScalarProperty Name="Id" ColumnName="TechId" />
+            </EndProperty>
+            <EndProperty Name="Store">
+              <ScalarProperty Name="Id" ColumnName="StoreId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="StoreWithBranches">
+            <EntityTypeMapping TypeName="MeasureModel.StoreWithBranch">
+              <MappingFragment StoreEntitySet="StoreWithBranch">
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DistrictNumber" ColumnName="DistrictNumber" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="StoreType" ColumnName="StoreType" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StoreUser" TypeName="MeasureModel.StoreUser" StoreEntitySet="StoreUser">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
             <EndProperty Name="Store">
               <ScalarProperty Name="Id" ColumnName="StoreId" />

@@ -1,0 +1,103 @@
+﻿@using Infragistics.Web.Mvc;
+@using MeasuresMVC.Utils;
+
+@model MeasuresMVC.Models.AddMaterialModel
+
+@{
+	ViewBag.Title = "Add Materials";
+}
+
+<h2>Edit</h2>
+
+@(Html.Infragistics().Loader()
+		.ScriptPath(Url.Content("~/Infragistics/js/"))
+		.CssPath(Url.Content("~/Infragistics/css/"))
+		.Render()
+)
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<h4>Branch</h4>
+		<hr />
+		@Html.ValidationSummary(true)
+		@Html.HiddenFor(model => model.MeasureId)
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Material.MaterialTypeId, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@(Html.Infragistics().ComboFor(model => model.Material.MaterialTypeId)
+					.ID("igMaterial")
+					.DataSource(Model.MaterialTypeList)
+					.ValueKey("id")
+					.ValueKeyType(ComboDataType.Number)
+					.TextKey("text")
+					.DataBind()
+					.Render())
+				@Html.ValidationMessageFor(model => model.Material.MaterialTypeId)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Material.Description, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Material.Description)
+				@Html.ValidationMessageFor(model => model.Material.Description)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Material.WidthId, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@(Html.Infragistics().ComboFor(model => model.Material.WidthId)
+					.ID("igWidth")
+					.DataSource(Model.WidthList)
+					.ValueKey("Id")
+					.TextKeyType(ComboDataType.Number)
+					.TextKey("Value")
+					.CascadingSettings(
+						settings => settings.ParentComboID("#igMaterial")
+						.ParentComboKey("MaterialTypeId")
+					)
+					.DataBind()
+					.Render())
+				@Html.ValidationMessageFor(model => model.Material.WidthId)
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Material.AltWidthId, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@(Html.Infragistics().ComboFor(model => model.Material.AltWidthId)
+					.ID("igAltWidth")
+					.DataSource(Model.WidthList)
+					.ValueKey("Id")
+					.TextKeyType(ComboDataType.Number)
+					.TextKey("Value")
+					.CascadingSettings(
+						settings => settings.ParentComboID("#igMaterial")
+						.ParentComboKey("MaterialTypeId")
+					)
+					.DataBind()
+					.Render())
+				@Html.ValidationMessageFor(model => model.Material.WidthId)
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Save" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
+}
+
+<div>
+	@Html.ActionLink("Back to Measure", "Details", new { id = Model.MeasureId })
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

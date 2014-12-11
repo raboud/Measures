@@ -15,7 +15,7 @@ namespace RandREng.MeasureDBEntity
 		public class MetaData
 		{
 			[Display(Name = "Store Type", Prompt = "Store Type")]
-			public string StoreTypeName;
+			public string Name;
 			[Display(Name = "Logo file name", Prompt = "Logo file name")]
 			public string ImageName;
 			public byte[] Logo;

@@ -6,7 +6,7 @@
 @model RandREng.MeasureDBEntity.Customer
 
 @{
-    ViewBag.Title = "Details";
+	ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
@@ -35,21 +35,26 @@
 		</th>
 	</tr>
 
-	@foreach (var item in Model.Measures) {
-	<tr>
-		<td>
-			@Html.DisplayFor2(modelItem => item.Enterred)
-		</td>
-		<td>
-			@Html.DisplayFor2(modelItem => item.Store.Number)
-		</td>
+	@foreach (var item in Model.Measures)
 
-		<td>
-			@Html.ActionLink("Edit", "Edit", "Measure", new { id = item.Id }, null) |
-			@Html.ActionLink("Details", "Details", "Measure", new { id = item.Id }, null) |
-			@Html.ActionLink("Delete", "Delete", "Measure", new { id = item.Id }, null)
-		</td>
-	</tr>
-}
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor2(modelItem => item.Enterred)
+			</td>
+			<td>
+				@Html.DisplayFor2(modelItem => item.Store.Number)
+			</td>
 
-	</table>
+			<td>
+				@Html.ActionLink("Details", "Details", "Measure", new { id = item.Id, ReturnUrl = ViewBag.ReturnUrl }, null)
+				@if (User.IsInRole("Admin"))
+				{
+					@Html.Raw("|");
+					@Html.ActionLink("Delete", "Delete", "Measure", new { id = item.Id, ReturnUrl = ViewBag.ReturnUrl }, null)
+				}
+			</td>
+		</tr>
+	}
+
+</table>

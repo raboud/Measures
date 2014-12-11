@@ -103,8 +103,6 @@ namespace MeasuresMVC.Models
 			this.Evening = new int[7];
 			foreach (TechCapacity c in tech.Capacities)
 			{
-				int row = 0;
-
 				switch (c.SlotType.Name)
 				{
 					case "Morning":

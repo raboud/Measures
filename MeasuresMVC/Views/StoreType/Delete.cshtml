@@ -1,4 +1,6 @@
-﻿@model RandREng.MeasureDBEntity.StoreType
+﻿@using MeasuresMVC.Utils;
+
+@model RandREng.MeasureDBEntity.StoreType
 
 @{
     ViewBag.Title = "Delete";
@@ -12,11 +14,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.StoreTypeName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor2(model => model.StoreTypeName)
+            @Html.DisplayFor2(model => model.Name)
         </dd>
 
         <dt>

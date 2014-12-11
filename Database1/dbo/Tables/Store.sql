@@ -12,7 +12,7 @@
     [Notes]                    NTEXT          NULL,
     [BranchId]                 INT            NOT NULL,
     [Active]                   BIT            CONSTRAINT [DF__Store__Active] DEFAULT ((1)) NOT NULL,
-    [StoreNickName]            NVARCHAR (50)  CONSTRAINT [DF__Store__StoreNickName] DEFAULT (NULL) NULL,
+    [NickName]            NVARCHAR (50)  CONSTRAINT [DF__Store__StoreNickName] DEFAULT (NULL) NULL,
     [Latitude]                 FLOAT (53)     NULL,
     [Longitude]                FLOAT (53)     NULL,
     [DistrictNumber]             SMALLINT       NULL,

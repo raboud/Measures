@@ -141,11 +141,11 @@ namespace Helper
 				conn.SaveChanges();
 			}
 
-			StoreType type = conn.StoreTypes.FirstOrDefault(st => st.StoreTypeName == "LOWES");
+			StoreType type = conn.StoreTypes.FirstOrDefault(st => st.Name == "LOWES");
 			if (type == null)
 			{
 				type = new StoreType();
-				type.StoreTypeName = "LOWES";
+				type.Name = "LOWES";
 				conn.StoreTypes.Add(type);
 				conn.SaveChanges();
 			}
@@ -192,7 +192,7 @@ namespace Helper
 								client.FaxNumber = store.COMMFAX;
 								client.Latitude = double.Parse(store.LLAT);
 								client.Longitude = double.Parse(store.LLON);
-								client.StoreNickName = store.NAME;
+								client.NickName = store.NAME;
 								client.State = store.STATE;
 								client.Number = store.KEY;
 								client.StorePhoneNumber = store.PHONE;

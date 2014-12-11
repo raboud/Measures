@@ -48,7 +48,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,StoreTypeName,ImageName,Logo,QBClass")] StoreType storetype)
+        public ActionResult Create([Bind(Include="Id,Name,ImageName,Logo,QBClass")] StoreType storetype)
         {
 			if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,StoreTypeName,ImageName,Logo,QBClass")] StoreType storetype)
+        public ActionResult Edit([Bind(Include="Id,Name,ImageName,Logo,QBClass")] StoreType storetype)
         {
 			if (ModelState.IsValid)
             {

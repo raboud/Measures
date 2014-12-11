@@ -1,4 +1,6 @@
-﻿@model RandREng.MeasureDBEntity.Measure
+﻿@using MeasuresMVC.Utils;
+
+@model RandREng.MeasureDBEntity.Measure
 
 @{
     ViewBag.Title = "Delete";
@@ -20,13 +22,13 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("Delete", "Measure", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+	{
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
-    }
+	}
 </div>

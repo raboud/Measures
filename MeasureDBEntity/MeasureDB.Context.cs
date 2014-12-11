@@ -43,5 +43,6 @@ namespace RandREng.MeasureDBEntity
         public virtual DbSet<Tech> Teches { get; set; }
         public virtual DbSet<TechCapacity> TechCapacities { get; set; }
         public virtual DbSet<Width> Widths { get; set; }
+        public virtual DbSet<StoreWithBranch> StoreWithBranches { get; set; }
     }
 }

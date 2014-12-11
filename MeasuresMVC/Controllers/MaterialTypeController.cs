@@ -31,7 +31,7 @@ namespace MeasuresMVC.Controllers
         }
 
         // GET: /MaterialType/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, string ReturnUrl)
         {
             if (id == null)
             {

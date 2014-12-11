@@ -22,7 +22,7 @@ namespace RandREng.MeasureDBEntity
 		public class MetaData
 		{
 			[Display(Name = "Branch Name", Prompt = "Branch Name")]
-			string Name;
+			public string Name;
 
 			[Display(Name = "Printer Name", Prompt = "Printer Name")]
 			public string PrinterName;
