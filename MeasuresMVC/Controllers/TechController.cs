@@ -17,13 +17,21 @@ namespace MeasuresMVC.Controllers
         // GET: /Tech/
         public ActionResult Index()
         {
-            return View(db.Teches.ToList());
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			return View(db.Teches.ToList());
         }
 
         // GET: /Tech/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -38,7 +46,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Tech/Create
         public ActionResult Create()
         {
-            return View();
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			return View();
         }
 
         // POST: /Tech/Create
@@ -48,7 +60,11 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,HomeNumber,MobileNumber,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech tech)
         {
-            if (ModelState.IsValid)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (ModelState.IsValid)
             {
                 db.Teches.Add(tech);
                 db.SaveChanges();
@@ -61,7 +77,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Tech/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -80,7 +100,11 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,HomeNumber,MobileNumber,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech tech)
         {
-            if (ModelState.IsValid)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (ModelState.IsValid)
             {
                 db.Entry(tech).State = EntityState.Modified;
                 db.SaveChanges();
@@ -92,7 +116,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Tech/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -109,7 +137,11 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Tech tech = db.Teches.Find(id);
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			Tech tech = db.Teches.Find(id);
             db.Teches.Remove(tech);
             db.SaveChanges();
             return RedirectToAction("Index");

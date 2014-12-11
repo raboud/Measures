@@ -13,7 +13,7 @@ namespace MeasuresMVC.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201401211511546_Tokens"; }
+            get { return "201401211905269_Tokens"; }
         }
         
         string IMigrationMetadata.Source

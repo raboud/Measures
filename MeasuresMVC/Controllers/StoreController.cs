@@ -17,14 +17,22 @@ namespace MeasuresMVC.Controllers
         // GET: /Store/
         public ActionResult Index()
         {
-            var stores = db.Stores.Include(s => s.Branch).Include(s => s.StoreType);
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			var stores = db.Stores.Include(s => s.Branch).Include(s => s.StoreType);
             return View(stores.ToList());
         }
 
         // GET: /Store/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -39,7 +47,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Store/Create
         public ActionResult Create()
         {
-            ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name");
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name");
             ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName");
             return View();
         }
@@ -51,7 +63,11 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] Store store)
         {
-            if (ModelState.IsValid)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (ModelState.IsValid)
             {
                 db.Stores.Add(store);
                 db.SaveChanges();
@@ -66,7 +82,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Store/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -87,7 +107,11 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] Store store)
         {
-            if (ModelState.IsValid)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (ModelState.IsValid)
             {
                 db.Entry(store).State = EntityState.Modified;
                 db.SaveChanges();
@@ -101,7 +125,11 @@ namespace MeasuresMVC.Controllers
         // GET: /Store/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -118,8 +146,12 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Store store = db.Stores.Find(id);
-            db.Stores.Remove(store);
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			Store store = db.Stores.Find(id);
+			store.Active = false;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

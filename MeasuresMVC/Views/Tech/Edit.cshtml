@@ -74,22 +74,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitude)
-                @Html.ValidationMessageFor(model => model.Latitude)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitude)
-                @Html.ValidationMessageFor(model => model.Longitude)
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.HomeNumber, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.HomeNumber)
@@ -113,29 +97,21 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedBy, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifiedBy)
-                @Html.ValidationMessageFor(model => model.LastModifiedBy)
-            </div>
-        </div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Latitude)
+				@Html.ValidationMessageFor(model => model.Latitude)
+			</div>
+		</div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedDateTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifiedDateTime)
-                @Html.ValidationMessageFor(model => model.LastModifiedDateTime)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-        </div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Longitude)
+				@Html.ValidationMessageFor(model => model.Longitude)
+			</div>
+		</div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
