@@ -20,7 +20,7 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			var stores = MeasuresMVC.Models.StoreView.GetRepository().Get();
+			IQueryable<IStoreView> stores = from c in new MeasureEntities().Stores orderby c.Id select c;
 			return View(stores);
 		}
 

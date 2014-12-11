@@ -17,7 +17,6 @@ namespace RandREng.MeasureDBEntity
         public Tech()
         {
             this.Capacities = new HashSet<TechCapacity>();
-            this.Stores = new HashSet<Store>();
         }
     
         public int Id { get; set; }
@@ -40,6 +39,5 @@ namespace RandREng.MeasureDBEntity
         public bool Active { get; set; }
     
         public virtual ICollection<TechCapacity> Capacities { get; set; }
-        public virtual ICollection<Store> Stores { get; set; }
     }
 }

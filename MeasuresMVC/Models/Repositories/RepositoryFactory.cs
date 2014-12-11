@@ -12,26 +12,26 @@ namespace MeasuresMVC.Models.Repositories
     public static class RepositoryFactory
     {        
         #region Northwind
-        public static ItemRepository<StoreView> GetStoresRepository()
-        {
-            GetRepositoryMapping().MapStores();
+		//public static ItemRepository<StoreView> GetStoresRepository()
+		//{
+		//	GetRepositoryMapping().MapStores();
 
-            IEnumerable<StoreView> products;
-            string sessionKey = GetSessionKey(typeof(StoreView));
-            var session = HttpContext.Current.Session[sessionKey];
+		//	IEnumerable<StoreView> products;
+		//	string sessionKey = GetSessionKey(typeof(StoreView));
+		//	var session = HttpContext.Current.Session[sessionKey];
 
-			if (session != null)
-			{
-				products = session as IEnumerable<StoreView>;
-			}
-			else
-			{
-				RandREng.MeasureDBEntity.MeasureEntities e = new RandREng.MeasureDBEntity.MeasureEntities();
-				products = Mapper.Map<IEnumerable<RandREng.MeasureDBEntity.Store>, IEnumerable<StoreView>>(
-					new RandREng.MeasureDBEntity.MeasureEntities().Stores.AsEnumerable());
-			}
-            return new ItemRepository<StoreView>(products, sessionKey);
-        }
+		//	if (session != null)
+		//	{
+		//		products = session as IEnumerable<StoreView>;
+		//	}
+		//	else
+		//	{
+		//		RandREng.MeasureDBEntity.MeasureEntities e = new RandREng.MeasureDBEntity.MeasureEntities();
+		//		products = Mapper.Map<IEnumerable<RandREng.MeasureDBEntity.Store>, IEnumerable<StoreView>>(
+		//			new RandREng.MeasureDBEntity.MeasureEntities().Stores.AsEnumerable());
+		//	}
+		//	return new ItemRepository<StoreView>(products, sessionKey);
+		//}
 
 		//public static ItemRepository<Employee> GetEmployeeRepository(IncludeChildren includeChildren = new IncludeChildren())
 		//{

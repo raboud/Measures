@@ -121,6 +121,7 @@
     <Compile Include="Store.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Store.extended.cs" />
     <Compile Include="StoreType.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
@@ -158,6 +159,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Types\Types.csproj">
+      <Project>{c2870024-bc03-4f1f-8355-38ff6284563c}</Project>
+      <Name>Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

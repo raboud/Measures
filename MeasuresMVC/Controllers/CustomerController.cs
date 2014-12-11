@@ -20,14 +20,15 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			var list = MeasuresMVC.Models.CustomerView.GetRepository().Get();
+			IQueryable<Customer> list = from c in new MeasureEntities().Customers orderby c.Id select c;
+//			var list = MeasuresMVC.Models.CustomerView.GetRepository(page, pageSize).Get();
 			return View(list);
 		}
 
         // GET: /Customer/
         public ActionResult Index()
         {
-            return View();
+			return View();
         }
 
         // GET: /Customer/Details/5
@@ -75,6 +76,47 @@ namespace MeasuresMVC.Controllers
 
             return View(customer);
         }
+
+		// GET: /Customer/Edit/5
+		public ActionResult Edit2(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			Customer customer = db.Customers.Find(id);
+			if (customer == null)
+			{
+				return HttpNotFound();
+			}
+			return View(customer);
+		}
+
+		// POST: /Customer/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit2(Customer customer)
+		{
+			if (ModelState.IsValid)
+			{
+				EntityState state = db.Entry(customer).State;
+				db.Entry(customer).State = EntityState.Modified;
+				try
+				{
+					customer.LastModifiedById = User.Identity.GetUserId();
+					customer.LastModifiedDateTime = DateTime.Now; 
+					db.SaveChanges();
+					return RedirectToAction("Index");
+				}
+				catch (System.Data.Entity.Validation.DbEntityValidationException e)
+				{
+
+				}
+			}
+			return View(customer);
+		}
 
         // GET: /Customer/Edit/5
         public ActionResult Edit(int? id)

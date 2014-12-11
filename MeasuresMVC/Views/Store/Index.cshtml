@@ -1,7 +1,7 @@
 ﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
 @using Infragistics.Web.Mvc
 
-@model IQueryable<MeasuresMVC.Models.StoreView>
+@model IQueryable<RandREng.MeasureDBEntity.IStoreView>
 
 @{
     ViewBag.Title = "Index";
@@ -29,12 +29,12 @@
 		.Columns(column =>
 		{
 			column.For(x => x.Active).HeaderText("Active").Hidden(true);
-			column.For(x => x.Branch).HeaderText("Branch").Width("20%");
+			column.For(x => x.BranchName).HeaderText("Branch").Width("20%");
 			column.For(x => x.Number).HeaderText("Number").Width("10%");
-			column.For(x => x.Address).HeaderText("Address").Width("30%");
+			column.For(x => x.BillingAddress).HeaderText("Address").Width("30%");
 			column.For(x => x.City).HeaderText("City").Width("20%");
 			column.For(x => x.State).HeaderText("State").Width("10%");
-			column.For(x => x.District).HeaderText("District").Width("10%");
+			column.For(x => x.DistrictNumber).HeaderText("District").Width("10%");
 		})
 	.Features( features =>
 	{

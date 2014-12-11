@@ -16,7 +16,6 @@ namespace RandREng.MeasureDBEntity
     {
         public Store()
         {
-            this.Measures = new HashSet<Measure>();
             this.Techs = new HashSet<Tech>();
         }
     
@@ -41,7 +40,6 @@ namespace RandREng.MeasureDBEntity
         public bool IncludeInStatusReportAll { get; set; }
     
         public virtual Branch Branch { get; set; }
-        public virtual ICollection<Measure> Measures { get; set; }
         public virtual StoreType StoreType { get; set; }
         public virtual ICollection<Tech> Techs { get; set; }
     }

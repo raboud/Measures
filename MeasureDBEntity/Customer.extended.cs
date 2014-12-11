@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using RandREng.Types;
 
 namespace RandREng.MeasureDBEntity
 {
+	public interface ICustomerView
+	{
+		int Id { get; set; }
+		string Name { get; set; }
+		string Address { get; set; }
+		string City { get; set; }
+		string State { get; set; }
+		string ZipCode { get; set; }
+	}
+
 	[MetadataType(typeof(Customer.MetaData))]
-	public partial class Customer
+	public partial class Customer : ICustomerView
 	{
 		public class MetaData
 		{
@@ -46,20 +57,21 @@ namespace RandREng.MeasureDBEntity
             public string State;
 
             [Display(Name = "Zip Code*", Prompt = "Enter Zip Code", Description = "Customer Zip Code")]
-            [StringLength(5)]
+			[PostalPlus4]
+            [StringLength(10)]
             [Required]
             public string ZipCode;
 
             [Display(Name = "Home Number", Prompt = "Enter Home Phone Number", Description = "Customer Home Phone")]
-            [StringLength(10)]
+            [PhoneNumber10Ext]
             public string PhoneNumber;
 
             [Display(Name = "Mobile Number", Prompt = "Enter Mobile Phone Number", Description = "Customer Mobile Phone")]
-            [StringLength(10)]
+			[PhoneNumber10Ext]
             public string MobileNumber;
 
             [Display(Name = "Work Number", Prompt = "Enter Work Number", Description = "Customer Work Number")]
-            [StringLength(10)]
+			[PhoneNumber10Ext]
             public string WorkNumber;
 
 

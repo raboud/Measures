@@ -10,18 +10,18 @@ namespace MeasuresMVC.Models.Repositories
     {
 		//public AppUrlHelper PathHelper;
         #region Northwind
-		public IMappingExpression<RandREng.MeasureDBEntity.Store, StoreView> MapStores()
-        {
-			return Mapper.CreateMap<RandREng.MeasureDBEntity.Store, StoreView>()
-				.ForMember(d => d.Id, m => m.MapFrom(s => s.Id))
-				.ForMember(d => d.Active, m => m.MapFrom(s => s.Active))
-				.ForMember(d => d.Address, m => m.MapFrom(s => s.BillingAddress))
-				.ForMember(d => d.Branch, m => m.MapFrom(s => s.Branch.Name))
-				.ForMember(d => d.City, m => m.MapFrom(s => s.City))
-				.ForMember(d => d.Number, m => m.MapFrom(s => s.Number))
-				.ForMember(d => d.State, m => m.MapFrom(s => s.State))
-				.ForMember(d => d.ZipCode, m => m.MapFrom(s => s.ZipCode));
-        }
+		//public IMappingExpression<RandREng.MeasureDBEntity.Store, StoreView> MapStores()
+		//{
+		//	return Mapper.CreateMap<RandREng.MeasureDBEntity.Store, StoreView>()
+		//		.ForMember(d => d.Id, m => m.MapFrom(s => s.Id))
+		//		.ForMember(d => d.Active, m => m.MapFrom(s => s.Active))
+		//		.ForMember(d => d.Address, m => m.MapFrom(s => s.BillingAddress))
+		//		.ForMember(d => d.Branch, m => m.MapFrom(s => s.Branch.Name))
+		//		.ForMember(d => d.City, m => m.MapFrom(s => s.City))
+		//		.ForMember(d => d.Number, m => m.MapFrom(s => s.Number))
+		//		.ForMember(d => d.State, m => m.MapFrom(s => s.State))
+		//		.ForMember(d => d.ZipCode, m => m.MapFrom(s => s.ZipCode));
+		//}
 
 		//public IMappingExpression<CategoryEntity, Category> MapCategories(IncludeChildren includes)
 		//{

@@ -14,17 +14,10 @@ namespace RandREng.MeasureDBEntity
     
     public partial class StoreType
     {
-        public StoreType()
-        {
-            this.Stores = new HashSet<Store>();
-        }
-    
         public int Id { get; set; }
         public string StoreTypeName { get; set; }
         public string ImageName { get; set; }
         public byte[] Logo { get; set; }
         public string QBClass { get; set; }
-    
-        public virtual ICollection<Store> Stores { get; set; }
     }
 }
