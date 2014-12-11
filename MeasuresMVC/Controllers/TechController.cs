@@ -16,6 +16,7 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class TechController : Controller
 	{
 		private MeasureEntities db = new MeasureEntities();
@@ -34,20 +35,12 @@ namespace MeasuresMVC.Controllers
 		// GET: /Tech/
 		public ActionResult Index()
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			return View();
 		}
 
 		// GET: /Tech/Details/5
 		public ActionResult Details(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -64,10 +57,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Tech/Create
 		public ActionResult Create()
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			return View();
 		}
 
@@ -78,10 +67,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,PhoneNumber1,PhoneNumber2,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				ApplicationUser user = new ApplicationUser { UserName = model.EmailAddress, Email = model.EmailAddress, FirstName = model.FirstName, LastName = model.LastName, IsConfirmed = true };
@@ -108,10 +93,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Tech/Edit/5
 		public ActionResult Edit(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return RedirectToAction("Index");
@@ -131,10 +112,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,PhoneNumber1,PhoneNumber2,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				Tech tech2 = db.Teches.Find(model.Id);
@@ -169,10 +146,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Tech/Edit2/5
 		public ActionResult Edit2(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				RedirectToAction("Index");
@@ -190,14 +163,9 @@ namespace MeasuresMVC.Controllers
 		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
-		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit2(Edit2ViewModels model)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				Tech tech = db.Teches.Find(model.Id);
@@ -251,10 +219,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Tech/Delete/5
 		public ActionResult Delete(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -272,10 +236,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			Tech tech = db.Teches.Find(id);
 			db.Teches.Remove(tech);
 			db.SaveChanges();

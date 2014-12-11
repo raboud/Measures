@@ -8,32 +8,32 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Models
 {
-	public class TechView
-	{
-		public TechView()
-		{
-		}
+//	public class TechView
+//	{
+//		public TechView()
+//		{
+//		}
 
-		public int Id { get; set; }
-		public bool Active { get; set; }
-		public string Name { get; set; }
-		public string Address { get; set; }
-		public string City { get; set; }
-		public string State { get; set; }
-		public string ZipCode { get; set; }
+//		public int Id { get; set; }
+//		public bool Active { get; set; }
+//		public string Name { get; set; }
+//		public string Address { get; set; }
+//		public string City { get; set; }
+//		public string State { get; set; }
+//		public string ZipCode { get; set; }
 
-		private static IMappingExpression<Tech, TechView> GetMapping()
-		{
-			return Mapper.CreateMap<Tech, TechView>()
-				.ForMember(d => d.Id, m => m.MapFrom(s => s.Id))
-				.ForMember(d => d.Active, m => m.MapFrom(s => s.Active))
-				.ForMember(d => d.Address, m => m.MapFrom(s => s.Address))
-				.ForMember(d => d.Name, m => m.MapFrom(s => s.Name))
-				.ForMember(d => d.City, m => m.MapFrom(s => s.City))
-				.ForMember(d => d.State, m => m.MapFrom(s => s.State))
-				.ForMember(d => d.ZipCode, m => m.MapFrom(s => s.ZipCode));
-		}
-	}
+//		private static IMappingExpression<Tech, TechView> GetMapping()
+//		{
+//			return Mapper.CreateMap<Tech, TechView>()
+//				.ForMember(d => d.Id, m => m.MapFrom(s => s.Id))
+//				.ForMember(d => d.Active, m => m.MapFrom(s => s.Active))
+//				.ForMember(d => d.Address, m => m.MapFrom(s => s.Address))
+//				.ForMember(d => d.Name, m => m.MapFrom(s => s.Name))
+//				.ForMember(d => d.City, m => m.MapFrom(s => s.City))
+//				.ForMember(d => d.State, m => m.MapFrom(s => s.State))
+//				.ForMember(d => d.ZipCode, m => m.MapFrom(s => s.ZipCode));
+//		}
+//	}
 
 	public class TechDetail
 	{

@@ -14,14 +14,7 @@ namespace RandREng.MeasureDBEntity
     
     public partial class Employee
     {
-        public Employee()
-        {
-            this.Branches = new HashSet<Branch>();
-        }
-    
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string NickName { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -32,13 +25,11 @@ namespace RandREng.MeasureDBEntity
         public string Email { get; set; }
         public string SMTPEmail { get; set; }
         public bool ReceiveCallNotes { get; set; }
-        public string UserName { get; set; }
         public string UserId { get; set; }
         public bool Active { get; set; }
-        public string Name { get; set; }
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
     
-        public virtual ICollection<Branch> Branches { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

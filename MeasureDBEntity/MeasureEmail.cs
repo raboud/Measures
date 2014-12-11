@@ -16,10 +16,10 @@ namespace RandREng.MeasureDBEntity
     {
         public int Id { get; set; }
         public int MeasureId { get; set; }
-        public int EmailTypeId { get; set; }
         public System.DateTime Sent { get; set; }
+        public int EmailTemplateId { get; set; }
     
-        public virtual EmailType EmailType { get; set; }
         public virtual Measure Measure { get; set; }
+        public virtual EmailTemplate EmailTemplate { get; set; }
     }
 }

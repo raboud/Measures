@@ -86,6 +86,8 @@
     <Build Include="dbo\InsertRoom.sql" />
     <Build Include="dbo\InsertSlotType.sql" />
     <Build Include="dbo\Tables\StoreTech.sql" />
+    <Build Include="dbo\Tables\StoreUser.sql" />
+    <Build Include="dbo\User Defined Types\AspNetUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Measure.sql" />

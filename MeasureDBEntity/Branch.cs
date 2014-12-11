@@ -31,6 +31,6 @@ namespace RandREng.MeasureDBEntity
         public Nullable<double> Longitude { get; set; }
         public string LabelPrinter { get; set; }
     
-        public virtual Employee Employee { get; set; }
+        public virtual Employee Manager { get; set; }
     }
 }

@@ -11,27 +11,20 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
-    public class StoreTypeController : Controller
+	[Authorize(Roles = "Admin")]
+	public class StoreTypeController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 
         // GET: /StoreType/
         public ActionResult Index()
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			return View(db.StoreTypes.ToList());
         }
 
         // GET: /StoreType/Details/5
         public ActionResult Details(int? id)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,10 +40,6 @@ namespace MeasuresMVC.Controllers
         // GET: /StoreType/Create
         public ActionResult Create()
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			return View();
         }
 
@@ -61,10 +50,6 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Id,StoreTypeName,ImageName,Logo,QBClass")] StoreType storetype)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
             {
                 db.StoreTypes.Add(storetype);
@@ -78,10 +63,6 @@ namespace MeasuresMVC.Controllers
         // GET: /StoreType/Edit/5
         public ActionResult Edit(int? id)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -101,10 +82,6 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="Id,StoreTypeName,ImageName,Logo,QBClass")] StoreType storetype)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
             {
                 db.Entry(storetype).State = EntityState.Modified;
@@ -117,10 +94,6 @@ namespace MeasuresMVC.Controllers
         // GET: /StoreType/Delete/5
         public ActionResult Delete(int? id)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,10 +111,6 @@ namespace MeasuresMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			StoreType storetype = db.StoreTypes.Find(id);
             db.StoreTypes.Remove(storetype);
             db.SaveChanges();

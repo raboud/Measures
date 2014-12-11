@@ -1,7 +1,5 @@
 ﻿CREATE TABLE [dbo].[Employees] (
     [Id]               INT            IDENTITY (1, 1) NOT NULL,
-    [FirstName]        NVARCHAR (30)  NULL,
-    [LastName]         NVARCHAR (50)  NULL,
     [NickName]         NVARCHAR (50)  NULL,
     [Address1]         NVARCHAR (255) NULL,
     [Address2]         NVARCHAR (255) NULL,
@@ -14,9 +12,9 @@
     [Email]            [dbo].[EmailAddress]  NULL,
     [SMTPEmail]        [dbo].[EmailAddress]  NULL,
     [ReceiveCallNotes] BIT            NOT NULL,
-    [UserName]         NVARCHAR (30)  NULL,
-    [UserId] NVARCHAR(128) NOT NULL,
+    [UserId] [dbo].[AspNetUserId] NOT NULL,
     [Active]           BIT            CONSTRAINT [DF__Employee_Active] DEFAULT (1) NOT NULL,
-    [Name] as LastName + ', ' + FirstName PERSISTED, 
-    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC) );
+    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC),
+
+	);
 

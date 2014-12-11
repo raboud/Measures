@@ -12,16 +12,13 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class StoreController : Controller
 	{
 		private MeasureEntities db = new MeasureEntities();
 
 		public ActionResult AddTech(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,10 +40,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult AddTech(Models.AddTech item)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				RandREng.MeasureDBEntity.Store store = db.Stores.Find(item.Id);
@@ -79,17 +72,13 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Store> stores = from c in new MeasureEntities().Stores.Include(c => c.Techs) orderby c.Id select c;
+			IQueryable<Store> stores = (IQueryable<Store>) (from c in new MeasureEntities().Stores.Include(c => c.Techs).Include(c => c.Branch) orderby c.Id select c);
 			return View(stores);
 		}
 
 		// GET: /Store/
 		public ActionResult Index()
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			ViewBag.Branches = (from c in new MeasureEntities().Branches orderby c.Id select c).ToList();
 			return View();
 		}
@@ -97,10 +86,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Store/Details/5
 		public ActionResult Details(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -116,10 +101,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Store/Create
 		public ActionResult Create()
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			ViewBag.BranchId = new SelectList(db.Branches, "Id", "Name");
 			ViewBag.TypeID = new SelectList(db.StoreTypes, "Id", "StoreTypeName");
 			return View();
@@ -132,10 +113,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Create([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				db.Stores.Add(store);
@@ -151,10 +128,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Store/Edit/5
 		public ActionResult Edit(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -176,10 +149,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult Edit([Bind(Include = "Id,TypeID,Number,Address,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (ModelState.IsValid)
 			{
 				db.Entry(store).State = EntityState.Modified;
@@ -194,10 +163,6 @@ namespace MeasuresMVC.Controllers
 		// GET: /Store/Delete/5
 		public ActionResult Delete(int? id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -215,10 +180,6 @@ namespace MeasuresMVC.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			RandREng.MeasureDBEntity.Store store = db.Stores.Find(id);
 			store.Active = false;
 			db.SaveChanges();

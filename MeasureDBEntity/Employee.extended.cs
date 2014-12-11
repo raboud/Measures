@@ -7,22 +7,22 @@ using RandREng.Types;
 
 namespace RandREng.MeasureDBEntity
 {
-	[MetadataType(typeof(Tech.MetaData))]
-	public partial class Tech
+	[MetadataType(typeof(Employee.MetaData))]
+	public partial class Employee
 	{
 		public string FirstName
 		{
-			get { return this.User.FirstName; }
-			set { this.User.FirstName = value; }
+			get { return this.AspNetUser.FirstName; }
+			set { this.AspNetUser.FirstName = value; }
 		}
 		public string LastName
 		{
-			get { return this.User.LastName; ; }
-			set { this.User.LastName = value; }
+			get { return this.AspNetUser.LastName; ; }
+			set { this.AspNetUser.LastName = value; }
 		}
 		public string Name
 		{
-			get { return this.User.Name; }
+			get { return this.AspNetUser.Name; }
 		}
 
 		public class MetaData

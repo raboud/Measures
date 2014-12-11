@@ -1,7 +1,8 @@
 ﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
 @using Infragistics.Web.Mvc
+@using RandREng.MeasureDBEntity;
 
-@model IQueryable<RandREng.MeasureDBEntity.Store>
+@model IQueryable<Store>
 
 @{
     ViewBag.Title = "Index";
@@ -29,7 +30,8 @@
 		.Columns(column =>
 		{
 			column.For(x => x.Active).HeaderText("Active").Hidden(true);
-			column.For(x => x.BranchId).HeaderText("Branch").Width("20%").FormatterFunction("lookupCustomer");
+			//column.For(x => x.BranchId).HeaderText("Branch").Width("20%").FormatterFunction("lookupCustomer");
+			column.For(x => x.BranchName).HeaderText("Branch").Width("20%");
 			column.For(x => x.Number).HeaderText("Number").Width("10%");
 			column.For(x => x.Address).HeaderText("Address").Width("30%");
 			column.For(x => x.City).HeaderText("City").Width("20%");

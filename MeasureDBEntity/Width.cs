@@ -14,16 +14,7 @@ namespace RandREng.MeasureDBEntity
     
     public partial class Width
     {
-        public Width()
-        {
-            this.MeasureMaterials = new HashSet<MeasureMaterial>();
-            this.MeasureMaterials1 = new HashSet<MeasureMaterial>();
-        }
-    
         public int Id { get; set; }
         public double Value { get; set; }
-    
-        public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
-        public virtual ICollection<MeasureMaterial> MeasureMaterials1 { get; set; }
     }
 }

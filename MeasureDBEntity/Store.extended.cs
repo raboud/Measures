@@ -12,6 +12,8 @@ namespace RandREng.MeasureDBEntity
 	[MetadataType(typeof(Store.MetaData))]
 	public partial class Store
 	{
+		public string BranchName { get { return this.Branch.Name; } }
+
 		public class MetaData
 		{
 

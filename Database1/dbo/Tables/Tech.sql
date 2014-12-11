@@ -2,8 +2,6 @@
 (
 	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY,
 	[Active] bit not null DEFAULT 1,
-    [FirstName]            NVARCHAR (50)  NOT NULL,
-    [LastName]             NVARCHAR (50)  NOT NULL,
     [Address]              NVARCHAR (255) NULL,
     [Address2]             NVARCHAR (255) NULL,
     [City]                 NVARCHAR (50)  NULL,
@@ -16,11 +14,10 @@
     [PhoneNumber2]         [dbo].[PhoneNumber]     NULL,
     [EmailAddress]         [dbo].[EmailAddress] NOT NULL,
 
-    [LastModifiedById]       NVARCHAR(128)            NOT NULL,
+    [LastModifiedById]       [dbo].[AspNetUserId]            NOT NULL,
     [LastModifiedDateTime] DATETIME       NOT NULL,
 
-    [Name] as LastName + ', ' + FirstName PERSISTED, 
-    [UserId] NVARCHAR(128) NOT NULL
+    [UserId] [dbo].[AspNetUserId] NOT NULL
 
 )
 

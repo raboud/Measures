@@ -17,7 +17,7 @@
     [PhoneNumber3]           [dbo].[PhoneNumber]   NULL,
     [EmailAddress]         [dbo].[EmailAddress] NULL,
 
-    [LastModifiedById]       NVARCHAR(128)            NOT NULL,
+    [LastModifiedById]       [dbo].[AspNetUserId]            NOT NULL,
     [LastModifiedDateTime] DATETIME       NOT NULL,
 
     [Name] as IIF(CompanyName is null, IsNull(LastName, '') + ', ' + IsNull(FirstName, ''), CompanyName) PERSISTED

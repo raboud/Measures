@@ -12,7 +12,8 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
-    public class BranchController : Controller
+	[Authorize(Roles="Admin")]
+	public class BranchController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 
@@ -26,10 +27,6 @@ namespace MeasuresMVC.Controllers
         // GET: /Branch/
         public ActionResult Index()
         {
-			if (!User.IsInRole("Admin"))
-			{
-				return RedirectToAction("Index", "Home");
-			}
 			return View();
         }
 

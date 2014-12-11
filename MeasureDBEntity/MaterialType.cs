@@ -14,14 +14,7 @@ namespace RandREng.MeasureDBEntity
     
     public partial class MaterialType
     {
-        public MaterialType()
-        {
-            this.MeasureMaterials = new HashSet<MeasureMaterial>();
-        }
-    
         public int Id { get; set; }
         public string Description { get; set; }
-    
-        public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
     }
 }

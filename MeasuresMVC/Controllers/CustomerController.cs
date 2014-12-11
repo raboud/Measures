@@ -13,7 +13,8 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
-    public class CustomerController : Controller
+	[Authorize]
+	public class CustomerController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 		
@@ -27,7 +28,7 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Customer> list = from c in new MeasureEntities().Customers.Include(m => m.Measures) orderby c.Id select c;
+			IQueryable<Customer> list = from c in new MeasureEntities().Customers.Include(m => m.Measures).Where(m => m.Measures.Any(s => s.StoreId == 3)) orderby c.Id select c;
 			return View(list);
 		}
 
@@ -49,7 +50,8 @@ namespace MeasuresMVC.Controllers
             {
                 return HttpNotFound();
             }
-            return View(customer);
+			ViewBag.ReturnUrl = Url.Action("Details" + "/" + id.Value); 
+			return View(customer);
         }
 
         // GET: /Customer/Create
@@ -83,7 +85,7 @@ namespace MeasuresMVC.Controllers
         }
 
 		// GET: /Customer/Edit/5
-		public ActionResult CreateMeasure(int? id)
+		public ActionResult CreateMeasure(int? id, string returnUrl)
 		{
 			if (id == null)
 			{
@@ -95,7 +97,15 @@ namespace MeasuresMVC.Controllers
 			{
 				return HttpNotFound();
 			}
-			return View(item);
+			item.customer.Measures.Add(new Measure()
+			{
+				EnterredById = User.Identity.GetUserId(),
+				Enterred = DateTime.Now,
+				StoreId = 3,
+				CustomerId = item.customer.Id
+			});
+			int i = db.SaveChanges();
+			return Redirect(returnUrl);
 		}
 
 		// POST: /Customer/Edit/5
@@ -107,6 +117,15 @@ namespace MeasuresMVC.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				item.customer.Measures.Add(new Measure() 
+				{ 
+					EnterredById = User.Identity.GetUserId(), 
+					Enterred = DateTime.Now,
+ 					StoreId = 3,
+					CustomerId = item.customer.Id
+				});
+				int i = db.SaveChanges();
+
 			}
 			return View(item);
 		}
@@ -208,6 +227,56 @@ namespace MeasuresMVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+		private void PopulateAssignedCourseData(MeasureMaterial instructor)
+		{
+			var allRooms = db.Rooms;
+			var materialRooms = new HashSet<int>(instructor.MeasureRooms.Select(c => c.RoomId));
+			var viewModel = new List<AssignedRoomData>();
+			foreach (var room in allRooms)
+			{
+				viewModel.Add(new AssignedRoomData
+				{
+					RoomId = room.Id,
+					Title = room.Name,
+					Assigned = materialRooms.Contains(room.Id)
+				});
+			}
+			ViewBag.Courses = viewModel;
+		}
+
+		private void UpdateInstructorCourses(string[] selectedRooms, MeasureMaterial instructorToUpdate)
+		{
+			if (selectedRooms == null)
+			{
+				instructorToUpdate.MeasureRooms = new List<MeasureRoom>();
+				return;
+			}
+
+			var selectedCoursesHS = new HashSet<string>(selectedRooms);
+			var instructorCourses = new HashSet<int>
+				(instructorToUpdate.MeasureRooms.Select(c => c.RoomId));
+			foreach (var room in db.Rooms)
+			{
+				if (selectedCoursesHS.Contains(room.Name))
+				{
+					if (!instructorCourses.Contains(room.Id))
+					{
+						instructorToUpdate.MeasureRooms.Add(new MeasureRoom() { RoomId = room.Id });
+					}
+				}
+				else
+				{
+					if (instructorCourses.Contains(room.Id))
+					{
+						instructorToUpdate.MeasureRooms.Remove(instructorToUpdate.MeasureRooms.FirstOrDefault(m => m.RoomId == room.Id));
+					}
+				}
+			}
+		}
+
+
 
         protected override void Dispose(bool disposing)
         {

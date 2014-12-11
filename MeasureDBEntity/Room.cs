@@ -14,15 +14,8 @@ namespace RandREng.MeasureDBEntity
     
     public partial class Room
     {
-        public Room()
-        {
-            this.MeasureRooms = new HashSet<MeasureRoom>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
-    
-        public virtual ICollection<MeasureRoom> MeasureRooms { get; set; }
     }
 }

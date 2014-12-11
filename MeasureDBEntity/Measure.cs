@@ -26,9 +26,9 @@ namespace RandREng.MeasureDBEntity
         public int StoreId { get; set; }
         public string EnterredById { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual Store Store { get; set; }
         public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
         public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
+        public virtual AspNetUser EnterredBy { get; set; }
     }
 }

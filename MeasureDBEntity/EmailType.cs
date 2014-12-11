@@ -17,13 +17,11 @@ namespace RandREng.MeasureDBEntity
         public EmailType()
         {
             this.EmailTemplates = new HashSet<EmailTemplate>();
-            this.MeasureEmails = new HashSet<MeasureEmail>();
         }
     
         public int Id { get; set; }
         public string Description { get; set; }
     
         public virtual ICollection<EmailTemplate> EmailTemplates { get; set; }
-        public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
     }
 }

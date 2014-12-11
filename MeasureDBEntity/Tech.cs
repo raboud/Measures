@@ -20,8 +20,6 @@ namespace RandREng.MeasureDBEntity
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Address { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
@@ -32,12 +30,13 @@ namespace RandREng.MeasureDBEntity
         public string EmailAddress { get; set; }
         public string LastModifiedById { get; set; }
         public System.DateTime LastModifiedDateTime { get; set; }
-        public string Name { get; set; }
         public string UserId { get; set; }
         public bool Active { get; set; }
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
     
         public virtual ICollection<TechCapacity> Capacities { get; set; }
+        public virtual AspNetUser User { get; set; }
+        public virtual AspNetUser LastModifiedBy { get; set; }
     }
 }

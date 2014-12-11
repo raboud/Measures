@@ -6,14 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
 using RandREng.MeasureDBEntity;
 
-namespace MeasuresMVC.Views
+namespace MeasuresMVC.Controllers
 {
-    public class MaterialTypeController : Controller
-    {
-        private MeasureEntities db = new MeasureEntities();
+	[Authorize(Roles = "Admin")]
+	public class MaterialTypeController : Controller
+	{
+		private MeasureEntities db = new MeasureEntities();
+
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			IQueryable<MaterialType> list = from c in new MeasureEntities().MaterialTypes orderby c.Id select c;
+			return View(list);
+		}
 
         // GET: /MaterialType/
         public ActionResult Index()

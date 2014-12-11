@@ -40,5 +40,6 @@ namespace RandREng.MeasureDBEntity
         public string PhoneNumber3 { get; set; }
     
         public virtual ICollection<Measure> Measures { get; set; }
+        public virtual AspNetUser LastModifiedBy { get; set; }
     }
 }

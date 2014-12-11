@@ -5,29 +5,28 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="65d66c980c834596816f5480cebacca0" Name="Diagram1">
-        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Branch" Width="1.5" PointX="1.5" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.5" PointX="1.5" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.EmailTemplate" Width="1.5" PointX="10" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.EmailType" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Employee" Width="1.5" PointX="1.5" PointY="36" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Measure" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MeasureEmail" Width="1.5" PointX="10" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Room" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.SlotType" Width="1.5" PointX="5.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Store" Width="1.5" PointX="1.5" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.StoreType" Width="1.5" PointX="1.5" PointY="41.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="5.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.Width" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.Branch" Width="1.5" PointX="1.5" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.5" PointX="0.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.EmailTemplate" Width="1.5" PointX="6.625" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.EmailType" Width="1.5" PointX="8.625" PointY="8.125" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.Employee" Width="1.5" PointX="1.5" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="7.625" PointY="2.75" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.Measure" Width="1.5" PointX="2.375" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureEmail" Width="1.5" PointX="4.375" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="2.125" PointX="4.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="7.625" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.Room" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.SlotType" Width="1.5" PointX="8.375" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.Store" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.StoreType" Width="1.5" PointX="3.875" PointY="19.875" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="3.875" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="6" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.Width" Width="1.5" PointX="7.625" PointY="4.25" IsExpanded="true" FillColor="0, 192, 0" />
         <AssociationConnector Association="MeasureModel.FK_Branch_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Store_Branch" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_EmailTemplate_EmailType" ManuallyRouted="false" />
-        <AssociationConnector Association="MeasureModel.FK_OrderEmail_EmailType" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_MaterialType" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Store" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_MeasureEmail_Measure" ManuallyRouted="false" />
@@ -40,6 +39,12 @@
         <AssociationConnector Association="MeasureModel.FK_Store_StoreType" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.StoreTech" />
+        <AssociationConnector Association="MeasureModel.FK_Employees_User" />
+        <AssociationConnector Association="MeasureModel.FK_Tech_User" />
+        <AssociationConnector Association="MeasureModel.FK_OrderEmail_EmailTemplate" />
+        <AssociationConnector Association="MeasureModel.FK_Customer_LastModified" />
+        <AssociationConnector Association="MeasureModel.FK_Measure_EnterredBy" />
+        <AssociationConnector Association="MeasureModel.FK_Tech_LastModified" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

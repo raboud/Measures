@@ -12,7 +12,9 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
-    public class MeasureController : Controller
+
+	[Authorize(Roles = "Admin")]
+	public class MeasureController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 
@@ -30,20 +32,6 @@ namespace MeasuresMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Measure measure = db.Measures.Find(id);
-            if (measure == null)
-            {
-                return HttpNotFound();
-            }
-            return View(measure);
-        }
-        public ActionResult Details(Customer customer)
-        {
-            if (customer == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            customer.Measures.Add(new Measure());
-            Measure measure = customer.Measures.First();
             if (measure == null)
             {
                 return HttpNotFound();

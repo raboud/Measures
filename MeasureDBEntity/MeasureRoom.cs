@@ -19,7 +19,6 @@ namespace RandREng.MeasureDBEntity
         public string Name { get; set; }
         public int MaterialId { get; set; }
     
-        public virtual MeasureMaterial MeasureMaterial { get; set; }
         public virtual Room Room { get; set; }
     }
 }

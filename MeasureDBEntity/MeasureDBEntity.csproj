@@ -80,6 +80,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Employee.extended.cs" />
     <Compile Include="MaterialType.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
