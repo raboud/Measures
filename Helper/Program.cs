@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,13 +15,13 @@ namespace Helper
 		static void Main(string[] args)
 		{
 			IdentityResult roleResult;
-			ApplicationDbContext context = new ApplicationDbContext("IdentityLive");
+			ApplicationDbContext context = new ApplicationDbContext("IdentityLocal");
 
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "store@custom-installs.com" }, "cfi12345", "Store");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "employee@custom-installs.com" }, "cfi12345", "Employee");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "tech@custom-installs.com" }, "cfi12345", "Tech");
-			roleResult = context.CreateUser(new ApplicationUser() { UserName = "admin@custom-installs.com" }, "cfi12345", "Admin");
-
+			roleResult = context.CreateUser(new ApplicationUser() { UserName = "store@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Store");
+			roleResult = context.CreateUser(new ApplicationUser() { UserName = "employee@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Employee");
+			roleResult = context.CreateUser(new ApplicationUser() { UserName = "tech@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Tech");
+			roleResult = context.CreateUser(new ApplicationUser() { UserName = "admin@custom-installs.com", IsConfirmed = true, Active = true }, "cfi12345", "Admin");
+			CustomerLoad();
 			PopulateLowesStores();
 		}
 
@@ -83,10 +84,42 @@ namespace Helper
 			public string Sunday_Close;
 		}
 
-
-		static void PopulateLowesStores()
+		static void CustomerLoad()
 		{
 			RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities("MeasureLive");
+			AspNetUser user = conn.AspNetUsers.FirstOrDefault(u => u.UserName.StartsWith("employee"));
+			if (user != null)
+			for (int i = 0; i < 1000000;i++)
+			{
+				Customer c = new Customer();
+				c.LastModifiedById = user.Id;
+				c.LastModifiedDateTime = DateTime.Now;
+				c.LastName = string.Format("Customer{0}", i);
+				c.FirstName = string.Format("Test{0}", i);
+				c.Address = string.Format("{0} Nowhere Lane", i);
+				c.City = "Im Lost";
+				c.State = "GA";
+				c.ZipCode = "12345";
+				c.EmailAddress = "foo@bar.com";
+				conn.Customers.Add(c);
+
+				if (((i + 1) % 1000) == 0)
+				{
+					try
+					{
+						conn.SaveChanges();
+					}
+					catch (System.Data.Entity.Validation.DbEntityValidationException e)
+					{
+					}
+				}
+
+			}
+			conn.SaveChanges();
+		}
+		static void PopulateLowesStores()
+		{
+			RandREng.MeasureDBEntity.MeasureEntities conn = new RandREng.MeasureDBEntity.MeasureEntities("MeasureLocal");
 
 			//ClientType ct = new ClientType();
 			//ct.Name = "Lowes";
@@ -98,6 +131,7 @@ namespace Helper
 			if (branch == null)
 			{
 				branch = new Branch();
+				branch.Active = true;
 				branch.Name = "Atlanta";
 				branch.Address = "4291 Communications Dr.";;
 				branch.State = "GA";
