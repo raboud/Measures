@@ -4,17 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>MeasuresDB</Name>
+    <Name>Idedntity</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{f78d5cb1-d99a-4ac9-a905-5ba835d90009}</ProjectGuid>
+    <ProjectGuid>{5146aa4e-4549-4271-9401-9d371a9ea7ee}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>MeasureDB</RootNamespace>
-    <AssemblyName>MeasureDB</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <RootNamespace>Idedntity</RootNamespace>
+    <AssemblyName>Idedntity</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
@@ -27,6 +27,8 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -61,34 +63,15 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="dbo" />
-    <Folder Include="dbo\Tables" />
-    <Folder Include="dbo\User Defined Types" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Customer.sql" />
-    <Build Include="dbo\User Defined Types\PhoneNumber.sql" />
-    <Build Include="dbo\User Defined Types\EmailAddress.sql" />
-    <Build Include="dbo\Tables\MeasureMaterials.sql" />
-    <Build Include="Width.sql" />
-    <Build Include="dbo\Tables\MaterialType.sql" />
-    <Build Include="dbo\Tables\Room.sql" />
-    <Build Include="dbo\Tables\MeasureRoom.sql" />
     <Build Include="dbo\Tables\AspNetRoles.sql" />
+    <Build Include="dbo\Tables\AspNetUsers.sql" />
     <Build Include="dbo\Tables\AspNetUserClaims.sql" />
     <Build Include="dbo\Tables\AspNetUserLogins.sql" />
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="dbo\Tables\Measure.sql" />
-    <Build Include="dbo\Tables\Tech.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="MeasuresDB.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="localdb.publish.xml" />
-    <None Include="atl-sql-02.publish.xml" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
   </ItemGroup>
 </Project>

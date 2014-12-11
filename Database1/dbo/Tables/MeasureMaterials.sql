@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[MeasureMaterial]
 (
-	[Id] INT NOT NULL PRIMARY KEY,
+	[Id] INT IDENTITY (1, 1)  NOT NULL PRIMARY KEY,
 	[MaterialTypeId] INT not null,
 	[MeasureId] int not null,
 	[WidthId] int not null,

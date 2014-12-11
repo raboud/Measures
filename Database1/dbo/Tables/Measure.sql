@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Measure]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
 	[CustomerId] INT not null,
     [Enterred] DATETIME NOT NULL,
 

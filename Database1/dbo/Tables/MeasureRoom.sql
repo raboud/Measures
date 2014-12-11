@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[MeasureRoom]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
     [RoomId] INT NOT NULL, 
     [Name] NVARCHAR(50) NULL, 
     [MaterialId] INT NOT NULL, 

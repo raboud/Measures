@@ -10,16 +10,23 @@
         <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="0.875" PointY="7.5" IsExpanded="true" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Customer" />
         <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="10.25" PointY="3.125" />
-        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="1.5" PointX="6.625" PointY="1.25" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="1.5" PointX="6.625" PointY="1.125" />
         <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="6.625" PointY="4.625" />
         <EntityTypeShape EntityType="MeasureModel.Room" Width="1.5" PointX="10.375" PointY="4.875" />
-        <EntityTypeShape EntityType="MeasureModel.Width" Width="1.5" PointX="10.25" PointY="1" />
+        <EntityTypeShape EntityType="MeasureModel.Width" Width="1.5" PointX="10.25" PointY="1.125" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_MaterialType" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_Measure" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_Width" />
         <AssociationConnector Association="MeasureModel.FK_MeasureRoom" />
         <AssociationConnector Association="MeasureModel.FK_MeasureRoom_MeasureMaterial" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_AltWidth" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetRole" Width="1.5" PointX="3.375" PointY="9.5" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetUserClaim" Width="1.5" PointX="7.875" PointY="8" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetUserLogin" Width="1.5" PointX="7.875" PointY="10.75" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="5.625" PointY="8.625" />
+        <AssociationConnector Association="MeasureModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
+        <AssociationConnector Association="MeasureModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MeasureModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
