@@ -12,8 +12,8 @@
     [Latitude]             FLOAT (53)     NULL,
     [Longitude]            FLOAT (53)     NULL,
 
-    [HomeNumber]          [dbo].[PhoneNumber]     NULL,
-    [MobileNumber]         [dbo].[PhoneNumber]     NULL,
+    [PhoneNumber1]          [dbo].[PhoneNumber]     NULL,
+    [PhoneNumber2]         [dbo].[PhoneNumber]     NULL,
     [EmailAddress]         [dbo].[EmailAddress] NOT NULL,
 
     [LastModifiedById]       NVARCHAR(128)            NOT NULL,

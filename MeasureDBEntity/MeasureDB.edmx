@@ -35,8 +35,8 @@
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nchar" MaxLength="2" />
           <Property Name="ZipCode" Type="nchar" MaxLength="10" />
-          <Property Name="PhoneNumber" Type="nchar" MaxLength="13" />
-          <Property Name="FaxNumber" Type="nchar" MaxLength="13" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="ManagerId" Type="int" />
           <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Latitude" Type="float" />
@@ -59,10 +59,9 @@
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
           <Property Name="Directions" Type="text" />
-          <Property Name="PhoneNumber" Type="nchar" MaxLength="14" />
-          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
-          <Property Name="WorkNumber" Type="varchar" MaxLength="50" />
-          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber3" Type="nvarchar" MaxLength="20" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
@@ -98,8 +97,8 @@
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nchar" MaxLength="2" Nullable="false" />
           <Property Name="Zip" Type="nvarchar" MaxLength="10" />
-          <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
-          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="20" />
           <Property Name="SSN" Type="nvarchar" MaxLength="11" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" />
           <Property Name="SMTPEmail" Type="nvarchar" MaxLength="255" />
@@ -181,10 +180,9 @@
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="20" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
-          <Property Name="StorePhoneNumber" Type="nvarchar" MaxLength="30" />
-          <Property Name="DirectPhoneNumber" Type="nvarchar" MaxLength="30" />
-          <Property Name="Extension" Type="nvarchar" MaxLength="30" />
-          <Property Name="FaxNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="StorePhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="DirectPhoneNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="20" />
           <Property Name="Notes" Type="ntext" />
           <Property Name="BranchId" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -227,8 +225,8 @@
           <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
-          <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
-          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
+          <Property Name="PhoneNumber1" Type="nvarchar" MaxLength="20" />
+          <Property Name="PhoneNumber2" Type="nvarchar" MaxLength="20" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
@@ -595,8 +593,8 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
-          <Property Name="FaxNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ManagerId" Type="Int32" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Latitude" Type="Double" />
@@ -620,15 +618,14 @@
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
           <Property Name="Directions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="WorkNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastModifiedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Measures" Relationship="Self.FK_Measure_Customer" FromRole="Customer" ToRole="Measure" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -663,8 +660,6 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
           <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SMTPEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -674,6 +669,8 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="82" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_Manager" FromRole="Employees" ToRole="Branch" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="MaterialType">
           <Key>
@@ -763,10 +760,9 @@
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="StorePhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DirectPhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="FaxNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="StorePhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DirectPhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BranchId" Type="Int32" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -803,8 +799,6 @@
           <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="Double" />
           <Property Name="Longitude" Type="Double" />
-          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastModifiedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
@@ -812,6 +806,8 @@
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Capacities" Relationship="Self.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TechCapacity">
           <Key>
@@ -1167,6 +1163,9 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="MeasureModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="PhoneNumber3" ColumnName="PhoneNumber3" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1179,10 +1178,6 @@
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Directions" ColumnName="Directions" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="WorkNumber" ColumnName="WorkNumber" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
                 <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
@@ -1212,6 +1207,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="MeasureModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1221,8 +1218,6 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
                 <ScalarProperty Name="SSN" ColumnName="SSN" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="SMTPEmail" ColumnName="SMTPEmail" />
@@ -1314,7 +1309,6 @@
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="StorePhoneNumber" ColumnName="StorePhoneNumber" />
                 <ScalarProperty Name="DirectPhoneNumber" ColumnName="DirectPhoneNumber" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -1341,6 +1335,8 @@
           <EntitySetMapping Name="Teches">
             <EntityTypeMapping TypeName="MeasureModel.Tech">
               <MappingFragment StoreEntitySet="Tech">
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -1352,8 +1348,6 @@
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
                 <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />

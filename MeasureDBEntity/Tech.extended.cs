@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using RandREng.Types;
 
 namespace RandREng.MeasureDBEntity
 {
@@ -46,21 +47,18 @@ namespace RandREng.MeasureDBEntity
 			[Required]
 			public string State;
 
-			[DataType(DataType.PostalCode)]
 			[Display(Name = "Zip Code", Prompt = "Enter Zip Code", Description = "Zip Code")]
-			[StringLength(5)]
+			[PostalPlus4]
 			[Required]
 			public string ZipCode;
 
-			[DataType(DataType.PhoneNumber, ErrorMessage = "Home phone number not valid")]
 			[Display(Name = "Home Number", Prompt = "Enter Home Phone Number", Description = "Customer Home Phone")]
-			[StringLength(10)]
-			public string HomeNumber;
+			[PhoneNumber10]
+			public string PhoneNumber1;
 
-			[DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number not valid")]
 			[Display(Name = "Mobile Number", Prompt = "Enter Mobile Phone Number", Description = "Customer Mobile Phone")]
-			[StringLength(10)]
-			public string MobileNumber;
+			[PhoneNumber10]
+			public string PhoneNumber2;
 		}
 	}
 }

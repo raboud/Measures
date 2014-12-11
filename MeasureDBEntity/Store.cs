@@ -28,7 +28,6 @@ namespace RandREng.MeasureDBEntity
         public string ZipCode { get; set; }
         public string StorePhoneNumber { get; set; }
         public string DirectPhoneNumber { get; set; }
-        public string Extension { get; set; }
         public string FaxNumber { get; set; }
         public string Notes { get; set; }
         public int BranchId { get; set; }

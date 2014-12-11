@@ -29,14 +29,14 @@ namespace RandREng.MeasureDBEntity
         public string ZipCode { get; set; }
         public Nullable<double> Latitude { get; set; }
         public Nullable<double> Longitude { get; set; }
-        public string HomeNumber { get; set; }
-        public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
         public string LastModifiedById { get; set; }
         public System.DateTime LastModifiedDateTime { get; set; }
         public string Name { get; set; }
         public string UserId { get; set; }
         public bool Active { get; set; }
+        public string PhoneNumber1 { get; set; }
+        public string PhoneNumber2 { get; set; }
     
         public virtual ICollection<TechCapacity> Capacities { get; set; }
     }

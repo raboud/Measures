@@ -28,8 +28,6 @@ namespace RandREng.MeasureDBEntity
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
-        public string HomeNumber { get; set; }
-        public string MobileNumber { get; set; }
         public string SSN { get; set; }
         public string Email { get; set; }
         public string SMTPEmail { get; set; }
@@ -38,6 +36,8 @@ namespace RandREng.MeasureDBEntity
         public string UserId { get; set; }
         public bool Active { get; set; }
         public string Name { get; set; }
+        public string PhoneNumber1 { get; set; }
+        public string PhoneNumber2 { get; set; }
     
         public virtual ICollection<Branch> Branches { get; set; }
     }

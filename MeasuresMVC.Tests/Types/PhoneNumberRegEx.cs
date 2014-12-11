@@ -9,147 +9,147 @@ namespace MeasuresMVC.Tests.Types
 	public class PhoneNumberRegEx
 	{
 		[TestMethod]
-		public void PhoneNumber1()
+		public void PhoneNumberRegExRegEx1()
 		{
 			string input = "234.567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber2()
+		public void PhoneNumberRegExRegEx2()
 		{
 			string input = "(234)567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber3()
+		public void PhoneNumberRegExRegEx3()
 		{
 			string input = "(234) 567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber4()
+		public void PhoneNumberRegExRegEx4()
 		{
 			string input = "234.567.8901 ext 9ii";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsFalse(b);
+			Assert.IsFalse(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "ERROR");
 		}
 		[TestMethod]
-		public void PhoneNumber5()
+		public void PhoneNumberRegExRegEx()
 		{
 			string input = "aaa.567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsFalse(b);
+			Assert.IsFalse(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "ERROR");
 		}
 		[TestMethod]
-		public void PhoneNumber6()
+		public void PhoneNumberRegEx6()
 		{
 			string input = "234.567.8901 x 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 
 		[TestMethod]
-		public void PhoneNumber7()
+		public void PhoneNumberRegEx7()
 		{
 			string input = "234.567.8901 x8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber8()
+		public void PhoneNumberRegEx8()
 		{
 			string input = "234.567.8901x8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber9()
+		public void PhoneNumberRegEx9()
 		{
 			string input = "234.567.8901 ext. 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void XPhoneNumber10()
+		public void PhoneNumberRegEx10()
 		{
 			string input = "234.567.8901 ext8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber11()
+		public void PhoneNumberRegEx11()
 		{
 			string input = "234.567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsFalse(b);
+			Assert.IsFalse(b, input);
 			string t = PhoneNumber10.Reformat(input);
 			Assert.AreEqual(t, "ERROR");
 		}
 		[TestMethod]
-		public void PhoneNumber12()
+		public void PhoneNumberRegEx12()
 		{
 			string input = "234.567.8901 ";
 			bool b = Regex.IsMatch(input, PhoneNumber10.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsFalse(b);
+			Assert.IsFalse(b, input);
 			string t = PhoneNumber10.Reformat(input);
 			Assert.AreEqual(t, "ERROR");
 		}
 		[TestMethod]
-		public void PhoneNumber13()
+		public void PhoneNumberRegEx13()
 		{
 			string input = "234.567.8901";
 			bool b = Regex.IsMatch(input, PhoneNumber10.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901");
 		}
 		[TestMethod]
-		public void PhoneNumber14()
+		public void PhoneNumberRegEx14()
 		{
 			string input = "234.567-8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901 ext 8888");
 		}
 		[TestMethod]
-		public void PhoneNumber15()
+		public void PhoneNumberRegEx15()
 		{
 			string input = "24.567.8901 ext 8888";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsFalse(b);
+			Assert.IsFalse(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "ERROR");
 		}
 		[TestMethod]
-		public void PhoneNumber16()
+		public void PhoneNumberRegEx16()
 		{
 			string input = "234.567.8901";
 			bool b = Regex.IsMatch(input, PhoneNumber10Ext.RegEx, RegexOptions.IgnoreCase);
-			Assert.IsTrue(b);
+			Assert.IsTrue(b, input);
 			string t = PhoneNumber10Ext.Reformat(input);
 			Assert.AreEqual(t, "(234) 567-8901");
 		}

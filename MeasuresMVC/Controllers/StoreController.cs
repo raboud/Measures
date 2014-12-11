@@ -20,7 +20,7 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<IStoreView> stores = from c in new MeasureEntities().Stores orderby c.Id select c;
+			IQueryable<Store> stores = from c in new MeasureEntities().Stores orderby c.Id select c;
 			return View(stores);
 		}
 
@@ -70,7 +70,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
+        public ActionResult Create([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
         {
 			if (!User.IsInRole("Admin"))
 			{
@@ -114,7 +114,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
+        public ActionResult Edit([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
         {
 			if (!User.IsInRole("Admin"))
 			{

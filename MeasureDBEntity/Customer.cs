@@ -31,14 +31,13 @@ namespace RandREng.MeasureDBEntity
         public Nullable<double> Latitude { get; set; }
         public Nullable<double> Longitude { get; set; }
         public string Directions { get; set; }
-        public string PhoneNumber { get; set; }
-        public string MobileNumber { get; set; }
-        public string WorkNumber { get; set; }
-        public string Extension { get; set; }
         public string EmailAddress { get; set; }
         public string LastModifiedById { get; set; }
         public System.DateTime LastModifiedDateTime { get; set; }
         public string Name { get; set; }
+        public string PhoneNumber1 { get; set; }
+        public string PhoneNumber2 { get; set; }
+        public string PhoneNumber3 { get; set; }
     
         public virtual ICollection<Measure> Measures { get; set; }
     }

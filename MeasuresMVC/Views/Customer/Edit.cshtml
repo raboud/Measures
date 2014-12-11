@@ -17,6 +17,9 @@
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
+		@Html.HiddenFor(model => model.Latitude)
+		@Html.HiddenFor(model => model.Longitude)
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
@@ -107,34 +110,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneNumber1, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PhoneNumber)
-                @Html.ValidationMessageFor(model => model.PhoneNumber)
+                @Html.EditorFor(model => model.PhoneNumber1)
+                @Html.ValidationMessageFor(model => model.PhoneNumber1)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MobileNumber, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneNumber2, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.MobileNumber)
-                @Html.ValidationMessageFor(model => model.MobileNumber)
+                @Html.EditorFor(model => model.PhoneNumber2)
+                @Html.ValidationMessageFor(model => model.PhoneNumber2)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.WorkNumber, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PhoneNumber3, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WorkNumber)
-                @Html.ValidationMessageFor(model => model.WorkNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Extension, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Extension)
-                @Html.ValidationMessageFor(model => model.Extension)
+                @Html.EditorFor(model => model.PhoneNumber3)
+                @Html.ValidationMessageFor(model => model.PhoneNumber3)
             </div>
         </div>
 
@@ -143,30 +138,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EmailAddress)
                 @Html.ValidationMessageFor(model => model.EmailAddress)
-            </div>
-        </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedBy, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifiedBy)
-                @Html.ValidationMessageFor(model => model.LastModifiedBy)
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastModifiedDateTime, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastModifiedDateTime)
-                @Html.ValidationMessageFor(model => model.LastModifiedDateTime)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 

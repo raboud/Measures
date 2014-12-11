@@ -74,7 +74,7 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,HomeNumber,MobileNumber,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
+		public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,PhoneNumber1,PhoneNumber2,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
 		{
 			if (!User.IsInRole("Admin"))
 			{
@@ -127,7 +127,7 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,HomeNumber,MobileNumber,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
+		public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,Address2,City,State,ZipCode,Latitude,Longitude,PhoneNumber1,PhoneNumber2,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Tech model)
 		{
 			if (!User.IsInRole("Admin"))
 			{
@@ -140,13 +140,13 @@ namespace MeasuresMVC.Controllers
 				tech2.Address = model.Address;
 				tech2.Address2 = model.Address2;
 				tech2.City = model.City;
-				tech2.HomeNumber = model.HomeNumber;
+				tech2.PhoneNumber1 = model.PhoneNumber1;
 				tech2.LastModifiedById = User.Identity.GetUserId();
 				tech2.LastModifiedDateTime = DateTime.Now;
 				tech2.LastName = model.LastName;
 				tech2.Latitude = model.Latitude;
 				tech2.Longitude = model.Longitude;
-				tech2.MobileNumber = model.MobileNumber;
+				tech2.PhoneNumber2 = model.PhoneNumber2;
 				tech2.State = model.State;
 				tech2.ZipCode = model.ZipCode.Trim();
 //				db.Entry(model).State = EntityState.Modified;

@@ -57,11 +57,11 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber,MobileNumber,WorkNumber,Extension,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
+        public ActionResult Create([Bind(Include="ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber1,PhoneNumber2,PhoneNumber3,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                if(string.IsNullOrEmpty(customer.PhoneNumber) && string.IsNullOrEmpty(customer.MobileNumber) && string.IsNullOrEmpty(customer.WorkNumber))
+                if(string.IsNullOrEmpty(customer.PhoneNumber1) && string.IsNullOrEmpty(customer.PhoneNumber2) && string.IsNullOrEmpty(customer.PhoneNumber3))
                 {
                     return View(customer);
                 }
@@ -138,7 +138,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber,MobileNumber,WorkNumber,Extension,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
+		public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber1,PhoneNumber2,PhoneNumber3,Extension,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
         {
             if (ModelState.IsValid)
             {

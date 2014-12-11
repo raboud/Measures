@@ -81,8 +81,8 @@ namespace MeasuresMVC.Models
 		public string ZipCode { get { return this._inner.ZipCode; } }
 		public Nullable<double> Latitude { get { return this._inner.Latitude; } }
 		public Nullable<double> Longitude { get { return this._inner.Longitude; } }
-		public string HomeNumber { get { return this._inner.HomeNumber; } }
-		public string MobileNumber { get { return this._inner.MobileNumber; } }
+		public string PhoneNumber1 { get { return this._inner.PhoneNumber1; } }
+		public string PhoneNumber2 { get { return this._inner.PhoneNumber2; } }
 		public string EmailAddress { get { return this._inner.EmailAddress; } }
 		public string LastModifiedById { get { return this._inner.LastModifiedById; } }
 		public System.DateTime LastModifiedDateTime { get { return this._inner.LastModifiedDateTime; } }
@@ -95,8 +95,8 @@ namespace MeasuresMVC.Models
 	{
 		public int Id { get; set; }
 		public string Name {get;set;}
-		public string HomeNumber {get;set;}
-		public string MobileNumber {get;set;}
+		public string PhoneNumber1 {get;set;}
+		public string PhoneNumber2 {get;set;}
 		public string EmailAddress {get;set;}
 		//public int AM0 { get; set; }
 		//public int AM1 { get; set; }
@@ -115,8 +115,8 @@ namespace MeasuresMVC.Models
 		{
 			this.Name = tech.Name;
 			this.Id = tech.Id;
-			this.HomeNumber = tech.HomeNumber;
-			this.MobileNumber = tech.MobileNumber;
+			this.PhoneNumber1 = tech.PhoneNumber1;
+			this.PhoneNumber2 = tech.PhoneNumber2;
 			this.EmailAddress = tech.EmailAddress;
 
 			this.Morning = new int[7];

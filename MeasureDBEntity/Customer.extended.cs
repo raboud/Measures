@@ -7,18 +7,8 @@ using RandREng.Types;
 
 namespace RandREng.MeasureDBEntity
 {
-	public interface ICustomerView
-	{
-		int Id { get; set; }
-		string Name { get; set; }
-		string Address { get; set; }
-		string City { get; set; }
-		string State { get; set; }
-		string ZipCode { get; set; }
-	}
-
 	[MetadataType(typeof(Customer.MetaData))]
-	public partial class Customer : ICustomerView
+	public partial class Customer
 	{
 		public class MetaData
 		{
@@ -62,17 +52,17 @@ namespace RandREng.MeasureDBEntity
             [Required]
             public string ZipCode;
 
-            [Display(Name = "Home Number", Prompt = "Enter Home Phone Number", Description = "Customer Home Phone")]
+            [Display(Name = "Primary Number", Prompt = "Enter Primary Phone Number", Description = "Customer Home Phone")]
             [PhoneNumber10Ext]
-            public string PhoneNumber;
+            public string PhoneNumber1;
 
-            [Display(Name = "Mobile Number", Prompt = "Enter Mobile Phone Number", Description = "Customer Mobile Phone")]
+            [Display(Name = "Secondary Number", Prompt = "Enter Secondary Phone Number", Description = "Customer Mobile Phone")]
 			[PhoneNumber10Ext]
-            public string MobileNumber;
+            public string PhoneNumber2;
 
-            [Display(Name = "Work Number", Prompt = "Enter Work Number", Description = "Customer Work Number")]
+            [Display(Name = "Third Number", Prompt = "Enter Tertiaryy Number", Description = "Customer Work Number")]
 			[PhoneNumber10Ext]
-            public string WorkNumber;
+            public string PhoneNumber3;
 
 
 		}

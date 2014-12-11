@@ -1,2 +1,2 @@
 ﻿CREATE TYPE [dbo].[PhoneNumber]
-	FROM nchar(14) NULL
+	FROM nvarchar(20) NULL
