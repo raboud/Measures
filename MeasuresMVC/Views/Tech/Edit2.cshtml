@@ -1,0 +1,141 @@
+﻿@model MeasuresMVC.Models.Edit2ViewModels
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Tech</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.HomeNumber)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.HomeNumber)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.MobileNumber)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.MobileNumber)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.EmailAddress)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.EmailAddress)
+		</dd>
+	</dl>
+	@using (Html.BeginForm("Edit2", "Tech"))
+	{
+		@Html.AntiForgeryToken()
+		<h4>Capacities</h4>
+		<hr />
+		@Html.ValidationSummary(true)
+
+		<table class="table">
+			<tr>
+				<th>
+					Type
+				</th>
+				<th>
+					Sun
+				</th>
+				<th>
+					Mon
+				</th>
+				<th>
+					Tues
+				</th>
+				<th>
+					Wed
+				</th>
+				<th>
+					Thur
+				</th>
+				<th>
+					Fri
+				</th>
+				<th>
+					Sat
+				</th>
+				<th></th>
+			</tr>
+
+			<tr>
+				<td>
+					Morning
+				</td>
+
+				@foreach (int Morning in Model.Morning)
+				{
+					<td>
+						@*<div class="col-md-8">*@
+							@Html.EditorFor(cap => Morning, null, new { style = "width: 10px" })
+							@Html.ValidationMessageFor(cap => Morning)
+						@*</div>*@
+					</td>
+				}
+			</tr>
+			<tr>
+					<td>
+						Afternoon
+					</td>
+				@foreach (int Afternoon in Model.Afternoon)
+				{
+					<td>
+						<div class="col-md-10">
+						@Html.EditorFor(cap => Afternoon, new { style = "min-width: 10px" })
+						@Html.ValidationMessageFor(cap => Afternoon)
+						</div>
+					</td>
+				}
+				</tr>
+				<tr>
+					<td>
+						Evening
+					</td>
+					@foreach (int Evening in Model.Evening)
+					{
+						<td>
+							<div class="col-md-10">
+							@Html.EditorFor(cap => Evening)
+							@Html.ValidationMessageFor(cap => Evening)
+							</div>
+						</td>
+					}
+				</tr>
+
+		</table>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Save" class="btn btn-default" />
+			</div>
+		</div>
+
+	}
+</div>
+
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
+section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+}

@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ddb752c8461a43c4a48a24d34c9144ec" Name="Diagram1" ZoomLevel="77">
-        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.75" PointX="0.875" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="10.25" PointY="3.125" />
         <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="1.5" PointX="5" PointY="3.25" />
         <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="7.125" PointY="4.75" />
@@ -35,14 +34,14 @@
         <AssociationConnector Association="MeasureModel.FK_MeasureEmail_Measure" />
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_Measure" />
         <EntityTypeShape EntityType="MeasureModel.SlotType" Width="1.5" PointX="0.875" PointY="12.75" />
-        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="3.125" PointY="12.5" />
-        <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" />
-        <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" />
         <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Store" />
-        <AssociationConnector Association="MeasureModel.TechAspNetUser" />
         <AssociationConnector Association="MeasureModel.MeasureAspNetUser" />
         <AssociationConnector Association="MeasureModel.CustomerAspNetUser" />
+        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="0.875" PointY="15.375" />
+        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="3.125" PointY="15.125" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

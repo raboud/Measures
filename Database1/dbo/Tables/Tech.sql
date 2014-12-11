@@ -7,7 +7,7 @@
     [Address2]             NVARCHAR (255) NULL,
     [City]                 NVARCHAR (50)  NULL,
     [State]                NCHAR (2)      CONSTRAINT [DF__TECH__State] DEFAULT ('GA') NULL,
-    [ZipCode]              NCHAR (10)     NULL,
+    [ZipCode]              NVARCHAR(10)     NULL,
     [Latitude]             FLOAT (53)     NULL,
     [Longitude]            FLOAT (53)     NULL,
 
@@ -18,7 +18,8 @@
     [LastModifiedById]       NVARCHAR(128)            NOT NULL,
     [LastModifiedDateTime] DATETIME       NOT NULL,
 
-    [Name] as LastName + ', ' + FirstName PERSISTED
+    [Name] as LastName + ', ' + FirstName PERSISTED, 
+    [UserId] NVARCHAR(128) NOT NULL
 
 )
 

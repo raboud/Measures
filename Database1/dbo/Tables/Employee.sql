@@ -15,7 +15,9 @@
     [SMTPEmail]        [dbo].[EmailAddress]  NULL,
     [ReceiveCallNotes] BIT            NOT NULL,
     [UserName]         NVARCHAR (30)  NULL,
+    [UserId] NVARCHAR(128) NOT NULL,
     [Active]           BIT            CONSTRAINT [DF__Employee_Active] DEFAULT (1) NOT NULL,
+    [Name] as LastName + ', ' + FirstName PERSISTED, 
     CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90)
 );
 

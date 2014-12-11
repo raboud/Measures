@@ -105,7 +105,9 @@
           <Property Name="SMTPEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="ReceiveCallNotes" Type="bit" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="82" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="MaterialType">
           <Key>
@@ -213,7 +215,7 @@
           <Property Name="Address2" Type="nvarchar" MaxLength="255" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nchar" MaxLength="2" />
-          <Property Name="ZipCode" Type="nchar" MaxLength="10" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
           <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
@@ -222,15 +224,17 @@
           <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="TechCapacity">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TechId" Type="int" Nullable="false" />
           <Property Name="SlotTypeId" Type="int" Nullable="false" />
           <Property Name="Capacity" Type="tinyint" Nullable="false" />
+          <Property Name="DayOfWeek" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Width">
           <Key>
@@ -519,31 +523,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MeasureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Tech">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
-          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Latitude" Type="Double" />
-          <Property Name="Longitude" Type="Double" />
-          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="TechCapacities" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
-          <Property Name="LastModifiedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="LastModifiedBy" Relationship="MeasureModel.TechAspNetUser" FromRole="Tech" ToRole="AspNetUser" />
-        </EntityType>
         <EntityContainer Name="MeasureEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Teches" EntityType="Self.Tech" />
           <EntitySet Name="MaterialTypes" EntityType="MeasureModel.MaterialType" />
           <EntitySet Name="MeasureMaterials" EntityType="MeasureModel.MeasureMaterial" />
           <EntitySet Name="MeasureRooms" EntityType="MeasureModel.MeasureRoom" />
@@ -611,23 +591,10 @@
             <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
           </AssociationSet>
           <EntitySet Name="SlotTypes" EntityType="MeasureModel.SlotType" />
-          <EntitySet Name="TechCapacities" EntityType="MeasureModel.TechCapacity" />
-          <AssociationSet Name="FK_TechCapacity_SlotType" Association="MeasureModel.FK_TechCapacity_SlotType">
-            <End Role="SlotType" EntitySet="SlotTypes" />
-            <End Role="TechCapacity" EntitySet="TechCapacities" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TechCapacity_Tech" Association="MeasureModel.FK_TechCapacity_Tech">
-            <End Role="Tech" EntitySet="Teches" />
-            <End Role="TechCapacity" EntitySet="TechCapacities" />
-          </AssociationSet>
           <EntitySet Name="AspNetUsers" EntityType="MeasureModel.AspNetUser" />
           <AssociationSet Name="FK_Measure_Store" Association="MeasureModel.FK_Measure_Store">
             <End Role="Store" EntitySet="Stores" />
             <End Role="Measure" EntitySet="Measures" />
-          </AssociationSet>
-          <AssociationSet Name="TechAspNetUser" Association="MeasureModel.TechAspNetUser">
-            <End Role="Tech" EntitySet="Teches" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="MeasureAspNetUser" Association="MeasureModel.MeasureAspNetUser">
             <End Role="Measure" EntitySet="Measures" />
@@ -636,6 +603,16 @@
           <AssociationSet Name="CustomerAspNetUser" Association="MeasureModel.CustomerAspNetUser">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Teches" EntityType="MeasureModel.Tech" />
+          <EntitySet Name="TechCapacities" EntityType="MeasureModel.TechCapacity" />
+          <AssociationSet Name="FK_TechCapacity_SlotType" Association="MeasureModel.FK_TechCapacity_SlotType">
+            <End Role="SlotType" EntitySet="SlotTypes" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_Tech" Association="MeasureModel.FK_TechCapacity_Tech">
+            <End Role="Tech" EntitySet="Teches" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MaterialType">
@@ -811,6 +788,8 @@
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Branches" Relationship="MeasureModel.FK_Branch_Manager" FromRole="Employee" ToRole="Branch" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="82" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="MeasureEmail">
           <Key>
@@ -1008,41 +987,6 @@
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TechCapacities" Relationship="MeasureModel.FK_TechCapacity_SlotType" FromRole="SlotType" ToRole="TechCapacity" />
         </EntityType>
-        <EntityType Name="TechCapacity">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TechId" Type="Int32" Nullable="false" />
-          <Property Name="SlotTypeId" Type="Int32" Nullable="false" />
-          <Property Name="Capacity" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="SlotType" Relationship="MeasureModel.FK_TechCapacity_SlotType" FromRole="TechCapacity" ToRole="SlotType" />
-          <NavigationProperty Name="Tech" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="TechCapacity" ToRole="Tech" />
-        </EntityType>
-        <Association Name="FK_TechCapacity_SlotType">
-          <End Type="MeasureModel.SlotType" Role="SlotType" Multiplicity="1" />
-          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SlotType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TechCapacity">
-              <PropertyRef Name="SlotTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TechCapacity_Tech">
-          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="1" />
-          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tech">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TechCapacity">
-              <PropertyRef Name="TechId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="AspNetUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -1059,7 +1003,6 @@
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Tech" Relationship="MeasureModel.TechAspNetUser" FromRole="AspNetUser" ToRole="Tech" />
           <NavigationProperty Name="Measures" Relationship="MeasureModel.MeasureAspNetUser" FromRole="AspNetUser" ToRole="Measure" />
           <NavigationProperty Name="Customers" Relationship="MeasureModel.CustomerAspNetUser" FromRole="AspNetUser" ToRole="Customer" />
         </EntityType>
@@ -1072,18 +1015,6 @@
             </Principal>
             <Dependent Role="Measure">
               <PropertyRef Name="StoreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TechAspNetUser">
-          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="*" />
-          <End Type="MeasureModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tech">
-              <PropertyRef Name="LastModifiedById" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1111,34 +1042,71 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Tech">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Capacities" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
+        </EntityType>
+        <EntityType Name="TechCapacity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TechId" Type="Int32" Nullable="false" />
+          <Property Name="SlotTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Byte" Nullable="false" />
+          <Property Name="DayOfWeek" Type="Byte" Nullable="false" a:SetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:GetterAccess="Public" />
+          <NavigationProperty Name="SlotType" Relationship="MeasureModel.FK_TechCapacity_SlotType" FromRole="TechCapacity" ToRole="SlotType" />
+          <NavigationProperty Name="Tech" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="TechCapacity" ToRole="Tech" />
+        </EntityType>
+        <Association Name="FK_TechCapacity_SlotType">
+          <End Type="MeasureModel.SlotType" Role="SlotType" Multiplicity="1" />
+          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="SlotTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_Tech">
+          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="1" />
+          <End Type="MeasureModel.TechCapacity" Role="TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MeasureModelStoreContainer" CdmEntityContainer="MeasureEntities">
-          <EntitySetMapping Name="Teches">
-            <EntityTypeMapping TypeName="MeasureModel.Tech">
-              <MappingFragment StoreEntitySet="Tech">
-                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MaterialTypes">
             <EntityTypeMapping TypeName="MeasureModel.MaterialType">
               <MappingFragment StoreEntitySet="MaterialType">
@@ -1229,6 +1197,8 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="MeasureModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ReceiveCallNotes" ColumnName="ReceiveCallNotes" />
@@ -1341,16 +1311,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TechCapacities">
-            <EntityTypeMapping TypeName="MeasureModel.TechCapacity">
-              <MappingFragment StoreEntitySet="TechCapacity">
-                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-                <ScalarProperty Name="SlotTypeId" ColumnName="SlotTypeId" />
-                <ScalarProperty Name="TechId" ColumnName="TechId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="MeasureModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
@@ -1365,6 +1325,40 @@
                 <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
                 <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teches">
+            <EntityTypeMapping TypeName="MeasureModel.Tech">
+              <MappingFragment StoreEntitySet="Tech">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechCapacities">
+            <EntityTypeMapping TypeName="MeasureModel.TechCapacity">
+              <MappingFragment StoreEntitySet="TechCapacity">
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="SlotTypeId" ColumnName="SlotTypeId" />
+                <ScalarProperty Name="TechId" ColumnName="TechId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

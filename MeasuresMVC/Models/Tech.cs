@@ -16,7 +16,7 @@ namespace MeasuresMVC.Models
     {
         public Tech()
         {
-            this.TechCapacities = new HashSet<TechCapacity>();
+            this.Capacities = new HashSet<TechCapacity>();
         }
     
         public int Id { get; set; }
@@ -32,11 +32,11 @@ namespace MeasuresMVC.Models
         public string HomeNumber { get; set; }
         public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
+        public string LastModifiedById { get; set; }
         public System.DateTime LastModifiedDateTime { get; set; }
         public string Name { get; set; }
-        public string LastModifiedById { get; set; }
+        public string UserId { get; set; }
     
-        public virtual ICollection<TechCapacity> TechCapacities { get; set; }
-        public virtual AspNetUser LastModifiedBy { get; set; }
+        public virtual ICollection<TechCapacity> Capacities { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace MeasuresMVC.Models
     {
         public AspNetUser()
         {
-            this.Tech = new HashSet<Tech>();
             this.Measures = new HashSet<Measure>();
             this.Customers = new HashSet<Customer>();
         }
@@ -34,7 +33,6 @@ namespace MeasuresMVC.Models
         public Nullable<bool> Active { get; set; }
         public string Discriminator { get; set; }
     
-        public virtual ICollection<Tech> Tech { get; set; }
         public virtual ICollection<Measure> Measures { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
     }

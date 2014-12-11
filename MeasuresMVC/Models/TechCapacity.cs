@@ -18,6 +18,7 @@ namespace MeasuresMVC.Models
         public int TechId { get; set; }
         public int SlotTypeId { get; set; }
         public byte Capacity { get; set; }
+        public byte DayOfWeek { get; set; }
     
         public virtual SlotType SlotType { get; set; }
         public virtual Tech Tech { get; set; }

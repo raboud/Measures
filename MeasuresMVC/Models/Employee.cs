@@ -36,6 +36,8 @@ namespace MeasuresMVC.Models
         public bool ReceiveCallNotes { get; set; }
         public string UserName { get; set; }
         public bool Active { get; set; }
+        public string UserId { get; set; }
+        public string Name { get; set; }
     
         public virtual ICollection<Branch> Branches { get; set; }
     }
