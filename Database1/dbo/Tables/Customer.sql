@@ -18,8 +18,8 @@
     [Extension]            VARCHAR (50)   NULL,
     [EmailAddress]         [dbo].[EmailAddress] NULL,
 
-    [LastModifiedBy]       INT            NULL,
-    [LastModifiedDateTime] DATETIME       NULL,
+    [LastModifiedById]       NVARCHAR(128)            NOT NULL,
+    [LastModifiedDateTime] DATETIME       NOT NULL,
 
     [Name] as IIF(CompanyName is null, IsNull(LastName, '') + ', ' + IsNull(FirstName, ''), CompanyName) PERSISTED
     CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),

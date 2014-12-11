@@ -14,6 +14,11 @@ namespace MeasuresMVC.Models
     
     public partial class Store
     {
+        public Store()
+        {
+            this.Measures = new HashSet<Measure>();
+        }
+    
         public int Id { get; set; }
         public int TypeID { get; set; }
         public string Number { get; set; }
@@ -36,5 +41,6 @@ namespace MeasuresMVC.Models
     
         public virtual Branch Branch { get; set; }
         public virtual StoreType StoreType { get; set; }
+        public virtual ICollection<Measure> Measures { get; set; }
     }
 }

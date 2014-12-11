@@ -23,9 +23,13 @@ namespace MeasuresMVC.Models
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public System.DateTime Enterred { get; set; }
+        public int StoreId { get; set; }
+        public string EnterredById { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
         public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
+        public virtual Store Store { get; set; }
+        public virtual AspNetUser EnterredBy { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeasuresMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MeasuresMVC.Controllers
 {
@@ -64,7 +65,9 @@ namespace MeasuresMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Measures.Add(measure);
+				measure.EnterredById = User.Identity.GetUserId();
+				measure.Enterred = DateTime.Now;
+				db.Measures.Add(measure);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

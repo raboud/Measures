@@ -147,4 +147,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="_SecurityStamp" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="35ef0945-a53e-45f8-8c7a-5968deaf159e" ChangeDateTime="01/22/2014 00:41:25">
+    <Property Name="ElementName" Value="[dbo].[Measure].[UserId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Measure]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EnterredById" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="40e5635f-26d9-4b00-b78b-9b2fbd290f7b" ChangeDateTime="01/22/2014 01:00:30">
+    <Property Name="ElementName" Value="[dbo].[Tech].[LastModifiedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tech]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastModifiedById" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ce7f109f-4425-4c8f-bad8-eae065aca646" ChangeDateTime="01/22/2014 01:03:33">
+    <Property Name="ElementName" Value="[dbo].[Customer].[LastModifiedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Customer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LastModifiedById" />
+  </Operation>
 </Operations>

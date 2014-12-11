@@ -36,10 +36,11 @@ namespace MeasuresMVC.Models
         public string WorkNumber { get; set; }
         public string Extension { get; set; }
         public string EmailAddress { get; set; }
-        public Nullable<int> LastModifiedBy { get; set; }
-        public Nullable<System.DateTime> LastModifiedDateTime { get; set; }
+        public System.DateTime LastModifiedDateTime { get; set; }
         public string Name { get; set; }
+        public string LastModifiedById { get; set; }
     
         public virtual ICollection<Measure> Measures { get; set; }
+        public virtual AspNetUser LastModifiedBy { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeasuresMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MeasuresMVC.Controllers
 {
@@ -54,6 +55,9 @@ namespace MeasuresMVC.Controllers
                 {
                     return View(customer);
                 }
+				customer.LastModifiedById = User.Identity.GetUserId();
+				customer.LastModifiedDateTime = DateTime.Now;
+
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Measure");

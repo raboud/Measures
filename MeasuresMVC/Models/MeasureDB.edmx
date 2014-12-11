@@ -5,6 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MeasureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ConfirmationToken" Type="nvarchar(max)" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="ResetPasswordToken" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="Branch">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,8 +64,8 @@
           <Property Name="WorkNumber" Type="varchar" MaxLength="50" />
           <Property Name="Extension" Type="varchar" MaxLength="50" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="LastModifiedBy" Type="int" />
-          <Property Name="LastModifiedDateTime" Type="datetime" />
+          <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="EmailTemplate">
@@ -104,6 +121,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="Enterred" Type="datetime" Nullable="false" />
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="EnterredById" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="MeasureEmail">
           <Key>
@@ -199,9 +218,9 @@
           <Property Name="Longitude" Type="float" />
           <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
           <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
-          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
-          <Property Name="LastModifiedBy" Type="int" />
-          <Property Name="LastModifiedDateTime" Type="datetime" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="TechCapacity">
@@ -253,6 +272,18 @@
             </Principal>
             <Dependent Role="Measure">
               <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Measure_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Measure" Type="Self.Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="StoreId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -401,6 +432,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MeasureModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
@@ -428,6 +460,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Measure_Customer" Association="Self.FK_Measure_Customer">
             <End Role="Customer" EntitySet="Customer" />
+            <End Role="Measure" EntitySet="Measure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Measure_Store" Association="Self.FK_Measure_Store">
+            <End Role="Store" EntitySet="Store" />
             <End Role="Measure" EntitySet="Measure" />
           </AssociationSet>
           <AssociationSet Name="FK_MeasureEmail_Measure" Association="Self.FK_MeasureEmail_Measure">
@@ -499,11 +535,12 @@
           <Property Name="Longitude" Type="Double" />
           <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
           <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="TechCapacities" Relationship="MeasureModel.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
+          <Property Name="LastModifiedById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LastModifiedBy" Relationship="MeasureModel.TechAspNetUser" FromRole="Tech" ToRole="AspNetUser" />
         </EntityType>
         <EntityContainer Name="MeasureEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Teches" EntityType="Self.Tech" />
@@ -582,6 +619,23 @@
           <AssociationSet Name="FK_TechCapacity_Tech" Association="MeasureModel.FK_TechCapacity_Tech">
             <End Role="Tech" EntitySet="Teches" />
             <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
+          <EntitySet Name="AspNetUsers" EntityType="MeasureModel.AspNetUser" />
+          <AssociationSet Name="FK_Measure_Store" Association="MeasureModel.FK_Measure_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Measure" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="TechAspNetUser" Association="MeasureModel.TechAspNetUser">
+            <End Role="Tech" EntitySet="Teches" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="MeasureAspNetUser" Association="MeasureModel.MeasureAspNetUser">
+            <End Role="Measure" EntitySet="Measures" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerAspNetUser" Association="MeasureModel.CustomerAspNetUser">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="MaterialType">
@@ -794,6 +848,7 @@
           <Property Name="IncludeInStatusReportAll" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Branch" Relationship="MeasureModel.FK_Store_Branch" FromRole="Store" ToRole="Branch" />
           <NavigationProperty Name="StoreType" Relationship="MeasureModel.FK_Store_StoreType" FromRole="Store" ToRole="StoreType" />
+          <NavigationProperty Name="Measures" Relationship="MeasureModel.FK_Measure_Store" FromRole="Store" ToRole="Measure" />
         </EntityType>
         <EntityType Name="StoreType">
           <Key>
@@ -887,10 +942,11 @@
           <Property Name="WorkNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Measures" Relationship="MeasureModel.FK_Measure_Customer" FromRole="Customer" ToRole="Measure" />
+          <Property Name="LastModifiedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LastModifiedBy" Relationship="MeasureModel.CustomerAspNetUser" FromRole="Customer" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Measure">
           <Key>
@@ -902,6 +958,10 @@
           <NavigationProperty Name="Customer" Relationship="MeasureModel.FK_Measure_Customer" FromRole="Measure" ToRole="Customer" />
           <NavigationProperty Name="MeasureEmails" Relationship="MeasureModel.FK_MeasureEmail_Measure" FromRole="Measure" ToRole="MeasureEmail" />
           <NavigationProperty Name="MeasureMaterials" Relationship="MeasureModel.FK_MeasureMaterial_Measure" FromRole="Measure" ToRole="MeasureMaterial" />
+          <Property Name="StoreId" Type="Int32" Nullable="false" />
+          <Property Name="EnterredById" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Store" Relationship="MeasureModel.FK_Measure_Store" FromRole="Measure" ToRole="Store" />
+          <NavigationProperty Name="EnterredBy" Relationship="MeasureModel.MeasureAspNetUser" FromRole="Measure" ToRole="AspNetUser" />
         </EntityType>
         <Association Name="FK_Measure_Customer">
           <End Type="MeasureModel.Customer" Role="Customer" Multiplicity="1" />
@@ -983,6 +1043,74 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="ResetPasswordToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tech" Relationship="MeasureModel.TechAspNetUser" FromRole="AspNetUser" ToRole="Tech" />
+          <NavigationProperty Name="Measures" Relationship="MeasureModel.MeasureAspNetUser" FromRole="AspNetUser" ToRole="Measure" />
+          <NavigationProperty Name="Customers" Relationship="MeasureModel.CustomerAspNetUser" FromRole="AspNetUser" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Measure_Store">
+          <End Type="MeasureModel.Store" Role="Store" Multiplicity="1" />
+          <End Type="MeasureModel.Measure" Role="Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TechAspNetUser">
+          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="*" />
+          <End Type="MeasureModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tech">
+              <PropertyRef Name="LastModifiedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MeasureAspNetUser">
+          <End Type="MeasureModel.Measure" Role="Measure" Multiplicity="*" />
+          <End Type="MeasureModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="EnterredById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerAspNetUser">
+          <End Type="MeasureModel.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="MeasureModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="LastModifiedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -992,6 +1120,7 @@
           <EntitySetMapping Name="Teches">
             <EntityTypeMapping TypeName="MeasureModel.Tech">
               <MappingFragment StoreEntitySet="Tech">
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -1005,7 +1134,6 @@
                 <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
                 <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -1170,9 +1298,9 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="MeasureModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="WorkNumber" ColumnName="WorkNumber" />
@@ -1196,6 +1324,8 @@
           <EntitySetMapping Name="Measures">
             <EntityTypeMapping TypeName="MeasureModel.Measure">
               <MappingFragment StoreEntitySet="Measure">
+                <ScalarProperty Name="EnterredById" ColumnName="EnterredById" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
                 <ScalarProperty Name="Enterred" ColumnName="Enterred" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1217,6 +1347,24 @@
                 <ScalarProperty Name="Capacity" ColumnName="Capacity" />
                 <ScalarProperty Name="SlotTypeId" ColumnName="SlotTypeId" />
                 <ScalarProperty Name="TechId" ColumnName="TechId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MeasureModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="ResetPasswordToken" ColumnName="ResetPasswordToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

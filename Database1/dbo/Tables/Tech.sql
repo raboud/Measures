@@ -13,10 +13,10 @@
 
     [HomeNumber]          [dbo].[PhoneNumber]     NULL,
     [MobileNumber]         [dbo].[PhoneNumber]     NULL,
-    [EmailAddress]         [dbo].[EmailAddress] NULL,
+    [EmailAddress]         [dbo].[EmailAddress] NOT NULL,
 
-    [LastModifiedBy]       INT            NULL,
-    [LastModifiedDateTime] DATETIME       NULL,
+    [LastModifiedById]       NVARCHAR(128)            NOT NULL,
+    [LastModifiedDateTime] DATETIME       NOT NULL,
 
     [Name] as LastName + ', ' + FirstName PERSISTED
 

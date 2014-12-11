@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MeasuresMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MeasuresMVC.Controllers
 {
@@ -66,6 +67,8 @@ namespace MeasuresMVC.Controllers
 			}
 			if (ModelState.IsValid)
             {
+				tech.LastModifiedById = User.Identity.GetUserId();
+				tech.LastModifiedDateTime = DateTime.Now;
                 db.Teches.Add(tech);
                 db.SaveChanges();
                 return RedirectToAction("Index");

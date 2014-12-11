@@ -32,10 +32,11 @@ namespace MeasuresMVC.Models
         public string HomeNumber { get; set; }
         public string MobileNumber { get; set; }
         public string EmailAddress { get; set; }
-        public Nullable<int> LastModifiedBy { get; set; }
-        public Nullable<System.DateTime> LastModifiedDateTime { get; set; }
+        public System.DateTime LastModifiedDateTime { get; set; }
         public string Name { get; set; }
+        public string LastModifiedById { get; set; }
     
         public virtual ICollection<TechCapacity> TechCapacities { get; set; }
+        public virtual AspNetUser LastModifiedBy { get; set; }
     }
 }

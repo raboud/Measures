@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ddb752c8461a43c4a48a24d34c9144ec" Name="Diagram1">
-        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="0.875" PointY="7.5" IsExpanded="true" />
+      <Diagram DiagramId="ddb752c8461a43c4a48a24d34c9144ec" Name="Diagram1" ZoomLevel="77">
+        <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.75" PointX="0.875" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="10.25" PointY="3.125" />
         <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="1.5" PointX="5" PointY="3.25" />
         <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="7.125" PointY="4.75" />
@@ -29,7 +29,7 @@
         <AssociationConnector Association="MeasureModel.FK_EmailTemplate_EmailType" />
         <AssociationConnector Association="MeasureModel.FK_OrderEmail_EmailType" />
         <AssociationConnector Association="MeasureModel.FK_Store_StoreType" />
-        <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.5" PointX="12.375" PointY="1.125" />
+        <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.875" PointX="12.375" PointY="1.125" />
         <EntityTypeShape EntityType="MeasureModel.Measure" Width="1.5" PointX="14.625" PointY="2.5" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Customer" />
         <AssociationConnector Association="MeasureModel.FK_MeasureEmail_Measure" />
@@ -38,6 +38,11 @@
         <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="3.125" PointY="12.5" />
         <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" />
         <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" />
+        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="MeasureModel.FK_Measure_Store" />
+        <AssociationConnector Association="MeasureModel.TechAspNetUser" />
+        <AssociationConnector Association="MeasureModel.MeasureAspNetUser" />
+        <AssociationConnector Association="MeasureModel.CustomerAspNetUser" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,5 +4,8 @@
 	[CustomerId] INT not null,
     [Enterred] DATETIME NOT NULL,
 
+    [StoreId] INT NOT NULL, 
+    [EnterredById] NVARCHAR(128) NOT NULL, 
     CONSTRAINT [FK_Measure_Customer] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer] ([Id]),
+    CONSTRAINT [FK_Measure_Store] FOREIGN KEY ([StoreId]) REFERENCES [dbo].[Store] ([Id]),
 )
