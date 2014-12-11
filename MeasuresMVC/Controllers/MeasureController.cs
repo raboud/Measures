@@ -34,6 +34,20 @@ namespace MeasuresMVC.Controllers
             }
             return View(measure);
         }
+        public ActionResult Details(Customer customer)
+        {
+            if (customer == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            customer.Measures.Add(new Measure());
+            Measure measure = customer.Measures.First();
+            if (measure == null)
+            {
+                return HttpNotFound();
+            }
+            return View(measure);
+        }
 
         // GET: /Measure/Create
         public ActionResult Create()

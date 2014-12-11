@@ -50,9 +50,14 @@ namespace MeasuresMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(string.IsNullOrEmpty(customer.PhoneNumber) && string.IsNullOrEmpty(customer.MobileNumber) && string.IsNullOrEmpty(customer.WorkNumber))
+                {
+                    return View(customer);
+                }
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Measure");
+//                return RedirectToAction("Index");
             }
 
             return View(customer);
