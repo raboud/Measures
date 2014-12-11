@@ -11,51 +11,7 @@ Post-Deployment Script Template
 */
 Use Measure
 
-EXEC InsertRoom 'LR';
-EXEC InsertRoom 'DR';
-EXEC InsertRoom 'FOYER';
-EXEC InsertRoom 'LWHALL';
-EXEC InsertRoom 'UPHALL';
-EXEC InsertRoom 'UPSTR';
-EXEC InsertRoom 'BED 1';
-EXEC InsertRoom 'CLOS 1';
-EXEC InsertRoom 'BED 2';
-EXEC InsertRoom 'CLOS 2';
-EXEC InsertRoom 'BED 3';
-EXEC InsertRoom 'CLOS 3';
-EXEC InsertRoom 'BED 4';
-EXEC InsertRoom 'CLOS 4';
-EXEC InsertRoom 'FR';
-EXEC InsertRoom 'LWSTR';
-EXEC InsertRoom 'DEN';
-EXEC InsertRoom 'BATH 1';
-EXEC InsertRoom 'KIT';
-EXEC InsertRoom 'DIN';
-EXEC InsertRoom 'NOOK';
-EXEC InsertRoom 'KITHALL';
-EXEC InsertRoom 'KITFYR';
-EXEC InsertRoom 'KITENT';
-EXEC InsertRoom 'KITSTR';
-EXEC InsertRoom 'KITLAND';
-EXEC InsertRoom 'LNDRY';
-EXEC InsertRoom 'PORCH';
-EXEC InsertRoom 'COMM';
-EXEC InsertRoom 'M BED';
-EXEC InsertRoom 'M CLOS';
-EXEC InsertRoom 'M BATH';
-EXEC InsertRoom 'PANTRY';
-EXEC InsertRoom 'UTILITY';
-EXEC InsertRoom 'BATH 2';
-EXEC InsertRoom 'BATH 3';
-EXEC InsertRoom 'BSMNT_STR';
-EXEC InsertRoom 'HMOFC';
-EXEC InsertRoom 'BSMNT_BED 1';
-EXEC InsertRoom 'BSMNT_BED 2';
-EXEC InsertRoom 'BSMNT_BATH';
-EXEC InsertRoom 'BSMNT_FR';
-EXEC InsertRoom 'BSMNT_KIT';
-EXEC InsertRoom 'STRINGER';
-EXEC InsertRoom 'VANITY';
+
 EXEC InsertSlotType 'Morning';
 EXEC InsertSlotType 'Afternoon';
 EXEC InsertSlotType 'Evening';
@@ -68,9 +24,9 @@ BEGIN
 END
 
 --Employee    [UserId]
-IF (OBJECT_ID('FK_Employees_User', 'F') IS NOT NULL)
+IF (OBJECT_ID('FK_Employee_User', 'F') IS NOT NULL)
 BEGIN
-    ALTER TABLE dbo.Employees DROP CONSTRAINT FK_Employee_User
+    ALTER TABLE dbo.Employee DROP CONSTRAINT FK_Employee_User
 END
 
 --Measure    [EnterredById]
@@ -80,9 +36,9 @@ BEGIN
 END
 
 --StoreUser    [UserId]
-IF (OBJECT_ID('FK_StoreUser_Use', 'F') IS NOT NULL)
+IF (OBJECT_ID('FK_StoreUser_User', 'F') IS NOT NULL)
 BEGIN
-    ALTER TABLE dbo.StoreUser DROP CONSTRAINT FK_StoreUser_Use
+    ALTER TABLE dbo.StoreUser DROP CONSTRAINT FK_StoreUser_User
 END
 
 --Tech    [LastModifiedById]
@@ -104,8 +60,8 @@ ADD CONSTRAINT [FK_Customer_LastModified] FOREIGN KEY ([LastModifiedById])
     REFERENCES [dbo].[AspNetUsers] ([Id]) ;
 	
 --Employee    [UserId]
-ALTER TABLE dbo.Employees 
-ADD CONSTRAINT [FK_Employees_User] FOREIGN KEY ([UserId]) 
+ALTER TABLE dbo.Employee 
+ADD CONSTRAINT [FK_Employee_User] FOREIGN KEY ([UserId]) 
     REFERENCES [dbo].[AspNetUsers] ([Id]) ;
 
 --Measure    [EnterredById]
@@ -127,4 +83,8 @@ ADD CONSTRAINT [FK_Tech_LastModified] FOREIGN KEY ([LastModifiedById])
 ALTER TABLE Tech 
 ADD CONSTRAINT [FK_Tech_User] FOREIGN KEY ([UserId]) 
     REFERENCES [dbo].[AspNetUsers] ([Id]) ;
+go
+
+ALTER TABLE Slot
+ADD CONSTRAINT [FK_Slot_User] FOREIGN KEY ([UserId]) REFERENCES [dbo].[AspNetUsers] ([Id]) on delete cascade;
 go

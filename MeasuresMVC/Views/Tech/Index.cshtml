@@ -48,7 +48,7 @@
 		$('#grid1').dblclick(function (e) {
 			var row =  $('#grid1').igGridSelection('selectedRow');
 			var dataview = $('#grid1').data('igGrid').dataSource.dataView();
-			var cellValue = dataview[row.index]["Id"];
+			var cellValue = dataview[row.index]["UserId"];
 			var address = "@Url.Action("Edit2")" + "/" + cellValue;
 			window.location = address;
 		});

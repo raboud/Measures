@@ -1,21 +1,23 @@
 ﻿/*!@license
-* Infragistics.Web.ClientUI Combo localization resources 13.2.20132.2055
+* Infragistics.Web.ClientUI Combo localization resources 13.2.20132.2157
 *
-* Copyright (c) 2011-2013 Infragistics Inc.
+* Copyright (c) 2011-2014 Infragistics Inc.
 *
 * http://www.infragistics.com/
 *
 */
 
-/*global $ */
-$.ig = $.ig || {};
+/*global jQuery */
+(function ($) {
+    $.ig = $.ig || {};
 
-if (!$.ig.Combo) {
-	$.ig.Combo = {
-		locale: {
-			noMatchFoundText: 'Aucun résultat',
-			dropDownButtonTitle: 'Afficher la liste déroulante',
-			clearButtonTitle: 'Effacer la valeur'
-		}
-	};
-}
+    if (!$.ig.Combo) {
+	    $.ig.Combo = {
+		    locale: {
+			    noMatchFoundText: 'Aucun résultat',
+			    dropDownButtonTitle: 'Afficher la liste déroulante',
+			    clearButtonTitle: 'Effacer la valeur'
+		    }
+	    };
+    }
+})(jQuery);

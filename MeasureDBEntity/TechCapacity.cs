@@ -15,11 +15,12 @@ namespace RandREng.MeasureDBEntity
     public partial class TechCapacity
     {
         public int Id { get; set; }
-        public int TechId { get; set; }
+        public string TechId { get; set; }
         public int SlotTypeId { get; set; }
         public byte Capacity { get; set; }
         public byte DayOfWeek { get; set; }
     
         public virtual SlotType SlotType { get; set; }
+        public virtual Tech Tech { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace RandREng.MeasureDBEntity
     {
         public Customer()
         {
-            this.Measures = new HashSet<Measure>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int Id { get; set; }
@@ -38,8 +38,9 @@ namespace RandREng.MeasureDBEntity
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string PhoneNumber3 { get; set; }
+        public bool Deleted { get; set; }
     
-        public virtual ICollection<Measure> Measures { get; set; }
         public virtual AspNetUser LastModifiedBy { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -10,6 +10,12 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Models
 {
+	public class CustomerView
+	{
+		public Customer Customer { get; set; }
+		public List<Measure> Measures { get; set; }
+	}
+
 	public class CreateMeasureModel
 	{
 		public Customer customer { get; set; }
@@ -31,6 +37,9 @@ namespace MeasuresMVC.Models
 		public int RoomId { get; set; }
 		public string Name { get; set; }
 		public int? MaterialId { get; set; }
+		public bool IncludeCloset { get; set; }
+		[Display(Name = "Include Closet", Prompt = "Include Closet in calculations.", Description = "Include Closet in calculations.")]
+		public bool ShowCloset { get; set; }
 
 	}
 
@@ -57,29 +66,50 @@ namespace MeasuresMVC.Models
 			this.Text = t;
 		}
 	}
-	public class AddMaterialModel
+	public class AddMaterialModel : MaterialModel
 	{
 		public AddMaterialModel()
 		{
-			this.Material = new MaterialModel();
 		}
 
 		public Customer customer { get; set; }
 		public int MeasureId { get; set; }
-		public AddMaterialModel.MaterialModel Material { get; set; }
+	}
+
+	public class EditMaterialModel : MaterialModel
+	{
+		public EditMaterialModel()
+		{
+		}
+
+		public int MeasureMaterialId { get; set; }
+		public int MeasureId { get; set; }
+
+	}
+
+	public class MaterialModel
+	{
+		public	MaterialModel()
+		{
+		}
 
 		public List<Lookup> MaterialTypeList { get; set; }
 		public List<Width> WidthList { get; set; }
-
-		public class MaterialModel
-		{
-			[Required]
-			public string Description { get; set; }
-			[Required]
-			public int? MaterialTypeId { get; set; }
-			public int? WidthId { get; set; }
-			public int? AltWidthId { get; set; }
-		}
+		[Required]
+		public string Description { get; set; }
+		[Display(Name = "Material Type", Prompt = "Select Material Type", Description = "Material Type")]
+		[Required]
+		public int? MaterialTypeId { get; set; }
+		[Display(Name = "Material Width", Prompt = "Select Material Width", Description = "Material Width")]
+		public int? WidthId { get; set; }
+		[Display(Name = "Alternate Material Width", Prompt = "Select Alternate Material Width", Description = "Alternate Material Width")]
+		public int? AltWidthId { get; set; }
+		[Display(Name = "Pattern Match Width", Prompt = "Enter Pattern Match Width in inches", Description = "Pattern Match Width(inches)")]
+		[DisplayFormat(DataFormatString = "{0:F3}")]
+		public decimal? PatternWidth { get; set; }
+		[Display(Name = "Pattern Match Length", Prompt = "Enter Pattern Match Length in inches", Description = "Pattern Match Length(inches)")]
+		[DisplayFormat(DataFormatString = "{0:F3}")]
+		public decimal? PatternLength { get; set; }
 
 	}
 

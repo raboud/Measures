@@ -44,11 +44,11 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -69,10 +69,40 @@
     <Compile Include="Branch.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChargeBack.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Check.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CheckCBDetail.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CheckDetail.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientTypeReport.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyInfo.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.extended.cs" />
+    <Compile Include="DaysOfYear.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Division.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DivisionGroup.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Document.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EmailTemplate.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
@@ -83,10 +113,35 @@
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Employee.extended.cs" />
+    <Compile Include="EntryMethod.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Item.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemCosting.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemMatCosting.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemPricing.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobStatu.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JobType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MaterialType.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Measure.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Measure.extended.cs" />
+    <Compile Include="MeasureCustomerStore.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MeasureDB.Context.cs">
@@ -111,14 +166,54 @@
     <Compile Include="MeasureMaterial.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MeasureMaterial.extended.cs" />
     <Compile Include="MeasureRoom.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="NoteType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Option.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OptionRetail.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderCustom.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderNote.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderOption.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POPhoto.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Room.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Slot.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SlotType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Status.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Store.cs">
@@ -131,11 +226,20 @@
     <Compile Include="StoreWithBranch.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SubContractor.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tech.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Tech.extended.cs" />
     <Compile Include="TechCapacity.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UnitOfMeasure.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Week.cs">
       <DependentUpon>MeasureDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Width.cs">
@@ -162,8 +266,8 @@
       <DependentUpon>MeasureDB.edmx</DependentUpon>
       <LastGenOutput>MeasureDB.cs</LastGenOutput>
     </None>
-    <None Include="packages.config" />
     <Compile Include="StoreType.extended.cs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

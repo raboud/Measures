@@ -4,26 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="65d66c980c834596816f5480cebacca0" Name="Diagram1">
-        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
+      <Diagram DiagramId="65d66c980c834596816f5480cebacca0" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="MeasureModel.AspNetUser" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Branch" Width="1.5" PointX="1.5" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Customer" Width="1.5" PointX="0.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.EmailTemplate" Width="1.5" PointX="6.5" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.EmailType" Width="1.5" PointX="8.625" PointY="8.125" IsExpanded="true" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="MeasureModel.Employee" Width="1.5" PointX="1.5" PointY="30" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MaterialType" Width="1.5" PointX="7.625" PointY="2.25" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.Measure" Width="1.5" PointX="2.375" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MeasureEmail" Width="1.5" PointX="4.375" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="2.125" PointX="4.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureMaterial" Width="2.125" PointX="4.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.MeasureRoom" Width="1.5" PointX="7.625" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Room" Width="1.5" PointX="9.75" PointY="5.5" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.SlotType" Width="1.5" PointX="8.375" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.Store" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.StoreType" Width="1.5" PointX="3.875" PointY="19.875" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="MeasureModel.Tech" Width="1.5" PointX="3.875" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="6" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MeasureModel.Width" Width="1.5" PointX="7.625" PointY="4.25" IsExpanded="true" FillColor="0, 192, 0" />
-        <AssociationConnector Association="MeasureModel.FK_Branch_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Store_Branch" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Measure_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_EmailTemplate_EmailType" ManuallyRouted="false" />
@@ -35,28 +32,114 @@
         <AssociationConnector Association="MeasureModel.FK_MeasureMaterial_Width" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_MeasureRoom_MeasureMaterial" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_MeasureRoom_Room" ManuallyRouted="false" />
-        <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.FK_Store_StoreType" ManuallyRouted="false" />
-        <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" ManuallyRouted="false" />
         <AssociationConnector Association="MeasureModel.StoreTech" />
-        <AssociationConnector Association="MeasureModel.FK_Employees_User" />
-        <AssociationConnector Association="MeasureModel.FK_Tech_User" ManuallyRouted="true" >
-          <ConnectorPoint PointX="12.02344" PointY="4.0186979166666665" />
-          <ConnectorPoint PointX="12.02344" PointY="16.054688749999997" />
-          <ConnectorPoint PointX="11.817708333333334" PointY="16.054688749999997" />
-          <ConnectorPoint PointX="11.651041666666666" PointY="16.054688749999997" />
-          <ConnectorPoint PointX="11.606770833333334" PointY="16.054688749999997" />
-          <ConnectorPoint PointX="11.440104166666666" PointY="16.054688749999997" />
-          <ConnectorPoint PointX="5.375" PointY="16.054688749999997" />
+        <AssociationConnector Association="MeasureModel.FK_Tech_User" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="MeasureModel.FK_OrderEmail_EmailTemplate" />
         <AssociationConnector Association="MeasureModel.FK_Customer_LastModified" />
         <AssociationConnector Association="MeasureModel.FK_Measure_EnterredBy" />
         <AssociationConnector Association="MeasureModel.FK_Tech_LastModified" />
-        <EntityTypeShape EntityType="MeasureModel.StoreWithBranch" Width="1.5" PointX="1.125" PointY="0.875" />
-        <AssociationConnector Association="MeasureModel.StoreUser" />
+        <EntityTypeShape EntityType="MeasureModel.StoreWithBranch" Width="1.5" PointX="3.375" PointY="0.5" />
         <AssociationConnector Association="MeasureModel.FK_Width_MaterialType" />
-      </Diagram>
+        <EntityTypeShape EntityType="MeasureModel.Slot" Width="1.5" PointX="13" PointY="8.625" />
+        <AssociationConnector Association="MeasureModel.FK_Slot_User" />
+        <AssociationConnector Association="MeasureModel.FK_Slot_Measure" />
+        <AssociationConnector Association="MeasureModel.FK_Slot_SlotType" />
+        <EntityTypeShape EntityType="MeasureModel.TechCapacity" Width="1.5" PointX="6.25" PointY="17.125" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_SlotType" />
+        <AssociationConnector Association="MeasureModel.FK_TechCapacity_Tech" />
+        <AssociationConnector Association="MeasureModel.StoreUser" />
+        <EntityTypeShape EntityType="MeasureModel.MeasureCustomerStore" Width="3.25" PointX="0.625" PointY="11.125" />
+        <EntityTypeShape EntityType="MeasureModel.ChargeBack" Width="1.5" PointX="20.25" PointY="35" />
+        <EntityTypeShape EntityType="MeasureModel.Check" Width="1.5" PointX="18" PointY="1.75" />
+        <EntityTypeShape EntityType="MeasureModel.CheckCBDetail" Width="1.5" PointX="22.5" PointY="35.875" />
+        <EntityTypeShape EntityType="MeasureModel.CheckDetail" Width="1.5" PointX="20.25" PointY="9" />
+        <EntityTypeShape EntityType="MeasureModel.ClientTypeReport" Width="1.5" PointX="8.875" PointY="15.625" />
+        <EntityTypeShape EntityType="MeasureModel.CompanyInfo" Width="1.5" PointX="12.125" PointY="12.5" />
+        <EntityTypeShape EntityType="MeasureModel.DaysOfYear" Width="1.5" PointX="20.125" PointY="2.5" />
+        <EntityTypeShape EntityType="MeasureModel.Division" Width="1.5" PointX="8.5" PointY="33.375" />
+        <EntityTypeShape EntityType="MeasureModel.DivisionGroup" Width="1.5" PointX="10.5" PointY="34" />
+        <EntityTypeShape EntityType="MeasureModel.Document" Width="1.5" PointX="15.75" PointY="3.25" />
+        <EntityTypeShape EntityType="MeasureModel.Employee" Width="1.5" PointX="15.75" PointY="14.125" />
+        <EntityTypeShape EntityType="MeasureModel.EntryMethod" Width="1.5" PointX="15.75" PointY="6.5" />
+        <EntityTypeShape EntityType="MeasureModel.Item" Width="1.5" PointX="10.875" PointY="29.75" />
+        <EntityTypeShape EntityType="MeasureModel.ItemCosting" Width="1.5" PointX="13.75" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.ItemMatCosting" Width="1.5" PointX="6.5" PointY="25.625" />
+        <EntityTypeShape EntityType="MeasureModel.ItemPricing" Width="1.5" PointX="13.75" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.JobStatu" Width="1.5" PointX="17.75" PointY="31.75" />
+        <EntityTypeShape EntityType="MeasureModel.JobType" Width="1.5" PointX="8.375" PointY="31.125" />
+        <EntityTypeShape EntityType="MeasureModel.NoteType" Width="1.5" PointX="18" PointY="28.375" />
+        <EntityTypeShape EntityType="MeasureModel.Option" Width="1.5" PointX="11.5" PointY="22" />
+        <EntityTypeShape EntityType="MeasureModel.OptionRetail" Width="1.5" PointX="14.875" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeasureModel.Order" Width="1.5" PointX="18" PointY="5.125" />
+        <EntityTypeShape EntityType="MeasureModel.OrderCustom" Width="1.5" PointX="23.25" PointY="10.75" />
+        <EntityTypeShape EntityType="MeasureModel.OrderNote" Width="1.5" PointX="20.25" PointY="15.75" />
+        <EntityTypeShape EntityType="MeasureModel.OrderOption" Width="1.5" PointX="26.25" PointY="11.125" />
+        <EntityTypeShape EntityType="MeasureModel.POPhoto" Width="1.5" PointX="20.25" PointY="12.375" />
+        <EntityTypeShape EntityType="MeasureModel.Program" Width="1.5" PointX="8.875" PointY="21.75" />
+        <EntityTypeShape EntityType="MeasureModel.ReportType" Width="1.5" PointX="6.625" PointY="0.875" />
+        <EntityTypeShape EntityType="MeasureModel.State" Width="1.5" PointX="22.125" PointY="2.5" />
+        <EntityTypeShape EntityType="MeasureModel.SubContractor" Width="1.5" PointX="21" PointY="21.875" />
+        <EntityTypeShape EntityType="MeasureModel.UnitOfMeasure" Width="1.5" PointX="21" PointY="5.375" />
+        <EntityTypeShape EntityType="MeasureModel.Week" Width="1.5" PointX="23.125" PointY="5.5" />
+        <AssociationConnector Association="MeasureModel.FK_Employee_User" />
+        <AssociationConnector Association="MeasureModel.FK_Branch_Manager1" />
+        <AssociationConnector Association="MeasureModel.FK_ItemCosting_Branch" />
+        <AssociationConnector Association="MeasureModel.FK_ItemMatCosting_Branch" />
+        <AssociationConnector Association="MeasureModel.FK_ItemPricing_Branch" />
+        <AssociationConnector Association="MeasureModel.FK_OptionRetail_Branch" />
+        <AssociationConnector Association="MeasureModel.FK_ChargeBack_Order" />
+        <AssociationConnector Association="MeasureModel.FK_CheckCBDetail_ChargeBacks" />
+        <AssociationConnector Association="MeasureModel.FK_CheckCBDetail_Checks" />
+        <AssociationConnector Association="MeasureModel.FK_CheckDetail_Checks" />
+        <AssociationConnector Association="MeasureModel.FK_CheckDetail_Orders" />
+        <AssociationConnector Association="MeasureModel.FK_ClientTypeReports_ClientType" />
+        <AssociationConnector Association="MeasureModel.FK_ClientTypeReports_ReportTypes" />
+        <AssociationConnector Association="MeasureModel.FK_Order_Customers" />
+        <AssociationConnector Association="MeasureModel.FK_Division_DivisionGroup" />
+        <AssociationConnector Association="MeasureModel.FK_ItemCosting_Division" />
+        <AssociationConnector Association="MeasureModel.FK_Program_Division" />
+        <AssociationConnector Association="MeasureModel.FK_Order_AssignedTo" />
+        <AssociationConnector Association="MeasureModel.FK_Order_EnteredBy" />
+        <AssociationConnector Association="MeasureModel.FK_Order_ReviewedBy" />
+        <AssociationConnector Association="MeasureModel.FK_Order_SalesPerson" />
+        <AssociationConnector Association="MeasureModel.FK_OrderCustomDetails_Employees" />
+        <AssociationConnector Association="MeasureModel.FK_OrderNote_EnteredBy" />
+        <AssociationConnector Association="MeasureModel.FK_OrderOption_Employees" />
+        <AssociationConnector Association="MeasureModel.FK_Order_EntryMethod" />
+        <AssociationConnector Association="MeasureModel.FK_OrderCustomDetails_EntryMethod" />
+        <AssociationConnector Association="MeasureModel.FK_OrderOption_EntryMethod" />
+        <AssociationConnector Association="MeasureModel.FK_Item_UnitOfMeasure" />
+        <AssociationConnector Association="MeasureModel.FK_ItemCosting_Item" />
+        <AssociationConnector Association="MeasureModel.FK_ItemMatCosting_Item" />
+        <AssociationConnector Association="MeasureModel.FK_ItemPricing_Item" />
+        <AssociationConnector Association="MeasureModel.FK_Options_Item" />
+        <AssociationConnector Association="MeasureModel.FK_ItemCosting_Stores" />
+        <AssociationConnector Association="MeasureModel.FK_ItemMatCosting_Stores" />
+        <AssociationConnector Association="MeasureModel.FK_ItemPricing_Stores" />
+        <AssociationConnector Association="MeasureModel.FK_Order_JobStatus" />
+        <AssociationConnector Association="MeasureModel.FK_Program_JobType" />
+        <AssociationConnector Association="MeasureModel.FK_OrderNote_NoteType" />
+        <AssociationConnector Association="MeasureModel.FK_OptionRetail_Labor" />
+        <AssociationConnector Association="MeasureModel.FK_Options_Program" />
+        <AssociationConnector Association="MeasureModel.FK_Options_UnitOfMeasure" />
+        <AssociationConnector Association="MeasureModel.FK_OrderOption_Option" />
+        <AssociationConnector Association="MeasureModel.FK_OptionRetail_Stores" />
+        <AssociationConnector Association="MeasureModel.FK_Order_Order" />
+        <AssociationConnector Association="MeasureModel.FK_Order_Program" />
+        <AssociationConnector Association="MeasureModel.FK_OrderCustomDetails_Orders" />
+        <AssociationConnector Association="MeasureModel.FK_OrderNote_Order" />
+        <AssociationConnector Association="MeasureModel.FK_OrderOption_Order" />
+        <AssociationConnector Association="MeasureModel.FK_POPhotos_Orders" />
+        <AssociationConnector Association="MeasureModel.FK_OrderCustomDetails_SubContractor" />
+        <AssociationConnector Association="MeasureModel.FK_OrderCustomDetails_UnitOfMeasure" />
+        <AssociationConnector Association="MeasureModel.FK_Program_StoreType" />
+        <AssociationConnector Association="MeasureModel.OrderDocument" />
+        <AssociationConnector Association="MeasureModel.FK_ItemCosting_Program" />
+        <AssociationConnector Association="MeasureModel.FK_ItemMatCosting_Program" />
+        <AssociationConnector Association="MeasureModel.FK_ItemPricing_Program" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -14,6 +14,14 @@ namespace RandREng.MeasureDBEntity
     
     public partial class Branch
     {
+        public Branch()
+        {
+            this.ItemCostings = new HashSet<ItemCosting>();
+            this.ItemMatCostings = new HashSet<ItemMatCosting>();
+            this.ItemPricings = new HashSet<ItemPricing>();
+            this.OptionRetails = new HashSet<OptionRetail>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string PrinterName { get; set; }
@@ -25,12 +33,16 @@ namespace RandREng.MeasureDBEntity
         public string ZipCode { get; set; }
         public string PhoneNumber { get; set; }
         public string FaxNumber { get; set; }
-        public Nullable<int> ManagerId { get; set; }
+        public string ManagerId { get; set; }
         public bool Active { get; set; }
         public Nullable<double> Latitude { get; set; }
         public Nullable<double> Longitude { get; set; }
         public string LabelPrinter { get; set; }
     
-        public virtual Employee Manager { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual ICollection<ItemCosting> ItemCostings { get; set; }
+        public virtual ICollection<ItemMatCosting> ItemMatCostings { get; set; }
+        public virtual ICollection<ItemPricing> ItemPricings { get; set; }
+        public virtual ICollection<OptionRetail> OptionRetails { get; set; }
     }
 }

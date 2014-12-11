@@ -9,7 +9,7 @@ namespace RandREng.IdentityDB.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(RandREng.IdentityDBEntity.ApplicationDbContext context)

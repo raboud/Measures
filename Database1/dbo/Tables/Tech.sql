@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[Tech]
 (
-	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY,
 	[Active] bit not null DEFAULT 1,
     [Address]              NVARCHAR (255) NULL,
     [Address2]             NVARCHAR (255) NULL,
@@ -17,7 +16,8 @@
     [LastModifiedById]       [dbo].[AspNetUserId]            NOT NULL,
     [LastModifiedDateTime] DATETIME       NOT NULL,
 
-    [UserId] [dbo].[AspNetUserId] NOT NULL
+    [UserId] [dbo].[AspNetUserId] NOT NULL, 
+    PRIMARY KEY ([UserId])
 
 )
 

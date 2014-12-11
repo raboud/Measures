@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
 using RandREng.MeasureDBEntity;
@@ -18,21 +19,6 @@ namespace MeasuresMVC.Controllers
 	public class MeasureController : Controller
 	{
 		private MeasureEntities db = new MeasureEntities();
-		//[HttpGet]
-		//public JsonResult GetOrdersData(string CustomerID)
-		//{
-		//	var NWE = new NORTHWNDEntities();
-
-		//	var orders = from o in NWE.Orders
-		//				 where o.CustomerID == CustomerID
-		//				 select o;
-
-		//	JsonResult jr = new JsonResult();
-		//	jr.Data = orders.Select(o => new { o.OrderID, o.Freight });
-		//	jr.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-
-		//	return jr;
-		//}
 
 		public ActionResult AddMaterial(int? id)
 		{
@@ -41,6 +27,44 @@ namespace MeasuresMVC.Controllers
 			model.MaterialTypeList = db.MaterialTypes.ToList().Select(i => new Lookup(i.Id, i.Description)).ToList();
 			model.WidthList = db.Widths.ToList();
 			return View(model);
+		}
+
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			IQueryable<MeasureCustomerStore> list = null;
+			try
+			{
+				if (User.IsInRole("Store"))
+				{
+					string userId = User.Identity.GetUserId();
+					List<int> stores = db.AspNetUsers.Find(userId).Stores.Select(s => s.Id).ToList();
+					list = (from m in db.MeasureCustomerStores
+							where m.StoreId != null
+								&& stores.Contains(m.StoreId.Value)
+								&& m.MeasureId != null
+								&& ((m.Status.Value & Status.Completed) != Status.Completed || m.Status == null)
+							orderby m.Enterred
+							select m);
+				}
+				else
+				{
+					list = (from m in db.MeasureCustomerStores
+							where m.StoreId != null
+								&& m.MeasureId != null
+								&& ((m.Status.Value & Status.Completed) != Status.Completed || m.Status == null)
+							orderby m.Enterred 
+							select m);
+				}
+			}
+			catch (Exception e)
+			{
+				List<MeasureCustomerStore> temp = new List<MeasureCustomerStore>();
+				ViewBag.Message = e.Message;
+				list = temp.AsQueryable();
+
+			}
+			return View(list);
 		}
 
 		[HttpPost]
@@ -54,10 +78,12 @@ namespace MeasuresMVC.Controllers
 				{
 					MeasureMaterial mm = new MeasureMaterial()
 					{
-						MaterialTypeId = model.Material.MaterialTypeId.Value,
-						AltWidthId = model.Material.AltWidthId.Value,
-						WidthId = model.Material.WidthId.Value,
-						Description = model.Material.Description
+						MaterialTypeId = model.MaterialTypeId.Value,
+						AltWidthId = model.AltWidthId,
+						WidthId = model.WidthId,
+						Description = model.Description,
+						PatternMatchWidth = model.PatternWidth,
+						PatternMatchLength = model.PatternLength
 					};
 					m.Materials.Add(mm);
 					int c = db.SaveChanges();
@@ -66,12 +92,93 @@ namespace MeasuresMVC.Controllers
 			}
 			return View(model);
 		}
+		public ActionResult DeleteMaterial(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
+			MeasureMaterial mm = db.MeasureMaterials.Find(id);
+			if (mm == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			mm.Deleted = true;
+			db.SaveChanges();
+			return RedirectToAction("Details/" + mm.MeasureId.ToString());
+		}
+
+		public ActionResult UndeleteMaterial(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
+			MeasureMaterial mm = db.MeasureMaterials.Find(id);
+			if (mm == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			mm.Deleted = false;
+			db.SaveChanges();
+			return RedirectToAction("Details/" + mm.MeasureId.ToString());
+
+		}
+
+		public ActionResult EditMaterial(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			EditMaterialModel model = new EditMaterialModel();
+
+			MeasureMaterial mm = db.MeasureMaterials.Find(id);
+			model.MeasureMaterialId = id.Value;
+			model.AltWidthId = mm.AltWidthId;
+			model.Description = mm.Description;
+			model.MaterialTypeId = mm.MaterialTypeId;
+			model.PatternLength = mm.PatternMatchLength;
+			model.PatternWidth = mm.PatternMatchWidth;
+			model.WidthId = mm.WidthId;
+			model.MaterialTypeList = db.MaterialTypes.ToList().Select(i => new Lookup(i.Id, i.Description)).ToList();
+			model.WidthList = db.Widths.ToList();
+			model.MeasureId = mm.MeasureId;
+			return View(model);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult EditMaterial(EditMaterialModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				MeasureMaterial mm = db.MeasureMaterials.Find(model.MeasureMaterialId);
+				if (mm != null)
+				{
+					mm.MaterialTypeId = model.MaterialTypeId.Value;
+					mm.AltWidthId = model.AltWidthId;
+					mm.WidthId = model.WidthId;
+					mm.Description = model.Description;
+					mm.PatternMatchWidth = model.PatternWidth;
+					mm.PatternMatchLength = model.PatternLength;
+					int c = db.SaveChanges();
+					return RedirectToAction("Details/" + mm.MeasureId.ToString());
+				}
+			}
+			model.MaterialTypeList = db.MaterialTypes.ToList().Select(i => new Lookup(i.Id, i.Description)).ToList();
+			model.WidthList = db.Widths.ToList();
+			return View(model);
+		}
 
 		// GET: /Measure/
 		public ActionResult Index()
 		{
-			return View(db.Measures.ToList());
+			return View();
 		}
+
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public ActionResult Details(MeasureModel model)
@@ -81,6 +188,7 @@ namespace MeasuresMVC.Controllers
 				Measure m = (from measure in db.Measures
 								 .Include(ma => ma.Materials.Select(r => r.Rooms))
 								 .Include(ma => ma.Materials.Select(mt => mt.MaterialType))
+								 .Include(s => s.Store)
 							 where measure.Id == model.MeasureId select measure).FirstOrDefault();
 				if (m == null)
 				{
@@ -92,13 +200,20 @@ namespace MeasuresMVC.Controllers
 				{
 					var rooms = new HashSet<int> (mm.Rooms.Select(c => c.RoomId));
 					var newRooms = new HashSet<int>(model.Rooms.Where(z => z.MaterialId == mm.Id).Select(z => z.RoomId));
+
 					foreach (var room in Rooms)
 					{
 						if (newRooms.Contains(room.Id))
 						{
+							RoomModel rm = model.Rooms.First(r => r.RoomId == room.Id);
 							if (!rooms.Contains(room.Id))
 							{
-								mm.Rooms.Add(new MeasureRoom() { RoomId = room.Id });
+								mm.Rooms.Add(new MeasureRoom() { RoomId = room.Id, IncludeCloset = rm.IncludeCloset });
+							}
+							else
+							{
+								MeasureRoom mmr = mm.Rooms.First(r => r.RoomId == room.Id);
+								mmr.IncludeCloset = rm.IncludeCloset;
 							}
 						}
 						else
@@ -135,6 +250,7 @@ namespace MeasuresMVC.Controllers
 			model.measure = (from measure in db.Measures
 							 .Include(ma => ma.Materials.Select(r => r.Rooms))
 							 .Include(ma => ma.Materials.Select(mt => mt.MaterialType))
+							 .Include(s => s.Store)
 						 where measure.Id == id.Value
 						 select measure).FirstOrDefault();
 			if (model.measure == null)
@@ -155,6 +271,7 @@ namespace MeasuresMVC.Controllers
 				RoomModel room = new RoomModel();
 				room.RoomId = r.Id;
 				room.Name = r.Name;
+				room.ShowCloset = r.ShowCloset;
 				foreach (MeasureMaterial mm in model.measure.Materials)
 				{
 					MeasureRoom mr = mm.Rooms.FirstOrDefault(mr2 => mr2.RoomId == r.Id);
@@ -162,6 +279,7 @@ namespace MeasuresMVC.Controllers
 					{
 //						room.Name = mr.Name;
 						room.MaterialId = mr.MaterialId;
+						room.IncludeCloset = mr.IncludeCloset;
 						break;
 					}
 				}
@@ -169,6 +287,7 @@ namespace MeasuresMVC.Controllers
 				model.Rooms.Add(room);
 			}
 			ViewBag.ReturnUrl = ReturnUrl;
+			ViewBag.ShowDeleted = true;
 
 			ViewBag.MaterialList = InsertEmptyFirst(new SelectList(model.measure.Materials, "Id", "Description", null));
 			return View(model);
@@ -180,9 +299,29 @@ namespace MeasuresMVC.Controllers
 		}
 
 		// GET: /Measure/Create
-		public ActionResult Create()
+		public ActionResult Create(int? id)
 		{
-			return View();
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			Measure model = new Measure();
+			model.CustomerId = id.Value;
+			List<Lookup> stores;
+			if (User.IsInRole("Store"))
+			{
+				stores = db.AspNetUsers.Find(User.Identity.GetUserId()).Stores.OrderBy(s => s.Number).Where(s => s.Active).Select(i => new Lookup(i.Id, i.Number + " - " + i.NickName)).ToList();
+			}
+			else
+			{
+				stores = db.Stores.OrderBy(s => s.Number).Where(s => s.Active).ToList().Select(i => new Lookup(i.Id, i.Number + " - " + i.NickName)).ToList();
+			}
+			if (stores.Count == 1)
+			{
+				model.StoreId = stores[0].id;
+			}
+			ViewBag.StoreList = stores;
+			return View(model);
 		}
 
 		// POST: /Measure/Create
@@ -190,7 +329,7 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Create([Bind(Include = "Id,Enterred")] Measure measure)
+		public ActionResult Create(Measure measure)
 		{
 			if (ModelState.IsValid)
 			{
@@ -198,7 +337,7 @@ namespace MeasuresMVC.Controllers
 				measure.Enterred = DateTime.Now;
 				db.Measures.Add(measure);
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details/" + measure.Id.ToString());
 			}
 
 			return View(measure);
@@ -224,25 +363,25 @@ namespace MeasuresMVC.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "Id,Enterred")] Measure measure)
+		public ActionResult Edit(MeasureModel model)
 		{
 			if (ModelState.IsValid)
 			{
-				db.Entry(measure).State = EntityState.Modified;
+				db.Entry(model).State = EntityState.Modified;
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Details/" + model.MeasureId.ToString());
 			}
-			return View(measure);
+			return View(model);
 		}
 
 		// GET: /Measure/Delete/5
-		public ActionResult Delete(int? mid, string ReturnUrl)
+		public ActionResult Delete(int? id, string ReturnUrl)
 		{
-			if (mid == null)
+			if (id == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			Measure measure = db.Measures.Find(mid);
+			Measure measure = db.Measures.Find(id);
 			if (measure == null)
 			{
 				return HttpNotFound();
@@ -257,7 +396,11 @@ namespace MeasuresMVC.Controllers
 		public ActionResult DeleteConfirmed(int id, string ReturnUrl)
 		{
 			Measure measure = db.Measures.Find(id);
-			db.Measures.Remove(measure);
+			if (measure == null)
+			{
+				return HttpNotFound();
+			}
+			measure.Deleted = true;
 			db.SaveChanges();
 			return Redirect(ReturnUrl);
 		}

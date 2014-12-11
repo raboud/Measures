@@ -21,7 +21,8 @@
     [LastModifiedDateTime] DATETIME       NOT NULL,
 
     [Name] as IIF(CompanyName is null, IsNull(LastName, '') + ', ' + IsNull(FirstName, ''), CompanyName) PERSISTED
-    CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED ([Id] ASC), 
+    [Deleted] BIT NOT NULL DEFAULT 0,
 );
 
 
@@ -39,3 +40,7 @@ GO
 CREATE NONCLUSTERED INDEX [CustomersLNameFName]
     ON [dbo].[Customer]([LastName] ASC, [FirstName] ASC);
 
+
+GO
+
+CREATE INDEX [IX_Customer_Id] ON [dbo].[Customer] ([Id])

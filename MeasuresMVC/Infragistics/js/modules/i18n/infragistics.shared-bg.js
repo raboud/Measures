@@ -1,25 +1,25 @@
 ﻿/*!@license
-* Infragistics.Web.ClientUI shared localization resources 13.2.20132.2055
+* Infragistics.Web.ClientUI shared localization resources 13.2.20132.2157
 *
-* Copyright (c) 2011-2013 Infragistics Inc.
+* Copyright (c) 2011-2014 Infragistics Inc.
 *
 * http://www.infragistics.com/
 *
 */
 
-/*jQuery must be defined before this. If it is not the $ variable is created*/
-$ = $ || {};
+/*global jQuery */
+(function ($) {
+    $.ig = $.ig || {};
 
-$.ig = $.ig || {};
+    if (!$.ig.SharedLocale) {
+	    $.ig.SharedLocale = {};
 
-if (!$.ig.SharedLocale) {
-	$.ig.SharedLocale = {};
+	    $.extend($.ig.SharedLocale, {
 
-	$.extend($.ig.SharedLocale, {
+	        locale: {
 
-	    locale: {
+		    }
+	    });
 
-		}
-	});
-
-}
+    }
+})(jQuery);

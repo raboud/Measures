@@ -1,13 +1,14 @@
 ﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
 @using Infragistics.Web.Mvc
 
-@model IQueryable<RandREng.MeasureDBEntity.Customer>
+@model IQueryable<RandREng.MeasureDBEntity.MeasureCustomerStore>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Customers";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -18,7 +19,6 @@
 		.Render()
 )
 
-<h2>Customers</h2>
 @(Html.Infragistics()
 	.Grid(Model)
 	.ID("grid1")
@@ -43,6 +43,7 @@
 		.DataSourceUrl(Url.Action("GetList"))
 	.Render()
 )
+
 <script>
 	$(document).ready(function () {
 		$('#grid1').dblclick(function (e) {

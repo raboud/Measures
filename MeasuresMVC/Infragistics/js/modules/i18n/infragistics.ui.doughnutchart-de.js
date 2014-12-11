@@ -1,20 +1,23 @@
 ﻿/*!@license
-* Infragistics.Web.ClientUI Doughnut Chart localization resources 13.2.20132.2055
+* Infragistics.Web.ClientUI Doughnut Chart localization resources 13.2.20132.2157
 *
-* Copyright (c) 2011-2013 Infragistics Inc.
+* Copyright (c) 2011-2014 Infragistics Inc.
 *
 * http://www.infragistics.com/
 *
 */
 
-$.ig = $.ig || {};
+/*global jQuery */
+(function ($) {
+    $.ig = $.ig || {};
 
-if (!$.ig.igDoughnutChart) {
-    $.ig.igDoughnutChart = {};
+    if (!$.ig.igDoughnutChart) {
+        $.ig.igDoughnutChart = {};
 
-    $.extend($.ig.igDoughnutChart, {
-        locale: {
-            invalidBaseElement: " wird nicht als Basiselement unterstützt. Stattdessen DIV verwenden."
-        }
-    });
-}
+        $.extend($.ig.igDoughnutChart, {
+            locale: {
+                invalidBaseElement: " wird nicht als Basiselement unterstützt. Stattdessen DIV verwenden."
+            }
+        });
+    }
+})(jQuery);

@@ -13,7 +13,7 @@ namespace MeasuresMVC.Models
 		{
 		}
 
-		public int TechId { get; set; }
+		public string TechId { get; set; }
 		public int Id { get; set; }
 	}
 

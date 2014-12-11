@@ -12,21 +12,22 @@ using RandREng.Types;
 
 namespace MeasuresMVC.Controllers
 {
-    public class EmployeeController : Controller
+	[Authorize(Roles = "Admin")]
+	public class EmployeeController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 
         // GET: /Employee/
         public async Task<ActionResult> Index()
         {
-            var employees = db.Employees.Include(e => e.AspNetUser);
+            var employees = db.Employees.Include(e => e.User);
             return View(await employees.ToListAsync());
         }
 
         // GET: /Employee/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -66,9 +67,9 @@ namespace MeasuresMVC.Controllers
         }
 
         // GET: /Employee/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -86,7 +87,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,NickName,Address1,Address2,City,State,Zip,SSN,Email,SMTPEmail,ReceiveCallNotes,UserId,Active,PhoneNumber1,PhoneNumber2")] Employee employee)
+        public async Task<ActionResult> Edit([Bind(Include="NickName,Address1,Address2,City,State,Zip,SSN,Email,SMTPEmail,ReceiveCallNotes,UserId,Active,PhoneNumber1,PhoneNumber2")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -101,9 +102,9 @@ namespace MeasuresMVC.Controllers
         }
 
         // GET: /Employee/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

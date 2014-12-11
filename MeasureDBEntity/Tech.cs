@@ -17,9 +17,9 @@ namespace RandREng.MeasureDBEntity
         public Tech()
         {
             this.Capacities = new HashSet<TechCapacity>();
+            this.Stores = new HashSet<Store>();
         }
     
-        public int Id { get; set; }
         public string Address { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
@@ -35,8 +35,9 @@ namespace RandREng.MeasureDBEntity
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
     
-        public virtual ICollection<TechCapacity> Capacities { get; set; }
         public virtual AspNetUser User { get; set; }
         public virtual AspNetUser LastModifiedBy { get; set; }
+        public virtual ICollection<TechCapacity> Capacities { get; set; }
+        public virtual ICollection<Store> Stores { get; set; }
     }
 }

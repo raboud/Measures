@@ -1,16 +1,23 @@
 ﻿@model MeasuresMVC.Models.RoomModel
 
-@*<tr>*@
-<div class="col-md-4">
-	<div class="form-group">
-		@Html.HiddenFor(model => model.RoomId)
-		<div class="col-md-4">
-			@Html.DisplayFor(model => model.Name)
-		</div>
-		@*@Html.HiddenFor(model => model.Name)*@
-		<div class="col-md-4">
-			@Html.DropDownListFor(model => model.MaterialId, new SelectList(ViewBag.MaterialList, "Value", "Text"))
-		</div>
-	</div>
-</div>
-@*</tr>*@
+<tr>
+	@Html.HiddenFor(model => model.RoomId)
+	<td>
+		@Html.DisplayFor(model => model.Name)
+	</td>
+	@*@Html.HiddenFor(model => model.Name)*@
+	@if (Model.ShowCloset)
+	{
+		<td>
+			@Html.CheckBoxFor(model => model.IncludeCloset)
+			@Html.DisplayNameFor(model => model.IncludeCloset)
+		</td>
+	}
+	else
+	{
+		<td></td>
+	}
+	<td>
+		@Html.DropDownListFor(model => model.MaterialId, new SelectList(ViewBag.MaterialList, "Value", "Text"))
+	</td>
+</tr>

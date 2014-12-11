@@ -25,6 +25,9 @@ namespace RandREng.MeasureDBEntity
         public Nullable<int> WidthId { get; set; }
         public Nullable<int> AltWidthId { get; set; }
         public string Description { get; set; }
+        public Nullable<decimal> PatternMatchLength { get; set; }
+        public Nullable<decimal> PatternMatchWidth { get; set; }
+        public bool Deleted { get; set; }
     
         public virtual MaterialType MaterialType { get; set; }
         public virtual Width AltWidth { get; set; }

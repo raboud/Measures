@@ -1,24 +1,26 @@
 ﻿/*!@license
-* Infragistics.Web.ClientUI Editors localization resources 13.2.20132.2055
+* Infragistics.Web.ClientUI Editors localization resources 13.2.20132.2157
 *
-* Copyright (c) 2011-2013 Infragistics Inc.
+* Copyright (c) 2011-2014 Infragistics Inc.
 *
 * http://www.infragistics.com/
 *
 */
 
-/*global $ */
-$.ig = $.ig || {};
+/*global jQuery */
+(function ($) {
+    $.ig = $.ig || {};
 
-if (!$.ig.Editor) {
-	$.ig.Editor = {
-		locale: {
-			spinUpperTitle: 'Incrementar',
-			spinLowerTitle: 'Reducir',
-			buttonTitle: 'Mostrar lista',
-			clearTitle: 'Borrar valor',
-			datePickerButtonTitle: 'Mostrar calendario',
-			updateModeUnsupportedValue: 'La opción updateMode admite dos valores posibles: "onChange" e "immediate"'
-		}
-	};
-}
+    if (!$.ig.Editor) {
+	    $.ig.Editor = {
+		    locale: {
+			    spinUpperTitle: 'Incrementar',
+			    spinLowerTitle: 'Reducir',
+			    buttonTitle: 'Mostrar lista',
+			    clearTitle: 'Borrar valor',
+			    datePickerButtonTitle: 'Mostrar calendario',
+			    updateModeUnsupportedValue: 'La opción updateMode admite dos valores posibles: "onChange" e "immediate"'
+		    }
+	    };
+    }
+})(jQuery);

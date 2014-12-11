@@ -1,24 +1,26 @@
 ﻿/*!@license
-* Infragistics.Web.ClientUI Dialog localization resources 13.2.20132.2055
+* Infragistics.Web.ClientUI Dialog localization resources 13.2.20132.2157
 *
-* Copyright (c) 2011-2013 Infragistics Inc.
+* Copyright (c) 2011-2014 Infragistics Inc.
 *
 * http://www.infragistics.com/
 *
 */
 
-/*global $ */
-$.ig = $.ig || {};
+/*global jQuery */
+(function ($) {
+    $.ig = $.ig || {};
 
-if (!$.ig.Dialog) {
-	$.ig.Dialog = {
-		locale: {
-			closeButtonTitle: "Cerrar",
-			minimizeButtonTitle: "Minimizar",
-			maximizeButtonTitle: "Maximizar",
-			pinButtonTitle: "Anclar",
-			unpinButtonTitle: "Desanclar",
-			restoreButtonTitle: "Restaurar"
-		}
-	};
-}
+    if (!$.ig.Dialog) {
+	    $.ig.Dialog = {
+		    locale: {
+			    closeButtonTitle: "Cerrar",
+			    minimizeButtonTitle: "Minimizar",
+			    maximizeButtonTitle: "Maximizar",
+			    pinButtonTitle: "Anclar",
+			    unpinButtonTitle: "Desanclar",
+			    restoreButtonTitle: "Restaurar"
+		    }
+	    };
+    }
+})(jQuery);

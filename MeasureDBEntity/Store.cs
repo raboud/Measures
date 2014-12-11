@@ -17,6 +17,10 @@ namespace RandREng.MeasureDBEntity
         public Store()
         {
             this.Techs = new HashSet<Tech>();
+            this.ItemCostings = new HashSet<ItemCosting>();
+            this.ItemMatCostings = new HashSet<ItemMatCosting>();
+            this.ItemPricings = new HashSet<ItemPricing>();
+            this.OptionRetails = new HashSet<OptionRetail>();
         }
     
         public int Id { get; set; }
@@ -41,5 +45,9 @@ namespace RandREng.MeasureDBEntity
         public virtual Branch Branch { get; set; }
         public virtual StoreType StoreType { get; set; }
         public virtual ICollection<Tech> Techs { get; set; }
+        public virtual ICollection<ItemCosting> ItemCostings { get; set; }
+        public virtual ICollection<ItemMatCosting> ItemMatCostings { get; set; }
+        public virtual ICollection<ItemPricing> ItemPricings { get; set; }
+        public virtual ICollection<OptionRetail> OptionRetails { get; set; }
     }
 }

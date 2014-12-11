@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ReportType]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Name] NVARCHAR(50) NOT NULL, 
+    [Class] INT NOT NULL DEFAULT 0
+)

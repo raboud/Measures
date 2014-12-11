@@ -18,6 +18,7 @@ namespace RandREng.MeasureDBEntity
         public int RoomId { get; set; }
         public string Name { get; set; }
         public int MaterialId { get; set; }
+        public bool IncludeCloset { get; set; }
     
         public virtual Room Room { get; set; }
     }

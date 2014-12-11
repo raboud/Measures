@@ -2,5 +2,6 @@
 (
 	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL,
-	[Active] bit not null DEFAULT 1,
+	[Active] bit not null DEFAULT 1, 
+    [ShowCloset] BIT NOT NULL DEFAULT 1,
 )

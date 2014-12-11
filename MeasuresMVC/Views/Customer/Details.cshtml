@@ -1,9 +1,8 @@
 ﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
 @using Infragistics.Web.Mvc
-@using RandREng.MeasureDBEntity
 @using MeasuresMVC.Utils
 
-@model RandREng.MeasureDBEntity.Customer
+@model MeasuresMVC.Models.CustomerView
 
 @{
 	ViewBag.Title = "Details";
@@ -13,7 +12,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		@Html.Partial("_PartialCustomer")
+		@Html.Partial("_PartialCustomer", Model.Customer)
 	</div>
 </div>
 @section Scripts {
@@ -23,7 +22,7 @@
 
 <h4>Measure</h4>
 <hr />
-@Html.ActionLink("Create New", "CreateMeasure", new { id = Model.Id, ReturnUrl = ViewBag.ReturnUrl })
+@Html.ActionLink("Create New", "Create", "Measure", new { id = Model.Customer.Id }, null)
 <table class="table">
 
 	<tr>

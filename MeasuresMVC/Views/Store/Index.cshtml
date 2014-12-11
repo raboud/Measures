@@ -5,10 +5,11 @@
 @model IQueryable<StoreWithBranch>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Stores";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -17,10 +18,10 @@
 @(Html.Infragistics().Loader()
 		.ScriptPath(Url.Content("~/Infragistics/js/"))
 		.CssPath(Url.Content("~/Infragistics/css/"))
+		.Resources("igGrid.*")
 		.Render()
 )
 
-<h2>Stores</h2>
 @(Html.Infragistics()
 	.Grid(Model)
 	.ID("grid1")
@@ -50,18 +51,6 @@
 	.Render()
 )
 <script>
-	var b = @Html.Raw(Json.Encode(ViewBag.Branches));
-	var branches = [];
-	$(function () {
-		for (var i = 0; i < b.length; i++) {
-			branches[b[i].Id] = b[i];
-		}
-	});
-
-	function lookupCustomer(val) {
-		return branches[val].Name;
-	}
-
 	$(document).ready(function () {
 		$('#grid1').dblclick(function (e) {
 			var row =  $('#grid1').igGridSelection('selectedRow');

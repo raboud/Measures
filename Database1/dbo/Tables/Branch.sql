@@ -10,12 +10,12 @@
     [ZipCode]       NCHAR (10)     NULL,
     [PhoneNumber]   [dbo].[PhoneNumber]     NULL,
     [FaxNumber]     [dbo].[PhoneNumber]     NULL,
-    [ManagerId]     INT            NULL,
+    [ManagerId]     [dbo].[AspNetUserId]            NULL,
     [Active]        BIT            DEFAULT ((1)) NOT NULL,
     [Latitude]      FLOAT (53)     NULL,
     [Longitude]     FLOAT (53)     NULL,
     [LabelPrinter] NVARCHAR(MAX) NULL, 
     CONSTRAINT [PK_Branch] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Branch_Manager] FOREIGN KEY ([ManagerId]) REFERENCES [dbo].[Employees] ([Id])
+    CONSTRAINT [FK_Branch_Manager] FOREIGN KEY ([ManagerId]) REFERENCES [dbo].[Employee] ([UserId])
 );
 

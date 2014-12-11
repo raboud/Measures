@@ -64,6 +64,7 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\User Defined Types" />
+    <Folder Include="dbo\Views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Customer.sql" />
@@ -84,11 +85,53 @@
     <Build Include="dbo\Tables\SlotType.sql" />
     <Build Include="dbo\InsertRoom.sql" />
     <Build Include="dbo\InsertSlotType.sql" />
-    <Build Include="dbo\Tables\StoreTech.sql" />
     <Build Include="dbo\Tables\StoreUser.sql" />
     <Build Include="dbo\User Defined Types\AspNetUserId.sql" />
-    <Build Include="dbo\StoreWithBranch.sql" />
     <Build Include="dbo\Tables\Width.sql" />
+    <Build Include="dbo\Views\StoreWithBranch.sql" />
+    <Build Include="dbo\Views\MeasureCustomerStore.sql" />
+    <Build Include="dbo\Tables\Slot.sql" />
+    <Build Include="dbo\Tables\StoreTech.sql" />
+    <Build Include="dbo\Tables\Order.sql" />
+    <Build Include="dbo\Tables\Check.sql" />
+    <Build Include="dbo\Tables\ChargeBack.sql" />
+    <Build Include="dbo\Tables\SubContractor.sql" />
+    <Build Include="dbo\Tables\Program.sql" />
+    <Build Include="dbo\Tables\Division.sql" />
+    <Build Include="dbo\Tables\DivisionGroup.sql" />
+    <Build Include="dbo\Tables\Document.sql" />
+    <Build Include="dbo\Tables\JobType.sql" />
+    <Build Include="dbo\Tables\EntryMethod.sql" />
+    <Build Include="dbo\Tables\JobStatus.sql" />
+    <Build Include="dbo\Tables\CheckCBDetail.sql" />
+    <Build Include="dbo\Tables\CheckDetail.sql" />
+    <Build Include="dbo\Tables\ClientTypeReports.sql" />
+    <Build Include="dbo\Tables\CompanyInfo.sql" />
+    <Build Include="dbo\Tables\DaysOfYear.sql" />
+    <Build Include="dbo\Tables\State.sql" />
+    <Build Include="dbo\Tables\Weeks.sql" />
+    <Build Include="dbo\Tables\ReportType.sql" />
+    <Build Include="dbo\Tables\Item.sql" />
+    <Build Include="dbo\Tables\ItemCosting.sql" />
+    <Build Include="dbo\Tables\ItemMatCosting.sql" />
+    <Build Include="dbo\Tables\ItemPricing.sql" />
+    <Build Include="dbo\Tables\UnitOfMeasure.sql" />
+    <Build Include="dbo\Tables\Option.sql" />
+    <Build Include="dbo\Tables\OptionRetail.sql" />
+    <Build Include="dbo\Tables\OrderOption.sql" />
+    <Build Include="dbo\Tables\OrderCustom.sql" />
+    <Build Include="dbo\Tables\OrderDocument.sql" />
+    <Build Include="dbo\Tables\OrderNote.sql" />
+    <Build Include="dbo\Tables\OrderPhoto.sql" />
+    <Build Include="dbo\Tables\NoteType.sql" />
+    <Build Include="dbo\Views\TotalChargeback.sql" />
+    <Build Include="dbo\Views\ChargebackMarketAndDivision.sql" />
+    <Build Include="dbo\Views\CheckByDivisionAndMarket.sql" />
+    <Build Include="dbo\Views\CustomerOrders.sql" />
+    <Build Include="dbo\Views\TotalPayment.sql" />
+    <Build Include="dbo\Views\vwChargeBacksTakenTotal.sql" />
+    <Build Include="dbo\Views\RptAll10s.sql" />
+    <Build Include="dbo\Views\RptInstallerCheckList.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Measure.sql" />

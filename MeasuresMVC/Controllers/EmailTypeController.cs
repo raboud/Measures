@@ -11,7 +11,8 @@ using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
-    public class EmailTypeController : Controller
+	[Authorize(Roles = "Admin")]
+	public class EmailTypeController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
 

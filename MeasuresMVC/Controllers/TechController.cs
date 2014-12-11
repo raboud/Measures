@@ -26,7 +26,7 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable < Tech > list = from c in new MeasureEntities().Teches orderby c.Id select c;
+			IQueryable < Tech > list = from c in new MeasureEntities().Teches orderby c.UserId select c;
 
 			List<Tech> t = list.ToList();
 			return View(list);
@@ -87,7 +87,7 @@ namespace MeasuresMVC.Controllers
 				{
 
 				}
-				return RedirectToAction("Edit2", "Tech", new { id = model.Id });
+				return RedirectToAction("Edit2", "Tech", new { id = model.UserId });
 			}
 
 			return View(model);
@@ -117,7 +117,7 @@ namespace MeasuresMVC.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				Tech tech2 = db.Teches.Find(model.Id);
+				Tech tech2 = db.Teches.Find(model.UserId);
 				tech2.FirstName = model.FirstName;
 				tech2.Address = model.Address;
 				tech2.Address2 = model.Address2;
@@ -141,15 +141,15 @@ namespace MeasuresMVC.Controllers
 
 				}
 
-				return RedirectToAction("Edit2", "Tech", new { id = model.Id });
+				return RedirectToAction("Edit2", "Tech", new { id = model.UserId });
 			}
 			return View(model);
 		}
 
 		// GET: /Tech/Edit2/5
-		public ActionResult Edit2(int? id)
+		public ActionResult Edit2(string id)
 		{
-			if (id == null)
+			if (string.IsNullOrEmpty(id))
 			{
 				RedirectToAction("Index");
 			}

@@ -30,31 +30,32 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Customer> list = null;
+
+			IQueryable<MeasureCustomerStore> list = null;
 			try
 			{
 				if (User.IsInRole("Store"))
 				{
 					string userId = User.Identity.GetUserId();
 					List<int> stores = db.AspNetUsers.Find(userId).Stores.Select(s => s.Id).ToList();
-					list = from c in db.Customers
-							   .Include(m => m.Measures.Select(me => me.Emails))
-							   .Include(m => m.Measures.Select(mm => mm.Materials.Select(mr => mr.Rooms)))
-							   .Include(m => m.Measures.Select(s => s.Store))
-							   .Where(c => c.Measures.Any(m => stores.Contains(m.StoreId))) orderby c.Id select c;
+					list = (from m in db.MeasureCustomerStores
+							where m.StoreId != null
+								&& m.MeasureId != null
+								&& stores.Contains(m.StoreId.Value)
+								&& ((m.Status.Value & Status.Completed) != Status.Completed || m.Status == null)
+							group m by m.Id into groups
+							select groups.FirstOrDefault()).OrderBy(m => m.Name);
 				}
 				else
 				{
-					list = from c in db.Customers
-							   .Include(m => m.Measures.Select(me => me.Emails))
-							   .Include(m => m.Measures.Select(mm => mm.Materials.Select(mr => mr.Rooms)))
-							   .Include(m => m.Measures.Select(s => s.Store))
-						   orderby c.Id
-						   select c;
+					list = (from c in db.MeasureCustomerStores orderby c.Name select c);
 				}
 			}
 			catch (Exception e)
 			{
+				List<MeasureCustomerStore> temp = new List<MeasureCustomerStore>();
+				ViewBag.Message = e.Message;
+				list = temp.AsQueryable();
 
 			}
 			return View(list);
@@ -73,11 +74,13 @@ namespace MeasuresMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+			CustomerView customer = new CustomerView();
+            customer.Customer = db.Customers.Find(id);
+            if (customer.Customer == null)
             {
                 return HttpNotFound();
             }
+			customer.Measures = db.Measures.Where(m => m.CustomerId == id && !m.Deleted).ToList();
 			ViewBag.ReturnUrl = Url.Action("Details" + "/" + id.Value, "Customer"); 
 			return View(customer);
         }
@@ -106,15 +109,9 @@ namespace MeasuresMVC.Controllers
 				customer.PhoneNumber2 = PhoneNumber10Ext.Reformat(customer.PhoneNumber2);
 				customer.LastModifiedById = User.Identity.GetUserId();
 				customer.LastModifiedDateTime = DateTime.Now;
-				customer.Measures.Add(new Measure()
-				{
-					EnterredById = User.Identity.GetUserId(),
-					Enterred = DateTime.Now,
-					StoreId = db.AspNetUsers.Find(User.Identity.GetUserId()).Stores.First().Id
-				});
                 db.Customers.Add(customer);
                 int count = db.SaveChanges();
-				return RedirectToAction("Details", "Measure", new { id = customer.Measures.First().Id });
+				return RedirectToAction("Create", "Measure", new { id = customer.Id });
             }
 
             return View(customer);
@@ -140,7 +137,7 @@ namespace MeasuresMVC.Controllers
 				StoreId = db.AspNetUsers.Find(User.Identity.GetUserId()).Stores.First().Id,
 				CustomerId = item.customer.Id
 			};
-			item.customer.Measures.Add(m);
+			db.Measures.Add(m);
 			int i = db.SaveChanges();
 			return RedirectToAction("Details", "Measure", new { id = m.Id });
 		}

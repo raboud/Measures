@@ -16,6 +16,7 @@ namespace RandREng.MeasureDBEntity
     {
         public AspNetUser()
         {
+            this.Slots = new HashSet<Slot>();
             this.Stores = new HashSet<Store>();
         }
     
@@ -32,6 +33,8 @@ namespace RandREng.MeasureDBEntity
         public Nullable<bool> Active { get; set; }
         public string Discriminator { get; set; }
     
+        public virtual ICollection<Slot> Slots { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

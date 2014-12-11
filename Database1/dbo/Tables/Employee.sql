@@ -1,5 +1,4 @@
-﻿CREATE TABLE [dbo].[Employees] (
-    [Id]               INT            IDENTITY (1, 1) NOT NULL,
+﻿CREATE TABLE [dbo].[Employee] (
     [NickName]         NVARCHAR (50)  NULL,
     [Address1]         NVARCHAR (255) NULL,
     [Address2]         NVARCHAR (255) NULL,
@@ -14,7 +13,7 @@
     [ReceiveCallNotes] BIT            NOT NULL,
     [UserId] [dbo].[AspNetUserId] NOT NULL,
     [Active]           BIT            CONSTRAINT [DF__Employee_Active] DEFAULT (1) NOT NULL,
-    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([UserId]),
 
 	);
 

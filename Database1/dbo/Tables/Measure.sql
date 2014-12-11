@@ -6,7 +6,9 @@
 
     [StoreId] INT NOT NULL, 
     [EnterredById] [dbo].[AspNetUserId] NOT NULL, 
-    [Notes] NTEXT NULL, 
+    [SpecialInstructions] NTEXT NULL, 
+    [Deleted] BIT NOT NULL DEFAULT 0, 
+    [Status] INT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_Measure_Customer] FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer] ([Id]),
     CONSTRAINT [FK_Measure_Store] FOREIGN KEY ([StoreId]) REFERENCES [dbo].[Store] ([Id]),
 )

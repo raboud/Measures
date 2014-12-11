@@ -37,8 +37,9 @@ namespace RandREng.IdentityDBEntity
 		{
 		}
 		public ApplicationDbContext(string conn)
-			: base(conn)
+			: base(conn, throwIfV1Schema:false)
 		{
+//			throwIfV1Schema = false;
 		}
 
 		public UserManager<ApplicationUser> GetUserManager()

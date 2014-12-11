@@ -12,17 +12,17 @@ namespace RandREng.MeasureDBEntity
 	{
 		public string FirstName
 		{
-			get { return this.AspNetUser.FirstName; }
-			set { this.AspNetUser.FirstName = value; }
+			get { return this.User.FirstName; }
+			set { this.User.FirstName = value; }
 		}
 		public string LastName
 		{
-			get { return this.AspNetUser.LastName; ; }
-			set { this.AspNetUser.LastName = value; }
+			get { return this.User.LastName; ; }
+			set { this.User.LastName = value; }
 		}
 		public string Name
 		{
-			get { return this.AspNetUser.Name; }
+			get { return this.User.Name; }
 		}
 
 		public class MetaData

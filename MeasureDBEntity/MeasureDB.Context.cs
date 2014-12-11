@@ -18,6 +18,7 @@ namespace RandREng.MeasureDBEntity
         public MeasureEntities()
             : base("name=MeasureEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -30,7 +31,6 @@ namespace RandREng.MeasureDBEntity
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<EmailType> EmailTypes { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<MaterialType> MaterialTypes { get; set; }
         public virtual DbSet<Measure> Measures { get; set; }
         public virtual DbSet<MeasureEmail> MeasureEmails { get; set; }
@@ -41,8 +41,42 @@ namespace RandREng.MeasureDBEntity
         public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<StoreType> StoreTypes { get; set; }
         public virtual DbSet<Tech> Teches { get; set; }
-        public virtual DbSet<TechCapacity> TechCapacities { get; set; }
         public virtual DbSet<Width> Widths { get; set; }
         public virtual DbSet<StoreWithBranch> StoreWithBranches { get; set; }
+        public virtual DbSet<Slot> Slots { get; set; }
+        public virtual DbSet<TechCapacity> TechCapacities { get; set; }
+        public virtual DbSet<MeasureCustomerStore> MeasureCustomerStores { get; set; }
+        public virtual DbSet<ChargeBack> ChargeBacks { get; set; }
+        public virtual DbSet<Check> Checks { get; set; }
+        public virtual DbSet<CheckCBDetail> CheckCBDetails { get; set; }
+        public virtual DbSet<CheckDetail> CheckDetails { get; set; }
+        public virtual DbSet<ClientTypeReport> ClientTypeReports { get; set; }
+        public virtual DbSet<CompanyInfo> CompanyInfoes { get; set; }
+        public virtual DbSet<DaysOfYear> DaysOfYears { get; set; }
+        public virtual DbSet<Division> Divisions { get; set; }
+        public virtual DbSet<DivisionGroup> DivisionGroups { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<EntryMethod> EntryMethods { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<ItemCosting> ItemCostings { get; set; }
+        public virtual DbSet<ItemMatCosting> ItemMatCostings { get; set; }
+        public virtual DbSet<ItemPricing> ItemPricings { get; set; }
+        public virtual DbSet<JobStatu> JobStatus { get; set; }
+        public virtual DbSet<JobType> JobTypes { get; set; }
+        public virtual DbSet<NoteType> NoteTypes { get; set; }
+        public virtual DbSet<Option> Options { get; set; }
+        public virtual DbSet<OptionRetail> OptionRetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderCustom> OrderCustoms { get; set; }
+        public virtual DbSet<OrderNote> OrderNotes { get; set; }
+        public virtual DbSet<OrderOption> OrderOptions { get; set; }
+        public virtual DbSet<POPhoto> POPhotos { get; set; }
+        public virtual DbSet<Program> Programs { get; set; }
+        public virtual DbSet<ReportType> ReportTypes { get; set; }
+        public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<SubContractor> SubContractors { get; set; }
+        public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+        public virtual DbSet<Week> Weeks { get; set; }
     }
 }
