@@ -26,9 +26,9 @@ namespace MeasuresMVC.Models
         public int AltWidthId { get; set; }
     
         public virtual MaterialType MaterialType { get; set; }
-        public virtual Measure Measure { get; set; }
         public virtual Width Width { get; set; }
         public virtual ICollection<MeasureRoom> MeasureRooms { get; set; }
         public virtual Width AltWidth { get; set; }
+        public virtual Measure Measure { get; set; }
     }
 }

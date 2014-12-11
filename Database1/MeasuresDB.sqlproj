@@ -69,7 +69,7 @@
     <Build Include="dbo\Tables\Customer.sql" />
     <Build Include="dbo\User Defined Types\PhoneNumber.sql" />
     <Build Include="dbo\User Defined Types\EmailAddress.sql" />
-    <Build Include="dbo\Tables\MeasureMaterials.sql" />
+    <Build Include="dbo\Tables\MeasureMaterial.sql" />
     <Build Include="Width.sql" />
     <Build Include="dbo\Tables\MaterialType.sql" />
     <Build Include="dbo\Tables\Room.sql" />
@@ -79,6 +79,13 @@
     <Build Include="dbo\Tables\AspNetUserLogins.sql" />
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\AspNetUsers.sql" />
+    <Build Include="dbo\Tables\Store.sql" />
+    <Build Include="dbo\Tables\StoreType.sql" />
+    <Build Include="dbo\Tables\Branch.sql" />
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Tables\EmailTenplate.sql" />
+    <Build Include="dbo\Tables\EmailType.sql" />
+    <Build Include="dbo\Tables\MeasureEmail.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Measure.sql" />

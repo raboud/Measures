@@ -12,20 +12,19 @@ namespace MeasuresMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Measure
+    public partial class StoreType
     {
-        public Measure()
+        public StoreType()
         {
-            this.MeasureEmails = new HashSet<MeasureEmail>();
-            this.MeasureMaterials = new HashSet<MeasureMaterial>();
+            this.Stores = new HashSet<Store>();
         }
     
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public System.DateTime Enterred { get; set; }
+        public string StoreTypeName { get; set; }
+        public string ImageName { get; set; }
+        public byte[] Logo { get; set; }
+        public string QBClass { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
-        public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
+        public virtual ICollection<Store> Stores { get; set; }
     }
 }

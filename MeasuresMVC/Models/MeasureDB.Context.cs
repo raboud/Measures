@@ -25,8 +25,6 @@ namespace MeasuresMVC.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Measure> Measures { get; set; }
         public virtual DbSet<Tech> Teches { get; set; }
         public virtual DbSet<MaterialType> MaterialTypes { get; set; }
         public virtual DbSet<MeasureMaterial> MeasureMaterials { get; set; }
@@ -37,5 +35,14 @@ namespace MeasuresMVC.Models
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
+        public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public virtual DbSet<EmailType> EmailTypes { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<MeasureEmail> MeasureEmails { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
+        public virtual DbSet<StoreType> StoreTypes { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Measure> Measures { get; set; }
     }
 }

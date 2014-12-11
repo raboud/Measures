@@ -12,34 +12,31 @@ namespace MeasuresMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Employee
     {
-        public Customer()
+        public Employee()
         {
-            this.Measures = new HashSet<Measure>();
+            this.Branches = new HashSet<Branch>();
         }
     
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string CompanyName { get; set; }
-        public string Address { get; set; }
+        public string NickName { get; set; }
+        public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string ZipCode { get; set; }
-        public Nullable<double> Latitude { get; set; }
-        public Nullable<double> Longitude { get; set; }
-        public string Directions { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Zip { get; set; }
+        public string HomeNumber { get; set; }
         public string MobileNumber { get; set; }
-        public string WorkNumber { get; set; }
-        public string Extension { get; set; }
-        public string EmailAddress { get; set; }
-        public Nullable<int> LastModifiedBy { get; set; }
-        public Nullable<System.DateTime> LastModifiedDateTime { get; set; }
-        public string Name { get; set; }
+        public string SSN { get; set; }
+        public string Email { get; set; }
+        public string SMTPEmail { get; set; }
+        public bool ReceiveCallNotes { get; set; }
+        public string UserName { get; set; }
+        public bool Active { get; set; }
     
-        public virtual ICollection<Measure> Measures { get; set; }
+        public virtual ICollection<Branch> Branches { get; set; }
     }
 }

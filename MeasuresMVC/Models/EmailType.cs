@@ -12,20 +12,18 @@ namespace MeasuresMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Measure
+    public partial class EmailType
     {
-        public Measure()
+        public EmailType()
         {
+            this.EmailTemplates = new HashSet<EmailTemplate>();
             this.MeasureEmails = new HashSet<MeasureEmail>();
-            this.MeasureMaterials = new HashSet<MeasureMaterial>();
         }
     
         public int Id { get; set; }
-        public int CustomerId { get; set; }
-        public System.DateTime Enterred { get; set; }
+        public string Description { get; set; }
     
-        public virtual Customer Customer { get; set; }
+        public virtual ICollection<EmailTemplate> EmailTemplates { get; set; }
         public virtual ICollection<MeasureEmail> MeasureEmails { get; set; }
-        public virtual ICollection<MeasureMaterial> MeasureMaterials { get; set; }
     }
 }
