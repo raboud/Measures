@@ -4,6 +4,6 @@
     [ImageName]     NVARCHAR (50) NULL,
     [Logo]          IMAGE         NULL,
     [QBClass] NVARCHAR(50) NULL, 
-    CONSTRAINT [PK_StoreType] PRIMARY KEY NONCLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90)
+    CONSTRAINT [PK_StoreType] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

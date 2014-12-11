@@ -22,7 +22,6 @@ namespace RandREng.MeasureDBEntity
         public int Id { get; set; }
         public int TypeID { get; set; }
         public string Number { get; set; }
-        public string BillingAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
@@ -37,6 +36,7 @@ namespace RandREng.MeasureDBEntity
         public Nullable<double> Longitude { get; set; }
         public Nullable<short> DistrictNumber { get; set; }
         public bool IncludeInStatusReportAll { get; set; }
+        public string Address { get; set; }
     
         public virtual Branch Branch { get; set; }
         public virtual StoreType StoreType { get; set; }

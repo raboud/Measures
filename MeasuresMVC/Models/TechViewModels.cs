@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using AutoMapper;
-using MeasuresMVC.Models.Repositories;
 using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Models
@@ -33,26 +32,6 @@ namespace MeasuresMVC.Models
 				.ForMember(d => d.City, m => m.MapFrom(s => s.City))
 				.ForMember(d => d.State, m => m.MapFrom(s => s.State))
 				.ForMember(d => d.ZipCode, m => m.MapFrom(s => s.ZipCode));
-		}
-
-		public static ItemRepository<TechView> GetRepository()
-		{
-			GetMapping();
-
-			IEnumerable<TechView> products;
-			string sessionKey = RepositoryFactory.GetSessionKey(typeof(TechView));
-			var session = HttpContext.Current.Session[sessionKey];
-
-			if (session != null)
-			{
-				products = session as IEnumerable<TechView>;
-			}
-			else
-			{
-				products = Mapper.Map<IEnumerable<Tech>, IEnumerable<TechView>>(
-					new MeasureEntities().Teches.AsEnumerable());
-			}
-			return new ItemRepository<TechView>(products, sessionKey);
 		}
 	}
 

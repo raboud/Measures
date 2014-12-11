@@ -1,0 +1,21 @@
+﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
+@using Infragistics.Web.Mvc
+@using RandREng.MeasureDBEntity
+@using MeasuresMVC.Utils
+
+@model MeasuresMVC.Models.CreateMeasureModel
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+	<div class="col-md-12">
+		@Html.Partial("_PartialCustomerMin", Model.customer)
+	</div>
+</div>
+@section Scripts {
+	@Scripts.Render("~/bundles/jqueryval")
+}

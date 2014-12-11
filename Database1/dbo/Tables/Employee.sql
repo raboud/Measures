@@ -8,8 +8,8 @@
     [City]             NVARCHAR (50)  NULL,
     [State]            NCHAR (2)      NOT NULL,
     [Zip]              NVARCHAR (10)  NULL,
-    [HomeNumber]       [dbo].[PhoneNumber]  NULL,
-    [MobileNumber]     [dbo].[PhoneNumber]  NULL,
+    [PhoneNumber1]       [dbo].[PhoneNumber]  NULL,
+    [PhoneNumber2]     [dbo].[PhoneNumber]  NULL,
     [SSN]              NVARCHAR (11)  NULL,
     [Email]            [dbo].[EmailAddress]  NULL,
     [SMTPEmail]        [dbo].[EmailAddress]  NULL,
@@ -18,6 +18,5 @@
     [UserId] NVARCHAR(128) NOT NULL,
     [Active]           BIT            CONSTRAINT [DF__Employee_Active] DEFAULT (1) NOT NULL,
     [Name] as LastName + ', ' + FirstName PERSISTED, 
-    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90)
-);
+    CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED ([Id] ASC) );
 

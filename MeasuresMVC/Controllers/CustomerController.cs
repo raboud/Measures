@@ -16,12 +16,18 @@ namespace MeasuresMVC.Controllers
     public class CustomerController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
+		
+		[GridDataSourceAction]
+		public ActionResult GetMeasures(int id)
+		{
+			IQueryable<Measure> list = from c in new MeasureEntities().Measures where c.CustomerId == id orderby c.Id select c;
+			return View(list);
+		}
 
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			IQueryable<Customer> list = from c in new MeasureEntities().Customers orderby c.Id select c;
-//			var list = MeasuresMVC.Models.CustomerView.GetRepository(page, pageSize).Get();
+			IQueryable<Customer> list = from c in new MeasureEntities().Customers.Include(m => m.Measures) orderby c.Id select c;
 			return View(list);
 		}
 
@@ -71,11 +77,39 @@ namespace MeasuresMVC.Controllers
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Create", "Measure");
-//                return RedirectToAction("Index");
             }
 
             return View(customer);
         }
+
+		// GET: /Customer/Edit/5
+		public ActionResult CreateMeasure(int? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			CreateMeasureModel item = new CreateMeasureModel();
+			item.customer = db.Customers.Find(id);
+			if (item.customer == null)
+			{
+				return HttpNotFound();
+			}
+			return View(item);
+		}
+
+		// POST: /Customer/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult CreateMeasure(CreateMeasureModel item)
+		{
+			if (ModelState.IsValid)
+			{
+			}
+			return View(item);
+		}
 
 		// GET: /Customer/Edit/5
 		public ActionResult Edit2(int? id)
@@ -106,7 +140,7 @@ namespace MeasuresMVC.Controllers
 				try
 				{
 					customer.LastModifiedById = User.Identity.GetUserId();
-					customer.LastModifiedDateTime = DateTime.Now; 
+					customer.LastModifiedDateTime = DateTime.Now;
 					db.SaveChanges();
 					return RedirectToAction("Index");
 				}
@@ -138,7 +172,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber1,PhoneNumber2,PhoneNumber3,Extension,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
+		public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,CompanyName,Address,Address2,City,State,ZipCode,Latitude,Longitude,Directions,PhoneNumber1,PhoneNumber2,PhoneNumber3,EmailAddress,LastModifiedBy,LastModifiedDateTime,Name")] Customer customer)
         {
             if (ModelState.IsValid)
             {

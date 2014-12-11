@@ -21,6 +21,5 @@ namespace RandREng.MeasureDBEntity
         public byte DayOfWeek { get; set; }
     
         public virtual SlotType SlotType { get; set; }
-        public virtual Tech Tech { get; set; }
     }
 }

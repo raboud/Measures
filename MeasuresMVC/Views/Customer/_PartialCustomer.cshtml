@@ -1,15 +1,16 @@
-﻿@using MeasuresMVC.Utils
+﻿
+@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
+@using Infragistics.Web.Mvc
+@using RandREng.MeasureDBEntity
+@using MeasuresMVC.Utils
 
-@model MeasuresMVC.Models.TechDetail
+@model RandREng.MeasureDBEntity.Customer
 
 @{
 	ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
 <div>
-	<h4>Tech</h4>
+	<h4>Customer</h4>
 	<hr />
 	<dl class="dl-horizontal">
 		<dt>
@@ -23,9 +24,11 @@
 		<dt>
 			@Html.DisplayNameFor(model => model.Address)
 		</dt>
+
 		<dd>
 			@Html.DisplayFor2(model => model.Address)
 		</dd>
+
 		<dt>
 			@Html.DisplayNameFor(model => model.Address2)
 		</dt>
@@ -59,19 +62,11 @@
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.Latitude)
+			@Html.DisplayNameFor(model => model.Directions)
 		</dt>
 
 		<dd>
-			@Html.DisplayFor2(model => model.Latitude)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.Longitude)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor2(model => model.Longitude)
+			@Html.DisplayFor2(model => model.Directions)
 		</dd>
 
 		<dt>
@@ -91,19 +86,19 @@
 		</dd>
 
 		<dt>
+			@Html.DisplayNameFor(model => model.PhoneNumber3)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor2(model => model.PhoneNumber3)
+		</dd>
+
+		<dt>
 			@Html.DisplayNameFor(model => model.EmailAddress)
 		</dt>
 
 		<dd>
 			@Html.DisplayFor2(model => model.EmailAddress)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.ModifiedBy)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor2(model => model.ModifiedBy)
 		</dd>
 
 		<dt>
@@ -113,6 +108,8 @@
 		<dd>
 			@Html.DisplayFor2(model => model.LastModifiedDateTime)
 		</dd>
+
+
 
 	</dl>
 </div>

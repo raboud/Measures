@@ -14,15 +14,8 @@ namespace RandREng.MeasureDBEntity
     
     public partial class SlotType
     {
-        public SlotType()
-        {
-            this.TechCapacities = new HashSet<TechCapacity>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
-    
-        public virtual ICollection<TechCapacity> TechCapacities { get; set; }
     }
 }

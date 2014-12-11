@@ -19,8 +19,8 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			var data = MeasuresMVC.Models.BranchView.GetRepository().Get();
-			return View(data);
+			IQueryable<Branch> list = from c in new MeasureEntities().Branches orderby c.Id select c;
+			return View(list);
 		}
 
         // GET: /Branch/

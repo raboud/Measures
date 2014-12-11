@@ -142,6 +142,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MeasureDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Compile Include="Branch.extended.cs" />
     <None Include="MeasureDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MeasureDB.edmx</DependentUpon>
@@ -156,6 +157,7 @@
       <LastGenOutput>MeasureDB.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <Compile Include="StoreType.extended.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

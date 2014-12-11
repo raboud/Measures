@@ -34,10 +34,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.BillingAddress, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BillingAddress)
-                @Html.ValidationMessageFor(model => model.BillingAddress)
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
             </div>
         </div>
 
@@ -78,14 +78,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DirectPhoneNumber)
                 @Html.ValidationMessageFor(model => model.DirectPhoneNumber)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Extension, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Extension)
-                @Html.ValidationMessageFor(model => model.Extension)
             </div>
         </div>
 

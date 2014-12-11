@@ -22,6 +22,11 @@ namespace RandREng.MeasureDBEntity
             [Required]
 			public string LastName;
 
+			[Display(Name = "Company Name*", Prompt = "Enter Company Name", Description = "Customer Company Name")]
+			[StringLength(50)]
+			[Required]
+			public string CompanyName;
+
 			[DataType(DataType.EmailAddress)]
             [Display(Name = "Email Address*", Prompt = "Enter Customer Email Address", Description = "Customer Email")]
             [Required]

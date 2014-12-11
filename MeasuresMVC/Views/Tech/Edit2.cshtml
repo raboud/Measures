@@ -1,4 +1,6 @@
-﻿@model MeasuresMVC.Models.Edit2ViewModels
+﻿@using MeasuresMVC.Utils;
+
+@model MeasuresMVC.Models.Edit2ViewModels
 
 @{
 	ViewBag.Title = "Details";
@@ -15,7 +17,7 @@
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.Name)
+			@Html.DisplayFor2(model => model.Name)
 		</dd>
 
 		<dt>
@@ -23,7 +25,7 @@
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.PhoneNumber1)
+			@Html.DisplayFor2(model => model.PhoneNumber1)
 		</dd>
 
 		<dt>
@@ -31,7 +33,7 @@
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.PhoneNumber2)
+			@Html.DisplayFor2(model => model.PhoneNumber2)
 		</dd>
 
 		<dt>
@@ -39,7 +41,7 @@
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.EmailAddress)
+			@Html.DisplayFor2(model => model.EmailAddress)
 		</dd>
 	</dl>
 	@using (Html.BeginForm("Edit2", "Tech"))

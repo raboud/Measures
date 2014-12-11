@@ -176,7 +176,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="20" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
@@ -747,7 +747,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TechCapacities" Relationship="Self.FK_TechCapacity_SlotType" FromRole="SlotType" ToRole="TechCapacity" />
         </EntityType>
         <EntityType Name="Store">
           <Key>
@@ -756,7 +755,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BillingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -774,6 +772,7 @@
           <NavigationProperty Name="Branch" Relationship="Self.FK_Store_Branch" FromRole="Store" ToRole="Branch" />
           <NavigationProperty Name="StoreType" Relationship="Self.FK_Store_StoreType" FromRole="Store" ToRole="StoreType" />
           <NavigationProperty Name="Techs" Relationship="MeasureModel.StoreTech" FromRole="Store" ToRole="Tech" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StoreType">
           <Key>
@@ -819,7 +818,6 @@
           <Property Name="Capacity" Type="Byte" Nullable="false" />
           <Property Name="DayOfWeek" Type="Byte" Nullable="false" />
           <NavigationProperty Name="SlotType" Relationship="Self.FK_TechCapacity_SlotType" FromRole="TechCapacity" ToRole="SlotType" />
-          <NavigationProperty Name="Tech" Relationship="Self.FK_TechCapacity_Tech" FromRole="TechCapacity" ToRole="Tech" />
         </EntityType>
         <EntityType Name="Width">
           <Key>
@@ -1300,10 +1298,10 @@
           <EntitySetMapping Name="Stores">
             <EntityTypeMapping TypeName="MeasureModel.Store">
               <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />

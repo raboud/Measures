@@ -49,7 +49,7 @@
 			var row =  $('#grid1').igGridSelection('selectedRow');
 			var dataview = $('#grid1').data('igGrid').dataSource.dataView();
 			var cellValue = dataview[row.index]["Id"];
-			var address = "@Url.Action("Edit")" + "/" + cellValue;
+			var address = "@Url.Action("Edit2")" + "/" + cellValue;
 			window.location = address;
 		});
 	})

@@ -29,9 +29,9 @@
 		.Columns(column =>
 		{
 			column.For(x => x.Active).HeaderText("Active").Hidden(true);
-			column.For(x => x.Branch.Name).HeaderText("Branch").Width("20%");
+			column.For(x => x.BranchId).HeaderText("Branch").Width("20%").FormatterFunction("lookupCustomer");
 			column.For(x => x.Number).HeaderText("Number").Width("10%");
-			column.For(x => x.BillingAddress).HeaderText("Address").Width("30%");
+			column.For(x => x.Address).HeaderText("Address").Width("30%");
 			column.For(x => x.City).HeaderText("City").Width("20%");
 			column.For(x => x.State).HeaderText("State").Width("10%");
 			column.For(x => x.DistrictNumber).HeaderText("District").Width("10%");
@@ -40,7 +40,7 @@
 	{
 		features.Sorting().Type(OpType.Remote);
 		features.Paging().Type(OpType.Remote);
-		features.Filtering().Mode(FilterMode.Advanced);
+		features.Filtering().Mode(FilterMode.Advanced).Type(OpType.Remote);
 		features.Selection().Mode(SelectionMode.Row);
 		features.Resizing();
 	}		)
@@ -48,13 +48,26 @@
 	.Render()
 )
 <script>
+	var b = @Html.Raw(Json.Encode(ViewBag.Branches));
+	var branches = [];
+	$(function () {
+		for (var i = 0; i < b.length; i++) {
+			branches[b[i].Id] = b[i];
+		}
+	});
+
+	function lookupCustomer(val) {
+		return branches[val].Name;
+	}
+
 	$(document).ready(function () {
 		$('#grid1').dblclick(function (e) {
 			var row =  $('#grid1').igGridSelection('selectedRow');
 			var dataview = $('#grid1').data('igGrid').dataSource.dataView();
 			var cellValue = dataview[row.index]["Id"];
-			var address = "@Url.Action("Edit")" + "/" + cellValue;
+			var address = "@Url.Action("Details")" + "/" + cellValue;
 			window.location = address;
 		});
 	})
+
 </script>

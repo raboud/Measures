@@ -8,14 +8,14 @@
     [City]          NVARCHAR (50)  NULL,
     [State]         NCHAR (2)      NULL,
     [ZipCode]       NCHAR (10)     NULL,
-    [PhoneNumber]   NCHAR (13)     NULL,
-    [FaxNumber]     NCHAR (13)     NULL,
+    [PhoneNumber]   [dbo].[PhoneNumber]     NULL,
+    [FaxNumber]     [dbo].[PhoneNumber]     NULL,
     [ManagerId]     INT            NULL,
     [Active]        BIT            DEFAULT ((1)) NOT NULL,
     [Latitude]      FLOAT (53)     NULL,
     [Longitude]     FLOAT (53)     NULL,
     [LabelPrinter] NVARCHAR(MAX) NULL, 
-    CONSTRAINT [PK_Branch] PRIMARY KEY CLUSTERED ([Id] ASC) WITH (FILLFACTOR = 90),
+    CONSTRAINT [PK_Branch] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Branch_Manager] FOREIGN KEY ([ManagerId]) REFERENCES [dbo].[Employees] ([Id])
 );
 

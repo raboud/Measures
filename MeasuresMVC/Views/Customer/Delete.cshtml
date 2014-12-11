@@ -1,4 +1,6 @@
 ﻿@using RandREng.MeasureDBEntity
+@using MeasuresMVC.Utils
+
 @model RandREng.MeasureDBEntity.Customer
 
 @{
@@ -17,7 +19,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor2(model => model.FirstName)
         </dd>
 
         <dt>
@@ -25,7 +27,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor2(model => model.LastName)
         </dd>
 
         <dt>
@@ -33,7 +35,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CompanyName)
+            @Html.DisplayFor2(model => model.CompanyName)
         </dd>
 
         <dt>
@@ -41,7 +43,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor2(model => model.Address)
         </dd>
 
         <dt>
@@ -49,7 +51,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address2)
+            @Html.DisplayFor2(model => model.Address2)
         </dd>
 
         <dt>
@@ -57,7 +59,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor2(model => model.City)
         </dd>
 
         <dt>
@@ -65,7 +67,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.State)
+            @Html.DisplayFor2(model => model.State)
         </dd>
 
         <dt>
@@ -73,7 +75,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ZipCode)
+            @Html.DisplayFor2(model => model.ZipCode)
         </dd>
 
         <dt>
@@ -81,7 +83,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Latitude)
+            @Html.DisplayFor2(model => model.Latitude)
         </dd>
 
         <dt>
@@ -89,7 +91,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Longitude)
+            @Html.DisplayFor2(model => model.Longitude)
         </dd>
 
         <dt>
@@ -97,7 +99,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Directions)
+            @Html.DisplayFor2(model => model.Directions)
         </dd>
 
         <dt>
@@ -105,7 +107,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber1)
+            @Html.DisplayFor2(model => model.PhoneNumber1)
         </dd>
 
         <dt>
@@ -113,7 +115,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber2)
+            @Html.DisplayFor2(model => model.PhoneNumber2)
         </dd>
 
         <dt>
@@ -121,15 +123,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Extension)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Extension)
+            @Html.DisplayFor2(model => model.PhoneNumber3)
         </dd>
 
         <dt>
@@ -137,7 +131,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmailAddress)
+            @Html.DisplayFor2(model => model.EmailAddress)
         </dd>
 
         @*<dt>
@@ -145,7 +139,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastModifiedBy)
+            @Html.DisplayFor2(model => model.LastModifiedBy)
         </dd>*@
 
         <dt>
@@ -153,7 +147,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastModifiedDateTime)
+            @Html.DisplayFor2(model => model.LastModifiedDateTime)
         </dd>
 
         <dt>
@@ -161,7 +155,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor2(model => model.Name)
         </dd>
 
     </dl>

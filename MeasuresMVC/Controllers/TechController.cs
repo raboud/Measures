@@ -24,7 +24,9 @@ namespace MeasuresMVC.Controllers
 		[GridDataSourceAction]
 		public ActionResult GetList()
 		{
-			var list = MeasuresMVC.Models.TechView.GetRepository().Get();
+			IQueryable < Tech > list = from c in new MeasureEntities().Teches orderby c.Id select c;
+
+			List<Tech> t = list.ToList();
 			return View(list);
 		}
 

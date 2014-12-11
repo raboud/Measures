@@ -184,7 +184,7 @@ namespace Helper
 								Stores.Add(store.KEY, store);
 								System.Console.WriteLine("Adding store " + store.KEY);
 								client = new RandREng.MeasureDBEntity.Store();
-								client.BillingAddress = store.ADDR;
+								client.Address = store.ADDR;
 								client.Active = true;
 								client.BranchId = branch.Id;
 								client.City = store.CITY;
@@ -202,7 +202,7 @@ namespace Helper
 							}
 							else
 							{
-								client.BillingAddress = store.ADDR;
+								client.Address = store.ADDR;
 							}
 						}
 					}
