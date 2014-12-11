@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Tech]
 (
 	[Id] INT  IDENTITY (1, 1) NOT NULL PRIMARY KEY,
+	[Active] bit not null DEFAULT 1,
     [FirstName]            NVARCHAR (50)  NOT NULL,
     [LastName]             NVARCHAR (50)  NOT NULL,
     [Address]              NVARCHAR (255) NULL,

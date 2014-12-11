@@ -6,8 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
+using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
@@ -15,10 +17,17 @@ namespace MeasuresMVC.Controllers
     {
         private MeasureEntities db = new MeasureEntities();
 
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			var list = MeasuresMVC.Models.CustomerView.GetRepository().Get();
+			return View(list);
+		}
+
         // GET: /Customer/
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View();
         }
 
         // GET: /Customer/Details/5

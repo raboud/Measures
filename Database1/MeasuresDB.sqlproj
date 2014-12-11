@@ -85,6 +85,7 @@
     <Build Include="dbo\Tables\SlotType.sql" />
     <Build Include="dbo\InsertRoom.sql" />
     <Build Include="dbo\InsertSlotType.sql" />
+    <Build Include="dbo\Tables\StoreTech.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Measure.sql" />

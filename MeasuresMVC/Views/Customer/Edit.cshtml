@@ -1,4 +1,5 @@
-﻿@model MeasuresMVC.Models.Customer
+﻿@using RandREng.MeasureDBEntity
+@model RandREng.MeasureDBEntity.Customer
 
 @{
     ViewBag.Title = "Edit";
@@ -145,13 +146,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.LastModifiedBy, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastModifiedBy)
                 @Html.ValidationMessageFor(model => model.LastModifiedBy)
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.LastModifiedDateTime, new { @class = "control-label col-md-2" })

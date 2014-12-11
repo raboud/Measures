@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
+using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
@@ -14,11 +16,21 @@ namespace MeasuresMVC.Controllers
     {
         private MeasureEntities db = new MeasureEntities();
 
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			var data = MeasuresMVC.Models.BranchView.GetRepository().Get();
+			return View(data);
+		}
+
         // GET: /Branch/
         public ActionResult Index()
         {
-            var branches = db.Branches.Include(b => b.Employee);
-            return View(branches.ToList());
+			if (!User.IsInRole("Admin"))
+			{
+				return RedirectToAction("Index", "Home");
+			}
+			return View();
         }
 
         // GET: /Branch/Details/5

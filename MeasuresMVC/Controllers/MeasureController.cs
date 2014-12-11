@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
+using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {

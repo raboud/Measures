@@ -6,13 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
+using MeasuresMVC.Models.Repositories;
+using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
     public class StoreController : Controller
     {
         private MeasureEntities db = new MeasureEntities();
+
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			var stores = MeasuresMVC.Models.StoreView.GetRepository().Get();
+			return View(stores);
+		}
 
         // GET: /Store/
         public ActionResult Index()
@@ -21,8 +31,7 @@ namespace MeasuresMVC.Controllers
 			{
 				return RedirectToAction("Index", "Home");
 			}
-			var stores = db.Stores.Include(s => s.Branch).Include(s => s.StoreType);
-            return View(stores.ToList());
+            return View();
         }
 
         // GET: /Store/Details/5
@@ -36,7 +45,7 @@ namespace MeasuresMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Store store = db.Stores.Find(id);
+            RandREng.MeasureDBEntity.Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -61,7 +70,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] Store store)
+        public ActionResult Create([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
         {
 			if (!User.IsInRole("Admin"))
 			{
@@ -90,7 +99,7 @@ namespace MeasuresMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Store store = db.Stores.Find(id);
+            RandREng.MeasureDBEntity.Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -105,7 +114,7 @@ namespace MeasuresMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] Store store)
+        public ActionResult Edit([Bind(Include="Id,TypeID,Number,BillingAddress,City,State,ZipCode,StorePhoneNumber,DirectPhoneNumber,Extension,FaxNumber,Notes,BranchId,Active,StoreNickName,Latitude,Longitude,DistrictNumber,IncludeInStatusReportAll")] RandREng.MeasureDBEntity.Store store)
         {
 			if (!User.IsInRole("Admin"))
 			{
@@ -133,7 +142,7 @@ namespace MeasuresMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Store store = db.Stores.Find(id);
+            RandREng.MeasureDBEntity.Store store = db.Stores.Find(id);
             if (store == null)
             {
                 return HttpNotFound();
@@ -150,7 +159,7 @@ namespace MeasuresMVC.Controllers
 			{
 				return RedirectToAction("Index", "Home");
 			}
-			Store store = db.Stores.Find(id);
+			RandREng.MeasureDBEntity.Store store = db.Stores.Find(id);
 			store.Active = false;
             db.SaveChanges();
             return RedirectToAction("Index");

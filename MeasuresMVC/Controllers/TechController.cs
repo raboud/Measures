@@ -8,14 +8,26 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Infragistics.Web.Mvc;
 using MeasuresMVC.Models;
 using Microsoft.AspNet.Identity;
+using RandREng.IdentityDBEntity;
+using RandREng.MeasureDBEntity;
 
 namespace MeasuresMVC.Controllers
 {
 	public class TechController : Controller
 	{
 		private MeasureEntities db = new MeasureEntities();
+
+
+		[GridDataSourceAction]
+		public ActionResult GetList()
+		{
+			var list = MeasuresMVC.Models.TechView.GetRepository().Get();
+			return View(list);
+		}
+
 
 		// GET: /Tech/
 		public ActionResult Index()
@@ -24,7 +36,7 @@ namespace MeasuresMVC.Controllers
 			{
 				return RedirectToAction("Index", "Home");
 			}
-			return View(db.Teches.ToList());
+			return View();
 		}
 
 		// GET: /Tech/Details/5
@@ -38,7 +50,8 @@ namespace MeasuresMVC.Controllers
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
-			Tech tech = db.Teches.Find(id);
+			MeasuresMVC.Models.TechDetail tech = new Models.TechDetail(db, id.Value);
+
 			if (tech == null)
 			{
 				return HttpNotFound();

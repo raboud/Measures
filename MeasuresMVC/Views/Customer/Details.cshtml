@@ -1,4 +1,5 @@
-﻿@model MeasuresMVC.Models.Customer
+﻿@using RandREng.MeasureDBEntity
+@model RandREng.MeasureDBEntity.Customer
 
 @{
     ViewBag.Title = "Details";
@@ -138,13 +139,13 @@
             @Html.DisplayFor(model => model.EmailAddress)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.LastModifiedBy)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.LastModifiedBy)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.LastModifiedDateTime)

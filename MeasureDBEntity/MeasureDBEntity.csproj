@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RandREng.MeasureDBEntity</RootNamespace>
+    <AssemblyName>RandREng.MeasureDBEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.extended.cs" />
+    <Compile Include="Branch.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.extended.cs" />
+    <Compile Include="EmailTemplate.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Measure.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasureDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MeasureDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureEmail.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureEntities.extended.cs" />
+    <Compile Include="MeasureMaterial.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MeasureRoom.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SlotType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Store.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StoreType.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tech.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tech.extended.cs" />
+    <Compile Include="TechCapacity.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Width.cs">
+      <DependentUpon>MeasureDB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="MeasureDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MeasureDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MeasureDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MeasureDB.edmx</DependentUpon>
+      <LastGenOutput>MeasureDB.Context.cs</LastGenOutput>
+    </None>
+    <None Include="MeasureDB.edmx.diagram">
+      <DependentUpon>MeasureDB.edmx</DependentUpon>
+    </None>
+    <None Include="MeasureDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MeasureDB.edmx</DependentUpon>
+      <LastGenOutput>MeasureDB.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

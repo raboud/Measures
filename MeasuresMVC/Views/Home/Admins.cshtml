@@ -1,6 +1,8 @@
 ﻿@{
 	ViewBag.Title = "Admin Home Page";
 }
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
 
 <div class="jumbotron">
 	<h1>Admin Home Page</h1>
@@ -17,13 +19,23 @@
 		<a class="btn btn-default" href="/Customer/Index">Measures &raquo;</a>
 	</div>
 	<div class="col-md-4">
-		<h2>Manage Techs</h2>
-		<p>View a list of all your active measure techs.</p>
+		<h2>Techs</h2>
+		<p>Manage techs.</p>
 		<a class="btn btn-default" href="/Tech/Index">Techs &raquo;</a>
 	</div>
 	<div class="col-md-4">
-		<h2>Manage Stores</h2>
-		<p>View a list of all your active stores.</p>
+		<h2>Stores</h2>
+		<p>Manage stores.</p>
 		<a class="btn btn-default" href="/Store/Index">Stores &raquo;</a>
+	</div>
+	<div class="col-md-4">
+		<h2>Stores Types</h2>
+		<p>Manage store Types.</p>
+		<a class="btn btn-default" href="/StoreType/Index">Store Types &raquo;</a>
+	</div>
+	<div class="col-md-4">
+		<h2>Branches</h2>
+		<p>Manage Branches.</p>
+		<a class="btn btn-default" href="/Branch/Index">Branches &raquo;</a>
 	</div>
 </div>

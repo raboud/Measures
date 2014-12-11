@@ -86,41 +86,36 @@
 				@foreach (int Morning in Model.Morning)
 				{
 					<td>
-						@*<div class="col-md-8">*@
-							@Html.EditorFor(cap => Morning, null, new { style = "width: 10px" })
-							@Html.ValidationMessageFor(cap => Morning)
-						@*</div>*@
+						@Html.TextBoxFor(cap => Morning, new { style = "width: 20px" })
+						@Html.ValidationMessageFor(cap => Morning)
+						@*@Html.LabelForModel*@
 					</td>
 				}
 			</tr>
 			<tr>
-					<td>
-						Afternoon
-					</td>
+				<td>
+					Afternoon
+				</td>
 				@foreach (int Afternoon in Model.Afternoon)
 				{
 					<td>
-						<div class="col-md-10">
-						@Html.EditorFor(cap => Afternoon, new { style = "min-width: 10px" })
+						@Html.TextBoxFor(cap => Afternoon, new { style = "width: 20px" })
 						@Html.ValidationMessageFor(cap => Afternoon)
-						</div>
 					</td>
 				}
-				</tr>
-				<tr>
+			</tr>
+			<tr>
+				<td>
+					Evening
+				</td>
+				@foreach (int Evening in Model.Evening)
+				{
 					<td>
-						Evening
+						@Html.TextBoxFor(cap => Evening, new { style = "width: 20px" })
+						@Html.ValidationMessageFor(cap => Evening)
 					</td>
-					@foreach (int Evening in Model.Evening)
-					{
-						<td>
-							<div class="col-md-10">
-							@Html.EditorFor(cap => Evening)
-							@Html.ValidationMessageFor(cap => Evening)
-							</div>
-						</td>
-					}
-				</tr>
+				}
+			</tr>
 
 		</table>
 		<div class="form-group">

@@ -1,0 +1,1418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MeasureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="ConfirmationToken" Type="nvarchar(max)" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="ResetPasswordToken" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="PrinterName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrinterPort" Type="nvarchar" MaxLength="50" />
+          <Property Name="PrinterDriver" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="10" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="13" />
+          <Property Name="FaxNumber" Type="nchar" MaxLength="13" />
+          <Property Name="ManagerId" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="LabelPrinter" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nchar" MaxLength="10" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Directions" Type="text" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
+          <Property Name="WorkNumber" Type="varchar" MaxLength="50" />
+          <Property Name="Extension" Type="varchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailTypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Content" Type="text" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="10" />
+          <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
+          <Property Name="SSN" Type="nvarchar" MaxLength="11" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="SMTPEmail" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReceiveCallNotes" Type="bit" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="82" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="MaterialType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Measure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="Enterred" Type="datetime" Nullable="false" />
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="EnterredById" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasureEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="MeasureId" Type="int" Nullable="false" />
+          <Property Name="EmailTypeId" Type="int" Nullable="false" />
+          <Property Name="Sent" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasureMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialTypeId" Type="int" Nullable="false" />
+          <Property Name="MeasureId" Type="int" Nullable="false" />
+          <Property Name="WidthId" Type="int" Nullable="false" />
+          <Property Name="AltWidthId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeasureRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaterialId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SlotType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="20" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="StorePhoneNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="DirectPhoneNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="30" />
+          <Property Name="FaxNumber" Type="nvarchar" MaxLength="30" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="StoreNickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="DistrictNumber" Type="smallint" />
+          <Property Name="IncludeInStatusReportAll" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreTech">
+          <Key>
+            <PropertyRef Name="StoreId" />
+            <PropertyRef Name="TechId" />
+          </Key>
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="TechId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreTypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImageName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logo" Type="image" />
+          <Property Name="QBClass" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tech">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="HomeNumber" Type="nchar" MaxLength="14" />
+          <Property Name="MobileNumber" Type="nchar" MaxLength="14" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastModifiedById" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="102" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechCapacity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TechId" Type="int" Nullable="false" />
+          <Property Name="SlotTypeId" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="tinyint" Nullable="false" />
+          <Property Name="DayOfWeek" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Width">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Branch_Manager">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTemplate_EmailType">
+          <End Role="EmailType" Type="Self.EmailType" Multiplicity="1" />
+          <End Role="EmailTemplate" Type="Self.EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="EmailTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Measure_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Measure" Type="Self.Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Measure_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Measure" Type="Self.Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureEmail_Measure">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+          <End Role="MeasureEmail" Type="Self.MeasureEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureEmail">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_AltWidth">
+          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="AltWidthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_MaterialType">
+          <End Role="MaterialType" Type="Self.MaterialType" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="MaterialTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_Measure">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_Width">
+          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="WidthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureRoom_MeasureMaterial">
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="1" />
+          <End Role="MeasureRoom" Type="Self.MeasureRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasureMaterial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureRoom">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureRoom_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="MeasureRoom" Type="Self.MeasureRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureRoom">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEmail_EmailType">
+          <End Role="EmailType" Type="Self.EmailType" Multiplicity="1" />
+          <End Role="MeasureEmail" Type="Self.MeasureEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureEmail">
+              <PropertyRef Name="EmailTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Store" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_StoreType">
+          <End Role="StoreType" Type="Self.StoreType" Multiplicity="1" />
+          <End Role="Store" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTech_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreTech" Type="Self.StoreTech" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTech">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StoreTech_Tech">
+          <End Role="Tech" Type="Self.Tech" Multiplicity="1" />
+          <End Role="StoreTech" Type="Self.StoreTech" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StoreTech">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_SlotType">
+          <End Role="SlotType" Type="Self.SlotType" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="SlotTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_Tech">
+          <End Role="Tech" Type="Self.Tech" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeasureModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailType" EntityType="Self.EmailType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialType" EntityType="Self.MaterialType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measure" EntityType="Self.Measure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasureEmail" EntityType="Self.MeasureEmail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasureMaterial" EntityType="Self.MeasureMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeasureRoom" EntityType="Self.MeasureRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotType" EntityType="Self.SlotType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreTech" EntityType="Self.StoreTech" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreType" EntityType="Self.StoreType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tech" EntityType="Self.Tech" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechCapacity" EntityType="Self.TechCapacity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Width" EntityType="Self.Width" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Branch_Manager" Association="Self.FK_Branch_Manager">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Branch" EntitySet="Branch" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTemplate_EmailType" Association="Self.FK_EmailTemplate_EmailType">
+            <End Role="EmailType" EntitySet="EmailType" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Measure_Customer" Association="Self.FK_Measure_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Measure" EntitySet="Measure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Measure_Store" Association="Self.FK_Measure_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Measure" EntitySet="Measure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureEmail_Measure" Association="Self.FK_MeasureEmail_Measure">
+            <End Role="Measure" EntitySet="Measure" />
+            <End Role="MeasureEmail" EntitySet="MeasureEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_AltWidth" Association="Self.FK_MeasureMaterial_AltWidth">
+            <End Role="Width" EntitySet="Width" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_MaterialType" Association="Self.FK_MeasureMaterial_MaterialType">
+            <End Role="MaterialType" EntitySet="MaterialType" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_Measure" Association="Self.FK_MeasureMaterial_Measure">
+            <End Role="Measure" EntitySet="Measure" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_Width" Association="Self.FK_MeasureMaterial_Width">
+            <End Role="Width" EntitySet="Width" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureRoom_MeasureMaterial" Association="Self.FK_MeasureRoom_MeasureMaterial">
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterial" />
+            <End Role="MeasureRoom" EntitySet="MeasureRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureRoom_Room" Association="Self.FK_MeasureRoom_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="MeasureRoom" EntitySet="MeasureRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEmail_EmailType" Association="Self.FK_OrderEmail_EmailType">
+            <End Role="EmailType" EntitySet="EmailType" />
+            <End Role="MeasureEmail" EntitySet="MeasureEmail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Branch" Association="Self.FK_Store_Branch">
+            <End Role="Branch" EntitySet="Branch" />
+            <End Role="Store" EntitySet="Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_StoreType" Association="Self.FK_Store_StoreType">
+            <End Role="StoreType" EntitySet="StoreType" />
+            <End Role="Store" EntitySet="Store" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTech_Store" Association="Self.FK_StoreTech_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="StoreTech" EntitySet="StoreTech" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StoreTech_Tech" Association="Self.FK_StoreTech_Tech">
+            <End Role="Tech" EntitySet="Tech" />
+            <End Role="StoreTech" EntitySet="StoreTech" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_SlotType" Association="Self.FK_TechCapacity_SlotType">
+            <End Role="SlotType" EntitySet="SlotType" />
+            <End Role="TechCapacity" EntitySet="TechCapacity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_Tech" Association="Self.FK_TechCapacity_Tech">
+            <End Role="Tech" EntitySet="Tech" />
+            <End Role="TechCapacity" EntitySet="TechCapacity" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MeasureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="ResetPasswordToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrinterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrinterPort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PrinterDriver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+          <Property Name="ManagerId" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="LabelPrinter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Branch_Manager" FromRole="Branch" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Directions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="WorkNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastModifiedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Measures" Relationship="Self.FK_Measure_Customer" FromRole="Customer" ToRole="Measure" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EmailType" Relationship="Self.FK_EmailTemplate_EmailType" FromRole="EmailTemplate" ToRole="EmailType" />
+        </EntityType>
+        <EntityType Name="EmailType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EmailTemplates" Relationship="Self.FK_EmailTemplate_EmailType" FromRole="EmailType" ToRole="EmailTemplate" />
+          <NavigationProperty Name="MeasureEmails" Relationship="Self.FK_OrderEmail_EmailType" FromRole="EmailType" ToRole="MeasureEmail" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiveCallNotes" Type="Boolean" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="82" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_Manager" FromRole="Employees" ToRole="Branch" />
+        </EntityType>
+        <EntityType Name="MaterialType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MeasureMaterials" Relationship="Self.FK_MeasureMaterial_MaterialType" FromRole="MaterialType" ToRole="MeasureMaterial" />
+        </EntityType>
+        <EntityType Name="Measure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Enterred" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StoreId" Type="Int32" Nullable="false" />
+          <Property Name="EnterredById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Measure_Customer" FromRole="Measure" ToRole="Customer" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Measure_Store" FromRole="Measure" ToRole="Store" />
+          <NavigationProperty Name="MeasureEmails" Relationship="Self.FK_MeasureEmail_Measure" FromRole="Measure" ToRole="MeasureEmail" />
+          <NavigationProperty Name="MeasureMaterials" Relationship="Self.FK_MeasureMaterial_Measure" FromRole="Measure" ToRole="MeasureMaterial" />
+        </EntityType>
+        <EntityType Name="MeasureEmail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="MeasureId" Type="Int32" Nullable="false" />
+          <Property Name="EmailTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Sent" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EmailType" Relationship="Self.FK_OrderEmail_EmailType" FromRole="MeasureEmail" ToRole="EmailType" />
+          <NavigationProperty Name="Measure" Relationship="Self.FK_MeasureEmail_Measure" FromRole="MeasureEmail" ToRole="Measure" />
+        </EntityType>
+        <EntityType Name="MeasureMaterial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MeasureId" Type="Int32" Nullable="false" />
+          <Property Name="WidthId" Type="Int32" Nullable="false" />
+          <Property Name="AltWidthId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MaterialType" Relationship="Self.FK_MeasureMaterial_MaterialType" FromRole="MeasureMaterial" ToRole="MaterialType" />
+          <NavigationProperty Name="Measure" Relationship="Self.FK_MeasureMaterial_Measure" FromRole="MeasureMaterial" ToRole="Measure" />
+          <NavigationProperty Name="Width" Relationship="Self.FK_MeasureMaterial_AltWidth" FromRole="MeasureMaterial" ToRole="Width" />
+          <NavigationProperty Name="Width1" Relationship="Self.FK_MeasureMaterial_Width" FromRole="MeasureMaterial" ToRole="Width" />
+          <NavigationProperty Name="MeasureRooms" Relationship="Self.FK_MeasureRoom_MeasureMaterial" FromRole="MeasureMaterial" ToRole="MeasureRoom" />
+        </EntityType>
+        <EntityType Name="MeasureRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MeasureMaterial" Relationship="Self.FK_MeasureRoom_MeasureMaterial" FromRole="MeasureRoom" ToRole="MeasureMaterial" />
+          <NavigationProperty Name="Room" Relationship="Self.FK_MeasureRoom_Room" FromRole="MeasureRoom" ToRole="Room" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MeasureRooms" Relationship="Self.FK_MeasureRoom_Room" FromRole="Room" ToRole="MeasureRoom" />
+        </EntityType>
+        <EntityType Name="SlotType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TechCapacities" Relationship="Self.FK_TechCapacity_SlotType" FromRole="SlotType" ToRole="TechCapacity" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="StorePhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DirectPhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="StoreNickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="DistrictNumber" Type="Int16" />
+          <Property Name="IncludeInStatusReportAll" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Branch" Relationship="Self.FK_Store_Branch" FromRole="Store" ToRole="Branch" />
+          <NavigationProperty Name="Measures" Relationship="Self.FK_Measure_Store" FromRole="Store" ToRole="Measure" />
+          <NavigationProperty Name="StoreType" Relationship="Self.FK_Store_StoreType" FromRole="Store" ToRole="StoreType" />
+          <NavigationProperty Name="Techs" Relationship="MeasureModel.StoreTech" FromRole="Store" ToRole="Tech" />
+        </EntityType>
+        <EntityType Name="StoreType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="QBClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK_Store_StoreType" FromRole="StoreType" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Tech">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="HomeNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="14" FixedLength="true" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastModifiedById" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastModifiedDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Name" Type="String" MaxLength="102" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Capacities" Relationship="Self.FK_TechCapacity_Tech" FromRole="Tech" ToRole="TechCapacity" />
+          <NavigationProperty Name="Stores" Relationship="MeasureModel.StoreTech" FromRole="Tech" ToRole="Store" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TechCapacity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TechId" Type="Int32" Nullable="false" />
+          <Property Name="SlotTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Byte" Nullable="false" />
+          <Property Name="DayOfWeek" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="SlotType" Relationship="Self.FK_TechCapacity_SlotType" FromRole="TechCapacity" ToRole="SlotType" />
+          <NavigationProperty Name="Tech" Relationship="Self.FK_TechCapacity_Tech" FromRole="TechCapacity" ToRole="Tech" />
+        </EntityType>
+        <EntityType Name="Width">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <NavigationProperty Name="MeasureMaterials" Relationship="Self.FK_MeasureMaterial_AltWidth" FromRole="Width" ToRole="MeasureMaterial" />
+          <NavigationProperty Name="MeasureMaterials1" Relationship="Self.FK_MeasureMaterial_Width" FromRole="Width" ToRole="MeasureMaterial" />
+        </EntityType>
+        <Association Name="FK_Branch_Manager">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Branch">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Branch">
+          <End Role="Branch" Type="Self.Branch" Multiplicity="1" />
+          <End Role="Store" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Branch">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Measure_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Measure" Type="Self.Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmailTemplate_EmailType">
+          <End Role="EmailType" Type="Self.EmailType" Multiplicity="1" />
+          <End Role="EmailTemplate" Type="Self.EmailTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmailTemplate">
+              <PropertyRef Name="EmailTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderEmail_EmailType">
+          <End Role="EmailType" Type="Self.EmailType" Multiplicity="1" />
+          <End Role="MeasureEmail" Type="Self.MeasureEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmailType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureEmail">
+              <PropertyRef Name="EmailTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_MaterialType">
+          <End Role="MaterialType" Type="Self.MaterialType" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="MaterialTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Measure_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Measure" Type="Self.Measure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Measure">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureEmail_Measure">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+          <End Role="MeasureEmail" Type="Self.MeasureEmail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureEmail">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_Measure">
+          <End Role="Measure" Type="Self.Measure" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="MeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_AltWidth">
+          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="AltWidthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureMaterial_Width">
+          <End Role="Width" Type="Self.Width" Multiplicity="1" />
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Width">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureMaterial">
+              <PropertyRef Name="WidthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureRoom_MeasureMaterial">
+          <End Role="MeasureMaterial" Type="Self.MeasureMaterial" Multiplicity="1" />
+          <End Role="MeasureRoom" Type="Self.MeasureRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MeasureMaterial">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureRoom">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeasureRoom_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="MeasureRoom" Type="Self.MeasureRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MeasureRoom">
+              <PropertyRef Name="RoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_SlotType">
+          <End Role="SlotType" Type="Self.SlotType" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="SlotTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_StoreType">
+          <End Role="StoreType" Type="Self.StoreType" Multiplicity="1" />
+          <End Role="Store" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StoreType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Store">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechCapacity_Tech">
+          <End Role="Tech" Type="Self.Tech" Multiplicity="1" />
+          <End Role="TechCapacity" Type="Self.TechCapacity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tech">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TechCapacity">
+              <PropertyRef Name="TechId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeasureEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplate" />
+          <EntitySet Name="EmailTypes" EntityType="Self.EmailType" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="MaterialTypes" EntityType="Self.MaterialType" />
+          <EntitySet Name="Measures" EntityType="Self.Measure" />
+          <EntitySet Name="MeasureEmails" EntityType="Self.MeasureEmail" />
+          <EntitySet Name="MeasureMaterials" EntityType="Self.MeasureMaterial" />
+          <EntitySet Name="MeasureRooms" EntityType="Self.MeasureRoom" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="SlotTypes" EntityType="Self.SlotType" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="StoreTypes" EntityType="Self.StoreType" />
+          <EntitySet Name="Teches" EntityType="Self.Tech" />
+          <EntitySet Name="TechCapacities" EntityType="Self.TechCapacity" />
+          <EntitySet Name="Widths" EntityType="Self.Width" />
+          <AssociationSet Name="FK_Branch_Manager" Association="Self.FK_Branch_Manager">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Branch" EntitySet="Branches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Branch" Association="Self.FK_Store_Branch">
+            <End Role="Branch" EntitySet="Branches" />
+            <End Role="Store" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Measure_Customer" Association="Self.FK_Measure_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Measure" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmailTemplate_EmailType" Association="Self.FK_EmailTemplate_EmailType">
+            <End Role="EmailType" EntitySet="EmailTypes" />
+            <End Role="EmailTemplate" EntitySet="EmailTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderEmail_EmailType" Association="Self.FK_OrderEmail_EmailType">
+            <End Role="EmailType" EntitySet="EmailTypes" />
+            <End Role="MeasureEmail" EntitySet="MeasureEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_MaterialType" Association="Self.FK_MeasureMaterial_MaterialType">
+            <End Role="MaterialType" EntitySet="MaterialTypes" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Measure_Store" Association="Self.FK_Measure_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Measure" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureEmail_Measure" Association="Self.FK_MeasureEmail_Measure">
+            <End Role="Measure" EntitySet="Measures" />
+            <End Role="MeasureEmail" EntitySet="MeasureEmails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_Measure" Association="Self.FK_MeasureMaterial_Measure">
+            <End Role="Measure" EntitySet="Measures" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_AltWidth" Association="Self.FK_MeasureMaterial_AltWidth">
+            <End Role="Width" EntitySet="Widths" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureMaterial_Width" Association="Self.FK_MeasureMaterial_Width">
+            <End Role="Width" EntitySet="Widths" />
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureRoom_MeasureMaterial" Association="Self.FK_MeasureRoom_MeasureMaterial">
+            <End Role="MeasureMaterial" EntitySet="MeasureMaterials" />
+            <End Role="MeasureRoom" EntitySet="MeasureRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeasureRoom_Room" Association="Self.FK_MeasureRoom_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="MeasureRoom" EntitySet="MeasureRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_SlotType" Association="Self.FK_TechCapacity_SlotType">
+            <End Role="SlotType" EntitySet="SlotTypes" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_StoreType" Association="Self.FK_Store_StoreType">
+            <End Role="StoreType" EntitySet="StoreTypes" />
+            <End Role="Store" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechCapacity_Tech" Association="Self.FK_TechCapacity_Tech">
+            <End Role="Tech" EntitySet="Teches" />
+            <End Role="TechCapacity" EntitySet="TechCapacities" />
+          </AssociationSet>
+          <AssociationSet Name="StoreTech" Association="MeasureModel.StoreTech">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Tech" EntitySet="Teches" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="StoreTech">
+          <End Type="MeasureModel.Store" Role="Store" Multiplicity="*" />
+          <End Type="MeasureModel.Tech" Role="Tech" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MeasureModelStoreContainer" CdmEntityContainer="MeasureEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MeasureModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ResetPasswordToken" ColumnName="ResetPasswordToken" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="MeasureModel.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PrinterName" ColumnName="PrinterName" />
+                <ScalarProperty Name="PrinterPort" ColumnName="PrinterPort" />
+                <ScalarProperty Name="PrinterDriver" ColumnName="PrinterDriver" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="LabelPrinter" ColumnName="LabelPrinter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="MeasureModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Directions" ColumnName="Directions" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="WorkNumber" ColumnName="WorkNumber" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTemplates">
+            <EntityTypeMapping TypeName="MeasureModel.EmailTemplate">
+              <MappingFragment StoreEntitySet="EmailTemplate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTypes">
+            <EntityTypeMapping TypeName="MeasureModel.EmailType">
+              <MappingFragment StoreEntitySet="EmailType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="MeasureModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SMTPEmail" ColumnName="SMTPEmail" />
+                <ScalarProperty Name="ReceiveCallNotes" ColumnName="ReceiveCallNotes" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialTypes">
+            <EntityTypeMapping TypeName="MeasureModel.MaterialType">
+              <MappingFragment StoreEntitySet="MaterialType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measures">
+            <EntityTypeMapping TypeName="MeasureModel.Measure">
+              <MappingFragment StoreEntitySet="Measure">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Enterred" ColumnName="Enterred" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="EnterredById" ColumnName="EnterredById" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasureEmails">
+            <EntityTypeMapping TypeName="MeasureModel.MeasureEmail">
+              <MappingFragment StoreEntitySet="MeasureEmail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="EmailTypeId" ColumnName="EmailTypeId" />
+                <ScalarProperty Name="Sent" ColumnName="Sent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasureMaterials">
+            <EntityTypeMapping TypeName="MeasureModel.MeasureMaterial">
+              <MappingFragment StoreEntitySet="MeasureMaterial">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaterialTypeId" ColumnName="MaterialTypeId" />
+                <ScalarProperty Name="MeasureId" ColumnName="MeasureId" />
+                <ScalarProperty Name="WidthId" ColumnName="WidthId" />
+                <ScalarProperty Name="AltWidthId" ColumnName="AltWidthId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeasureRooms">
+            <EntityTypeMapping TypeName="MeasureModel.MeasureRoom">
+              <MappingFragment StoreEntitySet="MeasureRoom">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="MeasureModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotTypes">
+            <EntityTypeMapping TypeName="MeasureModel.SlotType">
+              <MappingFragment StoreEntitySet="SlotType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="MeasureModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="BillingAddress" ColumnName="BillingAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="StorePhoneNumber" ColumnName="StorePhoneNumber" />
+                <ScalarProperty Name="DirectPhoneNumber" ColumnName="DirectPhoneNumber" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="StoreNickName" ColumnName="StoreNickName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="DistrictNumber" ColumnName="DistrictNumber" />
+                <ScalarProperty Name="IncludeInStatusReportAll" ColumnName="IncludeInStatusReportAll" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreTypes">
+            <EntityTypeMapping TypeName="MeasureModel.StoreType">
+              <MappingFragment StoreEntitySet="StoreType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StoreTypeName" ColumnName="StoreTypeName" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="QBClass" ColumnName="QBClass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teches">
+            <EntityTypeMapping TypeName="MeasureModel.Tech">
+              <MappingFragment StoreEntitySet="Tech">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="HomeNumber" ColumnName="HomeNumber" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastModifiedById" ColumnName="LastModifiedById" />
+                <ScalarProperty Name="LastModifiedDateTime" ColumnName="LastModifiedDateTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechCapacities">
+            <EntityTypeMapping TypeName="MeasureModel.TechCapacity">
+              <MappingFragment StoreEntitySet="TechCapacity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TechId" ColumnName="TechId" />
+                <ScalarProperty Name="SlotTypeId" ColumnName="SlotTypeId" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Widths">
+            <EntityTypeMapping TypeName="MeasureModel.Width">
+              <MappingFragment StoreEntitySet="Width">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StoreTech" TypeName="MeasureModel.StoreTech" StoreEntitySet="StoreTech">
+            <EndProperty Name="Tech">
+              <ScalarProperty Name="Id" ColumnName="TechId" />
+            </EndProperty>
+            <EndProperty Name="Store">
+              <ScalarProperty Name="Id" ColumnName="StoreId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

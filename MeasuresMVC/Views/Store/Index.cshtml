@@ -1,4 +1,7 @@
-﻿@model IEnumerable<MeasuresMVC.Models.Store>
+﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
+@using Infragistics.Web.Mvc
+
+@model IQueryable<MeasuresMVC.Models.StoreView>
 
 @{
     ViewBag.Title = "Index";
@@ -9,127 +12,49 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BillingAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StorePhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DirectPhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Extension)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FaxNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreNickName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DistrictNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncludeInStatusReportAll)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Branch.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StoreType.StoreTypeName)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillingAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StorePhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DirectPhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Extension)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FaxNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreNickName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistrictNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IncludeInStatusReportAll)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Branch.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StoreType.StoreTypeName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+@(Html.Infragistics().Loader()
+		.ScriptPath(Url.Content("~/Infragistics/js/"))
+		.CssPath(Url.Content("~/Infragistics/css/"))
+		.Render()
+)
 
-</table>
+<h2>Stores</h2>
+@(Html.Infragistics()
+	.Grid(Model)
+	.ID("grid1")
+		.Width("100%")
+		.AutoGenerateColumns(false)
+		.AutoGenerateLayouts(false)
+		.Columns(column =>
+		{
+			column.For(x => x.Active).HeaderText("Active").Hidden(true);
+			column.For(x => x.Branch).HeaderText("Branch").Width("20%");
+			column.For(x => x.Number).HeaderText("Number").Width("10%");
+			column.For(x => x.Address).HeaderText("Address").Width("30%");
+			column.For(x => x.City).HeaderText("City").Width("20%");
+			column.For(x => x.State).HeaderText("State").Width("10%");
+			column.For(x => x.District).HeaderText("District").Width("10%");
+		})
+	.Features( features =>
+	{
+		features.Sorting().Type(OpType.Remote);
+		features.Paging().Type(OpType.Remote);
+		features.Filtering().Mode(FilterMode.Advanced);
+		features.Selection().Mode(SelectionMode.Row);
+		features.Resizing();
+	}		)
+	.DataSourceUrl(Url.Action("GetList"))
+	.Render()
+)
+<script>
+	$(document).ready(function () {
+		$('#grid1').dblclick(function (e) {
+			var row =  $('#grid1').igGridSelection('selectedRow');
+			var dataview = $('#grid1').data('igGrid').dataSource.dataView();
+			var cellValue = dataview[row.index]["Id"];
+			var address = "@Url.Action("Edit")" + "/" + cellValue;
+			window.location = address;
+		});
+	})
+</script>

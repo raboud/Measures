@@ -1,117 +1,58 @@
-﻿@model IEnumerable<MeasuresMVC.Models.Branch>
+﻿@*Reference the Infragistics ASP.NET MVC Helpers Assembly*@
+@using Infragistics.Web.Mvc
+
+@model IQueryable<MeasuresMVC.Models.BranchView>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrinterName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrinterPort)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PrinterDriver)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FaxNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LabelPrinter)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee.FirstName)
-        </th>
-        <th></th>
-    </tr>
+@(Html.Infragistics().Loader()
+		.ScriptPath(Url.Content("~/Infragistics/js/"))
+		.CssPath(Url.Content("~/Infragistics/css/"))
+		.Render()
+)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrinterName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrinterPort)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrinterDriver)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FaxNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LabelPrinter)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.FirstName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<h2>Branches</h2>
+@(Html.Infragistics()
+	.Grid(Model)
+	.ID("grid1")
+	.Width("100%")
+	.AutoGenerateColumns(false)
+	.AutoGenerateLayouts(false)
+	.Columns(column =>
+	{
+		column.For(x => x.Active).HeaderText("Active").Hidden(true);
+		column.For(x => x.Name).HeaderText("Name").Width("30%");
+		column.For(x => x.Address).HeaderText("Address").Width("40%");
+		column.For(x => x.City).HeaderText("City").Width("20%");
+		column.For(x => x.State).HeaderText("State").Width("10%");
+	})
+	.Features(features =>
+	{
+		features.Sorting().Type(OpType.Local);
+		features.Paging().Type(OpType.Local);
+		features.Filtering().Mode(FilterMode.Advanced);
+		features.Selection().Mode(SelectionMode.Row);
+		features.Resizing();
+	})
+	.DataSourceUrl(Url.Action("GetList"))
+	.Render()
+)
+<script>
+	$(document).ready(function () {
+		$('#grid1').dblclick(function (e) {
+			var row = $('#grid1').igGridSelection('selectedRow');
+			var dataview = $('#grid1').data('igGrid').dataSource.dataView();
+			var cellValue = dataview[row.index]["Id"];
+			var address = "@Url.Action("Edit")" + "/" + cellValue;
+			window.location = address;
+		});
+	})
+</script>
 
-</table>
