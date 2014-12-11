@@ -74,11 +74,6 @@
     <Build Include="dbo\Tables\MaterialType.sql" />
     <Build Include="dbo\Tables\Room.sql" />
     <Build Include="dbo\Tables\MeasureRoom.sql" />
-    <Build Include="dbo\Tables\AspNetRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUserClaims.sql" />
-    <Build Include="dbo\Tables\AspNetUserLogins.sql" />
-    <Build Include="dbo\Tables\AspNetUserRoles.sql" />
-    <Build Include="dbo\Tables\AspNetUsers.sql" />
     <Build Include="dbo\Tables\Store.sql" />
     <Build Include="dbo\Tables\StoreType.sql" />
     <Build Include="dbo\Tables\Branch.sql" />

@@ -13,7 +13,7 @@ namespace MeasuresMVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MeasureEntities : Microsoft.AspNet.Identity.EntityFramework.IdentityDbContext<AspNetUser>
+    public partial class MeasureEntities : DbContext
     {
         public MeasureEntities()
             : base("name=MeasureEntities")
@@ -31,10 +31,6 @@ namespace MeasuresMVC.Models
         public virtual DbSet<MeasureRoom> MeasureRooms { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Width> Widths { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Branch> Branches { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<EmailType> EmailTypes { get; set; }
