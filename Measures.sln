@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasuresMVC", "MeasuresMVC\MeasuresMVC.csproj", "{A103E759-10E4-4F89-BD9C-81AA7EDA361E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasuresMVC.Tests", "MeasuresMVC.Tests\MeasuresMVC.Tests.csproj", "{EC187D2C-596C-4C3E-83B7-D353C08C2ACF}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MeasuresDB", "Database1\MeasuresDB.sqlproj", "{F78D5CB1-D99A-4AC9-A905-5BA835D90009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityDBEntity", "IdentityDB\IdentityDBEntity.csproj", "{8B8EFE68-8DDD-4782-9EC9-25482A0AAB5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeasureDBEntity", "MeasureDBEntity\MeasureDBEntity.csproj", "{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Types", "Types\Types.csproj", "{C2870024-BC03-4F1F-8355-38FF6284563C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helper", "Helper\Helper.csproj", "{F084B037-5D90-4103-A5E3-0D162C935192}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2D7FD121-FBB6-436E-9A93-A4A6CC16ADF8}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CFI.Utility", "..\InstallationManager\CFILogger\CFI.Utility.csproj", "{FEDA5FAD-7AB7-4B06-BA03-8C6559E38CD5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://randr.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = MeasuresMVC.Tests\\MeasuresMVC.Tests.csproj
+		SccProjectName0 = MeasuresMVC.Tests
+		SccLocalPath0 = MeasuresMVC.Tests
+		SccProjectUniqueName1 = MeasuresMVC\\MeasuresMVC.csproj
+		SccProjectName1 = MeasuresMVC
+		SccLocalPath1 = MeasuresMVC
+		SccProjectUniqueName2 = Database1\\MeasuresDB.sqlproj
+		SccProjectName2 = Database1
+		SccLocalPath2 = Database1
+		SccProjectUniqueName3 = IdentityDB\\IdentityDBEntity.csproj
+		SccProjectName3 = IdentityDB
+		SccLocalPath3 = IdentityDB
+		SccProjectUniqueName4 = MeasureDBEntity\\MeasureDBEntity.csproj
+		SccProjectName4 = MeasureDBEntity
+		SccLocalPath4 = MeasureDBEntity
+		SccProjectUniqueName5 = Types\\Types.csproj
+		SccProjectName5 = Types
+		SccLocalPath5 = Types
+		SccProjectUniqueName6 = Helper\\Helper.csproj
+		SccProjectName6 = Helper
+		SccLocalPath6 = Helper
+		SccProjectUniqueName7 = ..\\InstallationManager\\CFILogger\\CFI.Utility.csproj
+		SccProjectName7 = ../InstallationManager/Main/Src/CFILogger
+		SccLocalPath7 = ..\\InstallationManager\\CFILogger
+		SccLocalPath8 = .
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A103E759-10E4-4F89-BD9C-81AA7EDA361E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A103E759-10E4-4F89-BD9C-81AA7EDA361E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A103E759-10E4-4F89-BD9C-81AA7EDA361E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A103E759-10E4-4F89-BD9C-81AA7EDA361E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC187D2C-596C-4C3E-83B7-D353C08C2ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC187D2C-596C-4C3E-83B7-D353C08C2ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC187D2C-596C-4C3E-83B7-D353C08C2ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC187D2C-596C-4C3E-83B7-D353C08C2ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78D5CB1-D99A-4AC9-A905-5BA835D90009}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8B8EFE68-8DDD-4782-9EC9-25482A0AAB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B8EFE68-8DDD-4782-9EC9-25482A0AAB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B8EFE68-8DDD-4782-9EC9-25482A0AAB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B8EFE68-8DDD-4782-9EC9-25482A0AAB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C6C19FF-EE63-4D41-A1CD-0A8C129399A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2870024-BC03-4F1F-8355-38FF6284563C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2870024-BC03-4F1F-8355-38FF6284563C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2870024-BC03-4F1F-8355-38FF6284563C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2870024-BC03-4F1F-8355-38FF6284563C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F084B037-5D90-4103-A5E3-0D162C935192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F084B037-5D90-4103-A5E3-0D162C935192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F084B037-5D90-4103-A5E3-0D162C935192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F084B037-5D90-4103-A5E3-0D162C935192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDA5FAD-7AB7-4B06-BA03-8C6559E38CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDA5FAD-7AB7-4B06-BA03-8C6559E38CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDA5FAD-7AB7-4B06-BA03-8C6559E38CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDA5FAD-7AB7-4B06-BA03-8C6559E38CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
